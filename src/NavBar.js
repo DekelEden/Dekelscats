@@ -39,27 +39,27 @@ export default function NavBar() {
         </li>
         <li className="emptyspace"></li>
         <li>
-          <Link to="">
+          <a href="">
             {/* <!-- replace with business facebook page --> */}
             <i className="fab fa-facebook icon"></i>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="">
+          <a href="">
             {/* <!-- replace with business instagram page --> */}
             <i className="fab fa-instagram icon"></i>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="mailto:dekeltsa@gmail.com">
+          <a href="mailto:dekeltsa@gmail.com">
             <i className="far fa-paper-plane icon"></i>
-          </Link>
+          </a>
         </li>
         {/* <li>
-          <Link to="/contact">
+          <a href="/contact">
             {/* <i className="fas fa-phone icon"></i> }
             <i className="ri-phone-line icon phone"></i>
-          </Link>
+          </a>
         </li> */}
       </ul>
     </nav>
