@@ -1,0 +1,51 @@
+.pinkback {
+  background-color: #ebd5d5;
+  display: flex;
+  padding: 40px;
+  padding-top: 20px;
+  align-items: center;
+}
+
+.meAndCats {
+  border-radius: 50%;
+  margin: 30px;
+  margin-right: 0;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ab3b55;
+}
+
+.aboutpagetext h1 {
+  font-family: "Varela Round";
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.aboutpagetext p {
+  font-family: "Varela Round";
+  font-size: 16px;
+}
+
+.secondlightpink {
+  background-color: #f2f2f2;
+  font-family: "Varela Round";
+  padding: 40px;
+  padding-top: 20px;
+  display: block;
+}
+
+.whatcanidoText {
+  display: flex;
+  padding-bottom: 40px;
+  border-bottom: 2px dashed #ebd5d5;
+}
+
+.whatcanidoText img {
+  margin-top: -61px;
+  max-width: 250px;
+}
+
+.contactForm.newcontact {
+  margin-top: 30px;
+  background-color: #f2f2f2;
+}
