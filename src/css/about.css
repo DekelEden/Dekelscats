@@ -49,3 +49,18 @@
   margin-top: 30px;
   background-color: #f2f2f2;
 }
+
+@media (max-width: 420px) {
+  .meAndCats {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 630px) {
+  .whatcanidoText {
+    display: block;
+  }
+  .whatcanidoText img {
+    margin-top: 10px;
+  }
+}
