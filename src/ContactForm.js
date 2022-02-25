@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/contactform.css";
+import { send } from "@emailjs/browser";
 
 export default class ContactForm extends React.Component {
   state = {
@@ -18,7 +19,7 @@ export default class ContactForm extends React.Component {
     messageError: "",
   };
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     return String(email)
       .toLowerCase()
       .match(
@@ -26,7 +27,7 @@ export default class ContactForm extends React.Component {
       );
   };
 
-  change = (e) => {
+  change = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -71,14 +72,7 @@ export default class ContactForm extends React.Component {
     if (!this.state.message || this.state.message.length < 20) {
       messageError = "התיאור חייב להכיל לפחות 20 תוים. נא לפרט";
     }
-    if (
-      emailError ||
-      nameError ||
-      phoneError ||
-      contactError ||
-      problemError ||
-      messageError
-    ) {
+    if (emailError || nameError || phoneError || contactError || problemError || messageError) {
       console.debug({
         emailError,
         nameError,
@@ -101,11 +95,20 @@ export default class ContactForm extends React.Component {
     return true;
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
     const isValid = this.validate();
     if (isValid) {
-      console.log(this.state);
+      const data = {
+        fullName: this.state.fullName,
+        email: this.state.email,
+        phone: this.state.phone,
+        howToContact: this.state.howToContact,
+        problem: this.state.problem,
+        message: this.state.message,
+        access_token: "ikkarkrp6iwwzjrstnwfs06c",
+      };
+      send("default_service", "template_rnhwgvi", data);
 
       this.setState({
         fullName: "",
@@ -138,11 +141,9 @@ export default class ContactForm extends React.Component {
               name="fullName"
               placeholder="שם מלא"
               value={this.state.fullName}
-              onChange={(e) => this.change(e)}
+              onChange={e => this.change(e)}
             />
-            {this.state.nameError ? (
-              <div className="error">{this.state.nameError}</div>
-            ) : null}
+            {this.state.nameError ? <div className="error">{this.state.nameError}</div> : null}
           </div>
         </label>
         <br /> <br />
@@ -156,11 +157,9 @@ export default class ContactForm extends React.Component {
               type="email"
               placeholder="דואר אלקטרוני"
               value={this.state.email}
-              onChange={(e) => this.change(e)}
+              onChange={e => this.change(e)}
             />
-            {this.state.emailError ? (
-              <div className="error">{this.state.emailError}</div>
-            ) : null}
+            {this.state.emailError ? <div className="error">{this.state.emailError}</div> : null}
           </div>
         </label>
         <br /> <br />
@@ -174,67 +173,41 @@ export default class ContactForm extends React.Component {
               name="phone"
               placeholder="טלפון"
               value={this.state.phone}
-              onChange={(e) => this.change(e)}
+              onChange={e => this.change(e)}
             />
-            {this.state.phoneError ? (
-              <div className="error">{this.state.phoneError}</div>
-            ) : null}
+            {this.state.phoneError ? <div className="error">{this.state.phoneError}</div> : null}
           </div>
         </label>
         <br />
         <div className="inputcontainer">
           <p className="titlep">
             <i className="fas fa-comments"></i>
-            <span className="titleptext">
-              כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
-            </span>
+            <span className="titleptext">כיצד תרצו שאצור איתכם קשר לתיאום מפגש?</span>
           </p>
           <div className="flexthis">
             <label className="flexthis radiolabel">
-              <input
-                type="radio"
-                name="howToContact"
-                value="phoneCall"
-                onChange={(e) => this.change(e)}
-              />
+              <input type="radio" name="howToContact" value="phoneCall" onChange={e => this.change(e)} />
               שיחת טלפון
             </label>
 
             <label className="flexthis radiolabel">
-              <input
-                type="radio"
-                name="howToContact"
-                value="whatsapp"
-                onChange={(e) => this.change(e)}
-              />
+              <input type="radio" name="howToContact" value="whatsapp" onChange={e => this.change(e)} />
               וואצאפ/Whatsapp
             </label>
 
             <label className="flexthis radiolabel">
-              <input
-                type="radio"
-                name="howToContact"
-                value="email"
-                onChange={(e) => this.change(e)}
-              />
+              <input type="radio" name="howToContact" value="email" onChange={e => this.change(e)} />
               אימייל
             </label>
           </div>
-          {this.state.contactError ? (
-            <div className="error">{this.state.contactError}</div>
-          ) : null}
+          {this.state.contactError ? <div className="error">{this.state.contactError}</div> : null}
         </div>
         <br />
         <label className="flexthis title">
           <i className="fas fa-info"></i>
           <span className="titleptext"> סיבת הפנייה:</span>
           <div className="inputcontainer">
-            <select
-              name="problem"
-              value={this.state.problem}
-              onChange={(e) => this.change(e)}
-              className="reason"
-            >
+            <select name="problem" value={this.state.problem} onChange={e => this.change(e)} className="reason">
               <option className="grey" value="">
                 בחרו:
               </option>
@@ -248,9 +221,7 @@ export default class ContactForm extends React.Component {
             </select>
           </div>
         </label>
-        {this.state.problemError ? (
-          <div className="error">{this.state.problemError}</div>
-        ) : null}
+        {this.state.problemError ? <div className="error">{this.state.problemError}</div> : null}
         <br />
         <div className="inputcontainer">
           <label className="flexthis">
@@ -263,25 +234,16 @@ export default class ContactForm extends React.Component {
             maxLength="500"
             value={this.state.message}
             placeholder="תיאור כללי של עד 500 תוים"
-            onChange={(e) => this.change(e)}
+            onChange={e => this.change(e)}
           ></textarea>
-          {this.state.messageError ? (
-            <div className="error">{this.state.messageError}</div>
-          ) : null}
+          {this.state.messageError ? <div className="error">{this.state.messageError}</div> : null}
         </div>
         <br />
         <div className="helpmecenter">
-          <button
-            type="submit"
-            className="formbutton"
-            onClick={(e) => this.onSubmit(e)}
-          >
+          <button type="submit" className="formbutton" onClick={e => this.onSubmit(e)}>
             שליחה
           </button>
-          <h2
-            className="submitted"
-            style={{ color: this.state.isSent ? "black" : "transparent" }}
-          >
+          <h2 className="submitted" style={{ color: this.state.isSent ? "black" : "transparent" }}>
             פנייתך התקבלה
           </h2>
         </div>
