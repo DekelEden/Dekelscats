@@ -64,3 +64,35 @@ nav .icon {
 /* nav {
   border-bottom: 1px dashed #999;
 } */
+
+@media (max-width: 600px) {
+  nav .desktopmenu {
+    display: none;
+  }
+
+  nav .mobilemenu li:not(.alwaysshow) {
+    display: none;
+  }
+
+  nav .mobilemenu .spacer {
+    flex: 1;
+  }
+
+  nav .mobilemenu .hamburger {
+    padding-left: 25px;
+  }
+
+  nav .mobilemenu.open li:not(.alwaysshow) {
+    display: block;
+  }
+
+  nav .mobilemenuhidden {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 601px) {
+  nav .mobilemenu {
+    display: none;
+  }
+}

@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useHistory } from "react-router-dom";
 import "./css/Home.css";
 
 export default function Home() {
-  let goToContact = () => (document.location.href = "/contact");
+  const history = useHistory();
+  let goToContact = () => history.push("/contact");
   return (
     <div className="homediv">
       <div className="pinkback">
