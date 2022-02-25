@@ -10,7 +10,8 @@ export default function Home() {
         <div className="withmaxwidth">
           <img
             className="meAndSummy"
-            src="https://via.placeholder.com/100x100.png"
+            src="./13.jpg"
+            // src="https://via.placeholder.com/100x100.png"
           />
           <div className="frontpagetext">
             <h1>בעיות עם החתול? אני כאן כדי לעזור</h1>

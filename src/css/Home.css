@@ -31,7 +31,7 @@
   margin-right: 0;
   width: 300px;
   height: 300px;
-  border: 1px solid #ab3b55;
+  border: 2px solid #ab3b55;
 }
 
 .frontpagetext h1 {
@@ -75,7 +75,7 @@
 .lightpinkback li {
   margin-bottom: 33px;
   background-image: url(../../public/paw.svg);
-  background-position: 100% 0;
+  background-position: 100% 3px;
   background-repeat: no-repeat;
   background-size: 13px;
   padding-right: 25px;

@@ -39,13 +39,13 @@ export default function NavBar() {
         </li>
         <li className="emptyspace"></li>
         <li>
-          <a href="">
+          <a href="https://www.facebook.com/Dekelscats">
             {/* <!-- replace with business facebook page --> */}
             <i className="fab fa-facebook icon"></i>
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="https://instagram.com/dekelscats">
             {/* <!-- replace with business instagram page --> */}
             <i className="fab fa-instagram icon"></i>
           </a>

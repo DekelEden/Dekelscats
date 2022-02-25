@@ -8,16 +8,15 @@ export default function About() {
   return (
     <div className="aboutdiv">
       <div className="pinkback">
-        <div className="withmaxwidth">
-          <img
-            className="meAndCats"
-            src="https://via.placeholder.com/100x100.png"
-          />
+        <div className="withmaxwidth centered">
+          <div>
+            <img className="meAndCats" src="./meandrocket2.jpeg" />
+          </div>
           <div className="aboutpagetext">
             <h1>קצת עליי</h1>
             <p>
-              שמי דקל, יועצת להתנהגות חתולים ובוגרת תואר שני ("מוסמך") בחוג
-              למדעי בעלי החיים ווטרינריה של האוניברסיטה העברית.
+              שמי דקל, יועצת להתנהגות חתולים ובוגרת תואר ראשון ושני בחוג למדעי
+              בעלי החיים ווטרינריה של האוניברסיטה העברית.
               <br />
               <br />
               בעלי חיים הינם חלק בלתי נפרד מחיי. במהלך שנותיי באקדמיה למדתי רבות
@@ -54,8 +53,8 @@ export default function About() {
               לייעוץ כללי, הכנת חתולכם לשינויים גדולים צפויים (כמו מעבר דירה,
               לידה ועוד), לטיפים להכנת הבית לפני אימוץ חתולכם או לכל שאלה אחרת.
             </p>
-            <div className="meandrocketpic">
-              <img src="./meandrocket.jpeg" />
+            <div className="meandrocketpic smallerpic">
+              <img src="./15.jpg" />
             </div>
           </div>
         </div>
