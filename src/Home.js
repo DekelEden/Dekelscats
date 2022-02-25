@@ -160,7 +160,9 @@ export default function Home() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-envelope-square"></i>
-                <a href="mailto:dekeltsa@gmail.com">Dekeltsa@gmail.com</a>
+                <a href="mailto:contact@dekelscats.com">
+                  contact@dekelscats.com
+                </a>
               </span>
             </p>
           </div>

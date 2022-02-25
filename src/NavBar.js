@@ -51,7 +51,7 @@ export default function NavBar() {
           </a>
         </li>
         <li>
-          <a href="mailto:dekeltsa@gmail.com">
+          <a href="mailto:contact@dekelscats.com">
             <i className="far fa-paper-plane icon"></i>
           </a>
         </li>
