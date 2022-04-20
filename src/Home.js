@@ -155,7 +155,7 @@ export default function Home() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                050305922
+                0503059422
               </span>
               <span className="space"></span>
               <span className="divide">|</span>
