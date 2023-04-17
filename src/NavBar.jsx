@@ -8,6 +8,9 @@ export default function NavBar() {
 
   return (
     <nav>
+      {/*
+        DESKTOP MENU
+       */}
       <ul className="desktopmenu">
         <li className="smalllogocontainer">
           <Link to="/">
@@ -69,6 +72,11 @@ export default function NavBar() {
           </a>
         </li> */}
       </ul>
+
+      {/*
+        MOBILE MENU
+       */}
+
       <ul className="mobilemenu">
         <li className="smalllogocontainer alwaysshow">
           <Link to="/">
@@ -99,6 +107,11 @@ export default function NavBar() {
         <li>
           <Link className="withhover" to="/consult">
             טיפול וייעוץ
+          </Link>
+        </li>
+        <li>
+          <Link className="withhover" to="/lectures/speaking-cats">
+            הרצאת מדברים חתולית
           </Link>
         </li>
         <li>
