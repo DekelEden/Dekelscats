@@ -1,0 +1,51 @@
+.lectures-list .lecture-item button,
+.lectures-list .lecture-item .button {
+  display: inline-block;
+  background: #ab3b55;
+  color: #fff;
+  width: auto;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Varela Round';
+  text-decoration: none;
+}
+
+.lectures-list .lecture-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.lectures-list .lecture-item h2 a {
+  color: currentColor;
+  text-decoration: none;
+}
+.lectures-list .lecture-item h2 a:hover {
+  color: #ab3b55;
+  text-decoration: underline;
+}
+
+.lecture-content h2 {
+  margin-top: 0;
+}
+
+.lectures-list .lecture-item button:hover,
+.lectures-list .lecture-item .button:hover {
+  background: #be4964;
+}
+
+.lectures-list .lecture-item img {
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
+  padding: 5px;
+  border: 0;
+  background: white;
+  box-shadow: 2px 2px 6px -2px #00000030;
+}
+
+.lectures-list .lecture-item button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

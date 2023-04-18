@@ -9,6 +9,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import RouteGuard from './RouteGuard'
 import Lecture from './Lecture'
+import LecturesList from './LecturesList'
 
 export default function App() {
   return (
@@ -26,8 +27,11 @@ export default function App() {
             <Route path="/contact">
               <Contact />
             </Route>
-            <Route path="/lectures/speaking-cats">
+            <Route path="/lectures/:id">
               <Lecture />
+            </Route>
+            <Route path="/lectures">
+              <LecturesList />
             </Route>
             <Route path="/">
               <Home />

@@ -38,8 +38,8 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <Link className="withhover" to="/lectures/speaking-cats">
-            הרצאת מדברים חתולית
+          <Link className="withhover" to="/lectures">
+            הרצאות
           </Link>
         </li>
         <li>
@@ -110,8 +110,8 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <Link className="withhover" to="/lectures/speaking-cats">
-            הרצאת מדברים חתולית
+          <Link className="withhover" to="/lectures">
+            הרצאות
           </Link>
         </li>
         <li>
