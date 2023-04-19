@@ -1,7 +1,7 @@
 export const lecturesData = [
   {
     key: 'cat-language',
-    title: 'מדברים חתולית',
+    title: 'לומדים חתולית',
     short_description:
       'תמיד רציתם להבין את החתול שלכם טוב יותר?\n\nבואו ללמוד כיצד לתקשר עם חתולכם, להתאים את הבית לצרכיו, למנוע ולהתמוד עם בעיות התנהגות בבית.',
     long_description:

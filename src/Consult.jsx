@@ -52,7 +52,7 @@ export default function Consult() {
             <br />
             <br />
             <span className="notes actualnote">
-              *מפגשים פרונטליים נערכים באזור המרכז והשפלה בהתאם לזמינות.
+              *מפגשים פרונטליים נערכים בצפון ובמרכז בהתאם לזמינות.
             </span>
           </p>
         </div>

@@ -7,7 +7,7 @@ import { NewlineToBr } from './NewlineToBr'
 
 export default function LecturesList() {
   return (
-    <div className="lecturediv">
+    <div className="lectures-list-container">
       <div className="pinkback lecturepink">
         <div className="withmaxwidthnoflex">
           <h1>הרצאות</h1>

@@ -83,7 +83,7 @@
   background-color: #ebd5d5;
 }
 
-.mainContainer {
+.lecture-container .mainContainer {
   padding: 32px 0;
   max-width: 1200px;
   width: 100%;
@@ -107,6 +107,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: 'Varela Round';
 }
 
 .lectureFormContainer input[type='text'],
@@ -139,6 +140,11 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Varela Round';
+  border: none;
+}
+.lectureFormContainer button:hover,
+.lectureButton:hover {
+  background: #be4964;
 }
 
 .lectureFormContainer button:disabled,
@@ -161,10 +167,20 @@
   color: red;
 }
 
-.buttonContainer {
+.lecture-content .buttonContainer {
   text-align: center;
 }
 
-.lecturediv .top-area h1 {
+.lecture-container .top-area h1 {
   text-align: center;
+  padding-bottom: 0;
+}
+
+.lecture-details-container p h4 {
+  margin-top: 2.5em;
+  margin-bottom: 0;
+}
+
+.lecture-details-container ul {
+  margin-top: 0;
 }

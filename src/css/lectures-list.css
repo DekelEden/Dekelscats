@@ -15,6 +15,13 @@
   display: flex;
   align-items: flex-start;
   gap: 40px;
+  font-family: 'Varela Round';
+}
+
+.lectures-list-container h1 {
+  font-size: 3.5em;
+  padding-bottom: 0;
+  text-align: center;
 }
 
 .lectures-list .lecture-item h2 a {
@@ -27,7 +34,9 @@
 }
 
 .lecture-content h2 {
+  font-size: 2.5em;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .lectures-list .lecture-item button:hover,

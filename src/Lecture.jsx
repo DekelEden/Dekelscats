@@ -41,6 +41,7 @@ export default function Lecture() {
       console.debug('🚀 | file: Lecture.jsx:29 | getVideoURL | e:', e)
       const messages = {
         unauthorized: 'שם משתמש או סיסמה לא נכונים',
+        missing_username: 'נא להכניס שם משתמש וסיסמה',
       }
       setError(messages[e.message] || e.message || 'שגיאה לא ידועה')
     } finally {
@@ -57,13 +58,13 @@ export default function Lecture() {
   )
 
   return (
-    <div className="lecturediv">
+    <div className="lecture-container">
       <div className="lecturepink">
         <div className="top-area">
           <div className="pinkback lecturepink">
             <div>
               <img className="catform" src={image} alt={title} />
-              <h1>הרצאה: {title}</h1>
+              <h1>{title}</h1>
               {videoURL ? null : (
                 <>
                   <h2>{page_subtitle}</h2>
@@ -73,7 +74,7 @@ export default function Lecture() {
             </div>
           </div>
           {videoURL ? null : (
-            <div>
+            <div className="lecture-details-container">
               <div className="lightpinkback">
                 <div className="withmaxwidthnoflex">
                   <p>
