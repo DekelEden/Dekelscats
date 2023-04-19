@@ -140,7 +140,11 @@ export default function Lecture() {
                 </div>
                 {error ? <div className="error">{error}</div> : null}
                 <div className="inputcontainer buttonContainer">
-                  <button type="button" disabled={loading} onClick={getVideoURL}>
+                  <button
+                    type="button"
+                    disabled={loading || !username.trim() || !password.trim()}
+                    onClick={getVideoURL}
+                  >
                     צפייה בהרצאה
                   </button>
                 </div>
