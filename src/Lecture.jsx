@@ -51,7 +51,7 @@ export default function Lecture() {
 
   const purchaseButton = (
     <div className="lecturePurchaseContainer">
-      <a className="button lectureButton" href={document_url}>
+      <a className="button lectureButton" href={document_url} target="_blank" rel="noreferrer">
         מילוי פרטים ורכישה
       </a>
     </div>
