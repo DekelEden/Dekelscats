@@ -1,22 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
-import "./css/NavBar.css";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
+import './css/NavBar.css'
 
 export default function NavBar() {
-  const [menuOpenMobile, setMenuOpenMobile] = React.useState(false);
+  const [menuOpenMobile, setMenuOpenMobile] = React.useState(false)
 
   return (
     <nav>
+      {/*
+        DESKTOP MENU
+       */}
       <ul className="desktopmenu">
         <li className="smalllogocontainer">
           <Link to="/">
-            <img className="smalllogo" alt="logo" src="./logonotext.jpg" />
+            <img className="smalllogo" alt="logo" src="/logonotext.jpg" />
           </Link>
         </li>
         <li className="textcontainer">
           <Link to="/">
-            <img className="smalllogotext" alt="logo" src="./textonly.png" />
+            <img className="smalllogotext" alt="logo" src="/textonly.png" />
           </Link>
         </li>
         <li>
@@ -32,6 +35,11 @@ export default function NavBar() {
         <li>
           <Link className="withhover" to="/consult">
             טיפול וייעוץ
+          </Link>
+        </li>
+        <li>
+          <Link className="withhover" to="/lectures">
+            הרצאות
           </Link>
         </li>
         <li>
@@ -64,30 +72,28 @@ export default function NavBar() {
           </a>
         </li> */}
       </ul>
+
+      {/*
+        MOBILE MENU
+       */}
+
       <ul className="mobilemenu">
         <li className="smalllogocontainer alwaysshow">
           <Link to="/">
-            <img className="smalllogo" alt="logo" src="./logonotext.jpg" />
+            <img className="smalllogo" alt="logo" src="/logonotext.jpg" />
           </Link>
         </li>
         <li className="textcontainer alwaysshow">
           <Link to="/">
-            <img className="smalllogotext" alt="logo" src="./textonly.png" />
+            <img className="smalllogotext" alt="logo" src="/textonly.png" />
           </Link>
         </li>
         <li className="spacer alwaysshow" />
-        <li
-          className="alwaysshow hamburger"
-          onClick={() => setMenuOpenMobile((open) => !open)}
-        >
+        <li className="alwaysshow hamburger" onClick={() => setMenuOpenMobile((open) => !open)}>
           <i className="fas fa-bars"></i>
         </li>
       </ul>
-      <ul
-        className={
-          "mobilemenu mobilemenuhidden " + (menuOpenMobile ? "open" : "")
-        }
-      >
+      <ul className={'mobilemenu mobilemenuhidden ' + (menuOpenMobile ? 'open' : '')}>
         <li>
           <Link className="withhover" to="/">
             דף הבית
@@ -101,6 +107,11 @@ export default function NavBar() {
         <li>
           <Link className="withhover" to="/consult">
             טיפול וייעוץ
+          </Link>
+        </li>
+        <li>
+          <Link className="withhover" to="/lectures">
+            הרצאות
           </Link>
         </li>
         <li>
@@ -134,5 +145,5 @@ export default function NavBar() {
         </li> */}
       </ul>
     </nav>
-  );
+  )
 }

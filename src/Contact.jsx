@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./css/contact.css";
-import ContactForm from "./ContactForm";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './css/contact.css'
+import ContactForm from './ContactForm'
 
 export default function Contact() {
   return (
     <div className="contactdiv">
       <div className="pinkback contactpink">
         <div className="withmaxwidthnoflex">
-          <img className="catform" src="./catform.jfif" />
+          <img className="catform" src="/catform.jfif" />
           <h2>אנא השאירו פרטים ליצירת קשר:</h2>
           <ContactForm />
         </div>
@@ -29,14 +29,12 @@ export default function Contact() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-envelope-square"></i>
-                <a href="mailto:contact@dekelscats.com">
-                  contact@dekelscats.com
-                </a>
+                <a href="mailto:contact@dekelscats.com">contact@dekelscats.com</a>
               </span>
             </p>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

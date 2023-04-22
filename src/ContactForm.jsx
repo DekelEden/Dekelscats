@@ -73,15 +73,6 @@ export default class ContactForm extends React.Component {
       messageError = "התיאור חייב להכיל לפחות 20 תוים. נא לפרט";
     }
     if (emailError || nameError || phoneError || contactError || problemError || messageError) {
-      console.debug({
-        emailError,
-        nameError,
-        phoneError,
-        contactError,
-        problemError,
-        messageError,
-        state: { ...this.state },
-      });
       this.setState({
         emailError,
         nameError,
