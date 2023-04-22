@@ -18,6 +18,19 @@
   font-family: 'Varela Round';
 }
 
+@media (max-width: 768px) {
+  .lectures-list {
+    padding-inline-start: 0;
+  }
+  .lectures-list .lecture-item {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .lectures-list .lecture-item img {
+    width: 100%;
+  }
+}
+
 .lectures-list-container h1 {
   font-size: 3.5em;
   padding-bottom: 0;
