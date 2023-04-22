@@ -9,7 +9,7 @@ export const lecturesData = [
     page_subtitle: 'תמיד רציתם להבין את החתול שלכם טוב יותר?',
     image: '/lectures/cat-language.jfif',
     path: '/lectures/cat-language',
-    document_url: 'https://forms.google.com',
+    document_url: 'https://docs.google.com/forms/d/1ukW6DnjwB5mgFefLUHkouGdJ5K2PrOdX14pLAyhmXCk',
     toc: [
       { title: 'חישה בחתולים', description: 'נלמד כיצד החתול שלנו חווה את העולם ' },
       {
