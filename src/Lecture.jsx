@@ -15,9 +15,8 @@ export default function Lecture() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
 
-  const { title, long_description, page_subtitle, image, document_url, toc } = React.useMemo(() =>
-    lecturesData.find((x) => x.key === id),
-  )
+  const { title, long_description, page_subtitle, image, document_url, toc, video_preview_image } =
+    React.useMemo(() => lecturesData.find((x) => x.key === id))
 
   const getVideoURL = React.useCallback(
     async (e) => {
@@ -105,7 +104,7 @@ export default function Lecture() {
       {videoURL ? (
         <div className="mainContainer">
           <div className="videoContainer">
-            <video className="" controls>
+            <video className="" controls poster={video_preview_image}>
               <source src={videoURL} type="video/mp4" />
             </video>
           </div>
