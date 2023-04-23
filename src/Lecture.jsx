@@ -16,7 +16,7 @@ export default function Lecture() {
   const [error, setError] = React.useState(null)
 
   const { title, long_description, page_subtitle, image, document_url, toc, video_preview_image } =
-    React.useMemo(() => lecturesData.find((x) => x.key === id))
+    React.useMemo(() => lecturesData.find((x) => x.key === id), [id])
 
   const getVideoURL = React.useCallback(
     async (e) => {
@@ -32,7 +32,6 @@ export default function Lecture() {
           }).toString()}`,
         )
         const json = await response.json()
-        console.debug('🚀 | file: Lecture.jsx:25 | getVideoURL | json:', json)
         if (json.error) {
           throw new Error(json.error.map((issue) => issue.message).join(', ') || 'שגיאה לא ידועה')
         }
@@ -55,27 +54,25 @@ export default function Lecture() {
     </div>
   )
 
-  React.useEffect(() => {
-    //   <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
-    const link = document.createElement('link')
-    link.href = 'https://vjs.zencdn.net/8.0.4/video-js.css'
-    link.rel = 'stylesheet'
-    link.id = 'videojs-css'
-    document.head.appendChild(link)
+  // React.useEffect(() => {
+  //   //   <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+  //   const link = document.createElement('link')
+  //   link.href = 'https://vjs.zencdn.net/8.0.4/video-js.css'
+  //   link.rel = 'stylesheet'
+  //   link.id = 'videojs-css'
+  //   document.head.appendChild(link)
 
-    //   <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
-    const script = document.createElement('script')
-    script.src = 'https://vjs.zencdn.net/8.0.4/video.min.js'
-    script.id = 'videojs-js'
-    document.body.appendChild(script)
+  //   //   <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+  //   const script = document.createElement('script')
+  //   script.src = 'https://vjs.zencdn.net/8.0.4/video.min.js'
+  //   script.id = 'videojs-js'
+  //   document.body.appendChild(script)
 
-    console.debug('🚀 | file: Lecture.jsx:56 | React.useEffect | link, script:', link, script)
-
-    return () => {
-      document.head.removeChild(link)
-      document.body.removeChild(script)
-    }
-  }, [])
+  //   return () => {
+  //     document.head.removeChild(link)
+  //     document.body.removeChild(script)
+  //   }
+  // }, [])
 
   return (
     <div className="lecture-container">
