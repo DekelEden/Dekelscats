@@ -1,9 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import './css/lecture.css'
 import { lecturesData } from './lecturesData'
 import { useParams } from 'react-router-dom/cjs/react-router-dom'
 import { NewlineToBr } from './NewlineToBr'
+import VideoJS from './Video'
+import videojs from 'video.js'
 
 const API_BASE = 'https://us-central1-casraf-dev.cloudfunctions.net/api/dekel'
 //
@@ -47,6 +48,38 @@ export default function Lecture() {
     [id, password, username],
   )
 
+  const playerRef = React.useRef(null)
+
+  const videoJsOptions = React.useMemo(
+    () => ({
+      // autoplay: true,
+      controls: true,
+      responsive: true,
+      fluid: true,
+      poster: video_preview_image,
+      sources: [
+        {
+          src: videoURL,
+          type: 'video/mp4',
+        },
+      ],
+    }),
+    [videoURL, video_preview_image],
+  )
+
+  const handlePlayerReady = React.useCallback((player) => {
+    playerRef.current = player
+
+    // You can handle player events here, for example:
+    player.on('waiting', () => {
+      videojs.log('player is waiting')
+    })
+
+    player.on('dispose', () => {
+      videojs.log('player will dispose')
+    })
+  }, [])
+
   const purchaseButton = (
     <div className="lecturePurchaseContainer">
       <a className="button lectureButton" href={document_url} target="_blank" rel="noreferrer">
@@ -54,26 +87,6 @@ export default function Lecture() {
       </a>
     </div>
   )
-
-  // React.useEffect(() => {
-  //   //   <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
-  //   const link = document.createElement('link')
-  //   link.href = 'https://vjs.zencdn.net/8.0.4/video-js.css'
-  //   link.rel = 'stylesheet'
-  //   link.id = 'videojs-css'
-  //   document.head.appendChild(link)
-
-  //   //   <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
-  //   const script = document.createElement('script')
-  //   script.src = 'https://vjs.zencdn.net/8.0.4/video.min.js'
-  //   script.id = 'videojs-js'
-  //   document.body.appendChild(script)
-
-  //   return () => {
-  //     document.head.removeChild(link)
-  //     document.body.removeChild(script)
-  //   }
-  // }, [])
 
   return (
     <div className="lecture-container">
@@ -124,15 +137,11 @@ export default function Lecture() {
       {videoURL ? (
         <div className="mainContainer">
           <div className="videoContainer">
-            <video
-              className="video-js"
-              controls
+            <VideoJS
+              options={videoJsOptions}
+              onReady={handlePlayerReady}
               poster={video_preview_image}
-              data-setup="{}"
-              onContextMenu={(e) => e.preventDefault()}
-            >
-              <source src={videoURL} type="video/mp4" />
-            </video>
+            />
           </div>
         </div>
       ) : (
