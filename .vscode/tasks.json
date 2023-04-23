@@ -7,6 +7,13 @@
 			"problemMatcher": [],
 			"label": "npm: start",
 			"detail": "react-scripts start"
+		},
+		{
+			"type": "npm",
+			"script": "deploy",
+			"problemMatcher": [],
+			"label": "npm: deploy",
+			"detail": "gh-pages -d build"
 		}
 	]
 }
