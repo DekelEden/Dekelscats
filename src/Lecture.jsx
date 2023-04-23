@@ -55,6 +55,28 @@ export default function Lecture() {
     </div>
   )
 
+  React.useEffect(() => {
+    //   <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+    const link = document.createElement('link')
+    link.href = 'https://vjs.zencdn.net/8.0.4/video-js.css'
+    link.rel = 'stylesheet'
+    link.id = 'videojs-css'
+    document.head.appendChild(link)
+
+    //   <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    const script = document.createElement('script')
+    script.src = 'https://vjs.zencdn.net/8.0.4/video.min.js'
+    script.id = 'videojs-js'
+    document.body.appendChild(script)
+
+    console.debug('🚀 | file: Lecture.jsx:56 | React.useEffect | link, script:', link, script)
+
+    return () => {
+      document.head.removeChild(link)
+      document.body.removeChild(script)
+    }
+  }, [])
+
   return (
     <div className="lecture-container">
       <div className="lecturepink">
@@ -104,7 +126,13 @@ export default function Lecture() {
       {videoURL ? (
         <div className="mainContainer">
           <div className="videoContainer">
-            <video className="" controls poster={video_preview_image}>
+            <video
+              className="video-js"
+              controls
+              poster={video_preview_image}
+              data-setup="{}"
+              onContextMenu={(e) => e.preventDefault()}
+            >
               <source src={videoURL} type="video/mp4" />
             </video>
           </div>
