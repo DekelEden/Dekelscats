@@ -19,35 +19,34 @@ export default function Lecture() {
     lecturesData.find((x) => x.key === id),
   )
 
-  const getVideoURL = React.useCallback(async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      const response = await fetch(
-        `${API_BASE}/get_video_url?${new URLSearchParams({
-          username,
-          key: password,
-          video_key: id,
-        }).toString()}`,
-      )
-      const json = await response.json()
-      console.debug('🚀 | file: Lecture.jsx:25 | getVideoURL | json:', json)
-      if (json.error) {
-        throw new Error(json.error)
+  const getVideoURL = React.useCallback(
+    async (e) => {
+      e.preventDefault()
+      setLoading(true)
+      setError(null)
+      try {
+        const response = await fetch(
+          `${API_BASE}/get_video_url?${new URLSearchParams({
+            username,
+            key: password,
+            video_key: id,
+          }).toString()}`,
+        )
+        const json = await response.json()
+        console.debug('🚀 | file: Lecture.jsx:25 | getVideoURL | json:', json)
+        if (json.error) {
+          throw new Error(json.error.map((issue) => issue.message).join(', ') || 'שגיאה לא ידועה')
+        }
+        setVideoURL(json.url)
+      } catch (e) {
+        console.error(e)
+        setError(e.message)
+      } finally {
+        setLoading(false)
       }
-      setVideoURL(json.url)
-    } catch (e) {
-      console.error(e)
-      console.debug('🚀 | file: Lecture.jsx:29 | getVideoURL | e:', e)
-      const messages = {
-        unauthorized: 'שם משתמש או סיסמה לא נכונים',
-        missing_username: 'נא להכניס שם משתמש וסיסמה',
-      }
-      setError(messages[e.message] || e.message || 'שגיאה לא ידועה')
-    } finally {
-      setLoading(false)
-    }
-  }, [id, password, username])
+    },
+    [id, password, username],
+  )
 
   const purchaseButton = (
     <div className="lecturePurchaseContainer">
@@ -116,7 +115,7 @@ export default function Lecture() {
           <div className="mainContainer">
             <div className="lectureOnboardingContainer">
               {purchaseButton}
-              <div className="lectureFormContainer">
+              <form className="lectureFormContainer" onSubmit={getVideoURL}>
                 <h4 align="center">כבר רכשתם? הכניסו פרטים לצפייה</h4>
                 <div className="inputcontainer">
                   <input
@@ -140,15 +139,11 @@ export default function Lecture() {
                 </div>
                 {error ? <div className="error">{error}</div> : null}
                 <div className="inputcontainer buttonContainer">
-                  <button
-                    type="button"
-                    disabled={loading || !username.trim() || !password.trim()}
-                    onClick={getVideoURL}
-                  >
+                  <button type="submit" disabled={loading || !username.trim() || !password.trim()}>
                     צפייה בהרצאה
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
