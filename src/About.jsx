@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './css/about.css'
+import { PHONE_NUMBER } from './consts'
 
 export default function About() {
   let goToContact = () => (document.location.href = '/contact')
@@ -66,7 +67,7 @@ export default function About() {
                 <span className="space"></span>
                 <span>
                   <i className="fas fa-phone-square-alt"></i>
-                  0503059422
+                  {PHONE_NUMBER}
                 </span>
                 <span className="space"></span>
                 <span className="divide">|</span>

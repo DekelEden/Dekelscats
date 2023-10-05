@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './css/consult.css'
+import { PHONE_NUMBER } from './consts'
 
 export default function Consult() {
   let goToContact = () => (document.location.href = '/contact')
@@ -10,7 +11,7 @@ export default function Consult() {
       <div className="pinkback consultpink">
         <div className="withmaxwidthnoflexdif">
           <div className="headerpic">
-            <img src="/catscounter.jfif" />
+            <img src="/catscounter.jfif" alt="חתול על שיש" />
           </div>
           <h1>למי מיועד הייעוץ?</h1>
           <p>
@@ -86,7 +87,7 @@ export default function Consult() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                0503059422
+                  {PHONE_NUMBER}
               </span>
               <span className="space"></span>
               <span className="divide">|</span>

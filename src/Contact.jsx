@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './css/contact.css'
 import ContactForm from './ContactForm'
+import { PHONE_NUMBER } from './consts'
 
 export default function Contact() {
   return (
     <div className="contactdiv">
       <div className="pinkback contactpink">
         <div className="withmaxwidthnoflex">
-          <img className="catform" src="/catform.jfif" />
+          <img className="catform" src="/catform.jfif" alt="חתול" />
           <h2>אנא השאירו פרטים ליצירת קשר:</h2>
           <ContactForm />
         </div>
@@ -22,7 +23,7 @@ export default function Contact() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                0503059422
+                {PHONE_NUMBER}
               </span>
               <span className="space"></span>
               <span className="divide">|</span>

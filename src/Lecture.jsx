@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom'
 import { NewlineToBr } from './NewlineToBr'
 import VideoJS from './Video'
 import videojs from 'video.js'
+import { PHONE_NUMBER } from './consts'
 
 const API_BASE = 'https://us-central1-casraf-dev.cloudfunctions.net/api/dekel'
 //
@@ -191,7 +192,7 @@ export default function Lecture() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                0503059422
+                {PHONE_NUMBER}
               </span>
               <span className="space"></span>
               <span className="divide">|</span>

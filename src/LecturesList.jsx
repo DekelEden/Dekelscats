@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
 import './css/lectures-list.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom'
 import { lecturesData } from './lecturesData'
 import { NewlineToBr } from './NewlineToBr'
+import { PHONE_NUMBER } from './consts'
 
 export default function LecturesList() {
   return (
@@ -47,7 +47,7 @@ export default function LecturesList() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                0503059422
+                {PHONE_NUMBER}
               </span>
               <span className="space"></span>
               <span className="divide">|</span>

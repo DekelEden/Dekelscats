@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import './css/Home.css'
+import { PHONE_NUMBER } from './consts'
 
 export default function Home() {
   const history = useHistory()
@@ -13,7 +14,8 @@ export default function Home() {
           <img
             className="meAndSummy"
             src="/13.jpg"
-            // src="https://via.placeholder.com/100x100.png"
+            alt="דקל וסאמר"
+          // src="https://via.placeholder.com/100x100.png"
           />
           <div className="frontpagetext">
             <h1>בעיות עם החתול? אני כאן כדי לעזור</h1>
@@ -142,7 +144,7 @@ export default function Home() {
               <span className="space"></span>
               <span>
                 <i className="fas fa-phone-square-alt"></i>
-                0503059422
+                {PHONE_NUMBER}
               </span>
               <span className="space"></span>
               <span className="divide">|</span>
