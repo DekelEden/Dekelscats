@@ -1,0 +1,17 @@
+---
+import { twMerge } from 'tailwind-merge'
+const { src, class: className, borderSize = 'md', alt } = Astro.props;
+---
+<img src={src} class={twMerge(
+    'bg-white rounded-[5px]', 
+    borderSize === 'sm' && 'p-[5px]',
+    borderSize === 'md' && 'p-[10px]',
+    className,
+  )}
+  alt={alt}
+/>
+<style>
+img {
+  box-shadow: 2px 2px 6px -2px theme('colors.photo-shadow');
+}
+</style>
