@@ -1,3 +1,10 @@
+.lectures-list {
+  margin-inline: -40px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
 .lectures-list .lecture-item button,
 .lectures-list .lecture-item .button {
   display: inline-block;
@@ -11,11 +18,24 @@
   text-decoration: none;
 }
 
+.lecturesMainContainer {
+  margin-inline: auto;
+}
+
 .lectures-list .lecture-item {
+  font-family: 'Varela Round';
+  padding-inline: 40px;
+}
+
+.lectures-list .lecture-item-inner {
   display: flex;
   align-items: flex-start;
   gap: 40px;
-  font-family: 'Varela Round';
+  padding-block: 20px;
+}
+
+.lectures-list .lecture-item:nth-child(odd) {
+  background-color: #f2f2f2;
 }
 
 @media (max-width: 768px) {

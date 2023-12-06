@@ -1,7 +1,7 @@
 import React from 'react'
 import './css/lecture.css'
 import { lecturesData } from './lecturesData'
-import { useParams } from 'react-router-dom/cjs/react-router-dom'
+import { useParams } from 'react-router-dom'
 import { NewlineToBr } from './NewlineToBr'
 import VideoJS from './Video'
 import { PHONE_NUMBER } from './consts'

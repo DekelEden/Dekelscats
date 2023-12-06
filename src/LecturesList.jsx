@@ -1,6 +1,6 @@
 import React from 'react'
 import './css/lectures-list.css'
-import { Link } from 'react-router-dom/cjs/react-router-dom'
+import { Link } from 'react-router-dom'
 import { lecturesData } from './lecturesData'
 import { NewlineToBr } from './NewlineToBr'
 import { PHONE_NUMBER } from './consts'
@@ -15,23 +15,25 @@ export default function LecturesList() {
       </div>
 
       <div className="pinkback">
-        <div className="mainContainer">
+        <div className="mainContainer lecturesMainContainer">
           <ul className="lectures-list">
             {lecturesData.map(({ key, title, short_description, image, path }) => (
               <li key={key} className="lecture-item">
-                <Link to={path}>
-                  <img src={image} alt={title} />
-                </Link>
-                <div className="lecture-content">
-                  <h2>
-                    <Link to={path}>{title}</Link>
-                  </h2>
-                  <p>
-                    <NewlineToBr text={short_description} />
-                  </p>
-                  <Link className="button" to={path}>
-                    לרכישה
+                <div className="lecture-item-inner">
+                  <Link to={path}>
+                    <img src={image} alt={title} />
                   </Link>
+                  <div className="lecture-content">
+                    <h2>
+                      <Link to={path}>{title}</Link>
+                    </h2>
+                    <p>
+                      <NewlineToBr text={short_description} />
+                    </p>
+                    <Link className="button" to={path}>
+                      לרכישה
+                    </Link>
+                  </div>
                 </div>
               </li>
             ))}
