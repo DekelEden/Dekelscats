@@ -31,6 +31,7 @@ export default function Lecture() {
     video_preview_image,
     toc_title,
     video_titles,
+    video_posters,
   } = React.useMemo(() => lecturesData.find((x) => x.key === id), [id])
 
   const getVideoURL = React.useCallback(
@@ -70,7 +71,7 @@ export default function Lecture() {
       controls: true,
       responsive: true,
       fluid: true,
-      poster: video_preview_image,
+      poster: video_posters[currentVideoIndex] || video_preview_image,
       sources: [
         {
           src: videoURLs[currentVideoIndex],
@@ -164,12 +165,9 @@ export default function Lecture() {
               className={['videoContainer', videoURLs.length > 1 ? 'hasSidebar' : '']
                 .filter(Boolean)
                 .join(' ')}
+              key={currentVideoIndex}
             >
-              <VideoJS
-                options={videoJsOptions}
-                onReady={handlePlayerReady}
-                poster={video_preview_image}
-              />
+              <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
             </div>
           </div>
         </>

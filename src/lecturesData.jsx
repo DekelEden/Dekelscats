@@ -40,13 +40,16 @@ export const lecturesData = [
       </>
     ),
     // TODO update
-    image: '/lectures/cat-language.jfif',
+    image: '/lectures/cat-enrichment/poster.jpeg',
     // TODO update
-    video_preview_image: '/lectures/cat-language-poster.jpeg',
+    video_preview_image: '/lectures/cat-enrichment/poster.png',
     path: '/lectures/cat-enrichment',
     // TODO update
-    document_url: 'https://docs.google.com/forms/d/1ukW6DnjwB5mgFefLUHkouGdJ5K2PrOdX14pLAyhmXCk',
+    document_url: 'https://docs.google.com/forms/d/1hlAYnAFMyrDrVwdQKTHihcKF27GXpP1xSDkVfrMWT_E',
     toc: [],
+    /*
+      poster.jpeg
+     */
     video_titles: [
       'מבוא',
       'גובה ומסתור',
@@ -57,6 +60,17 @@ export const lecturesData = [
       'בטיחות בבית',
       'ריבוי בעלי חיים בבית',
       'סיכום',
+    ],
+    video_posters: [
+      '/lectures/cat-enrichment/01-intro.png',
+      '/lectures/cat-enrichment/02-height-and-hiding.png',
+      '/lectures/cat-enrichment/03-food-and-drink.png',
+      '/lectures/cat-enrichment/04-litterboxes.png',
+      '/lectures/cat-enrichment/05-scratching.png',
+      '/lectures/cat-enrichment/06-play-time.png',
+      '/lectures/cat-enrichment/07-home-safety.png',
+      '/lectures/cat-enrichment/08-multiple-pets.png',
+      '/lectures/cat-enrichment/09-summary.png',
     ],
   },
   // cat-language
