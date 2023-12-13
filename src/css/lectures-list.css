@@ -5,6 +5,7 @@
   padding: 0;
   list-style: none;
 }
+
 .lectures-list .lecture-item button,
 .lectures-list .lecture-item .button {
   display: inline-block;
@@ -42,10 +43,12 @@
   .lectures-list {
     padding-inline-start: 0;
   }
-  .lectures-list .lecture-item {
+
+  .lectures-list .lecture-item-inner {
     flex-direction: column;
     gap: 20px;
   }
+
   .lectures-list .lecture-item img {
     width: 100%;
   }
@@ -61,6 +64,7 @@
   color: currentColor;
   text-decoration: none;
 }
+
 .lectures-list .lecture-item h2 a:hover {
   color: #ab3b55;
   text-decoration: underline;
