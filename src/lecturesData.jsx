@@ -84,6 +84,7 @@ export const lecturesData = [
     page_subtitle: 'תמיד רציתם להבין את החתול שלכם טוב יותר?',
     image: '/lectures/cat-language.jfif',
     video_preview_image: '/lectures/cat-language-poster.jpeg',
+    video_posters: ['/lectures/cat-language-poster.jpeg'],
     path: '/lectures/cat-language',
     document_url: 'https://docs.google.com/forms/d/1ukW6DnjwB5mgFefLUHkouGdJ5K2PrOdX14pLAyhmXCk',
     toc_title: 'מה בתוכנית?',

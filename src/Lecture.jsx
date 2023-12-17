@@ -31,7 +31,7 @@ export default function Lecture() {
     video_preview_image,
     toc_title,
     video_titles,
-    video_posters,
+    video_posters = [],
   } = React.useMemo(() => lecturesData.find((x) => x.key === id), [id])
 
   const getVideoURL = React.useCallback(
