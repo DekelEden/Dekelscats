@@ -1,0 +1,21 @@
+---
+import { cn } from "@/lib/utils"
+type Props = {
+  class?: string
+}
+const { class: className } = Astro.props
+---
+
+<ul class={cn("paw-list", "flex flex-col gap-6 my-6 ps-11", className)}>
+  <slot />
+</ul>
+<style>
+  .paw-list :global(li) {
+    background-image: url("/images/paw.svg");
+    background-position: 100% 3px;
+    background-repeat: no-repeat;
+    background-size: 13px;
+    font: theme("fontFamily.varela");
+    padding-inline-start: 24px;
+  }
+</style>

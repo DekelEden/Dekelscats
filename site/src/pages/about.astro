@@ -3,48 +3,9 @@ import Layout from "../layouts/Layout.astro"
 import PhotoBorder from "../components/PhotoBorder.astro"
 import MaxWidth from "../layouts/MaxWidth.astro"
 const pCls = "text-md my-4 leading-snug font-varela"
-const liCls = "font-varela ps-6"
-const consultingImages = [
-  {
-    title: "תוקפנות",
-    src: "/images/consulting/aggression.jpg",
-  },
-  {
-    title: "צרכים מחוץ לארגז",
-    src: "/images/consulting/litter.jfif",
-  },
-  {
-    title: "יללות",
-    src: "/images/consulting/meowing.jfif",
-  },
-  {
-    title: "מעבר דירה",
-    src: "/images/consulting/moving.jfif",
-  },
-  {
-    title: "הפגת שעמום",
-    src: "/images/consulting/boredom.jfif",
-  },
-  {
-    title: "ייעוץ והכנת הבית לפני אימוץ",
-    src: "/images/consulting/adopting.jfif",
-  },
-  {
-    title: "חיבור בין חתולים",
-    src: "/images/consulting/introducing-cats.jfif",
-  },
-  {
-    title: "חיבור בין חתול וכלב",
-    src: "/images/consulting/introducing-dog.jfif",
-  },
-  {
-    title: "ייעוץ כללי",
-    src: "/images/consulting/general.jfif",
-  },
-]
 ---
 
-<Layout title="טיפול וייעוץ התנהגותי לחתולים" footerVariant="light">
+<Layout title="טיפול וייעוץ התנהגותי לחתולים" footerProps={{ variant: "light" }}>
   <div class="bg-primary-bg p-12">
     <MaxWidth class="flex gap-6 max-w-5xl">
       <div class="my-2 flex gap-8">

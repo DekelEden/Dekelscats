@@ -2,16 +2,18 @@
 import Button from "@/components/Button.astro"
 import { PHONE, EMAIL } from "@/lib/consts"
 import { cn } from "@/lib/utils"
+
 export type Props = {
   variant?: "light" | "primary"
+  title?: string
 }
 
-const { variant = "primary" } = Astro.props
+const { title, variant = "primary" } = Astro.props
 ---
 
 <footer class={cn("footer-img", variant === "primary" && "bg-primary-bg")}>
   <div class="flex flex-col items-center gap-8 py-12">
-    <h2 class="text-3xl font-bold font-varela">צרו קשר</h2>
+    <h2 class="text-3xl font-bold font-varela">{title ?? "צרו קשר"}</h2>
 
     <div class="flex flex-col gap-4 items-center justify-center">
       <div class="flex items-center gap-4 font-varela">

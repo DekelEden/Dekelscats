@@ -1,0 +1,45 @@
+---
+import MaxWidth from "@/layouts/MaxWidth.astro"
+import PhotoBorder, { type Props as PhotoBorderProps } from "./PhotoBorder.astro"
+import type { HTMLAttributes } from "astro/types"
+import { cn } from "@/lib/utils"
+
+type Props = {
+  title: string
+  paragraphs: string[]
+  width?: "sm" | "md"
+  image: string
+  imageWithBorder?: boolean
+  imageProps?: HTMLAttributes<"img"> | Omit<PhotoBorderProps, "src">
+}
+
+const { title, paragraphs, image, imageProps, imageWithBorder = true, width = "md" } = Astro.props
+---
+
+<div class="bg-primary-bg p-8">
+  <MaxWidth class={cn("flex gap-6", width === "sm" && "max-w-3xl", width === "md" && "max-w-5xl")}>
+    <div class="my-2 flex flex-col gap-8 items-center">
+      <div>
+        {
+          imageWithBorder ? (
+            <PhotoBorder src={image} borderSize="sm" {...(imageProps as Omit<PhotoBorderProps, "src">)} />
+          ) : (
+            <img src={image} {...(imageProps as HTMLAttributes<"img">)} />
+          )
+        }
+      </div>
+      <div class="text-center page-header-content">
+        <h1 class="text-3xl font-bold font-varela">{title}</h1>
+        {paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </MaxWidth>
+</div>
+<style>
+  .page-header-content :global(p) {
+    font-size: theme("fontSize.base");
+    margin: theme("margin.4") 0;
+    line-spacing: theme("lineHeight.snug");
+    font-family: theme("fontFamily.varela");
+  }
+</style>
