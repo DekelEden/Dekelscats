@@ -1,12 +1,14 @@
 ---
+import NavBar from "./NavBar.astro"
+import Footer, { type Props as FooterProps } from "./Footer.astro"
+
 interface Props {
   title: string
+  footerVariant?: FooterProps["variant"]
 }
 
-const { title } = Astro.props
+const { title, footerVariant } = Astro.props
 const PREFIX = "דקל"
-import NavBar from "./NavBar.astro"
-import Footer from "./Footer.astro"
 ---
 
 <!doctype html>
@@ -55,7 +57,7 @@ import Footer from "./Footer.astro"
   <body>
     <NavBar />
     <slot />
-    <Footer />
+    <Footer variant={footerVariant} />
   </body>
 </html>
 <style is:global>

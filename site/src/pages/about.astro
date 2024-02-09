@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro"
+import PhotoBorder from "../components/PhotoBorder.astro"
+import MaxWidth from "../layouts/MaxWidth.astro"
+const pCls = "text-md my-4 leading-snug font-varela"
+const liCls = "font-varela ps-6"
+const consultingImages = [
+  {
+    title: "תוקפנות",
+    src: "/images/consulting/aggression.jpg",
+  },
+  {
+    title: "צרכים מחוץ לארגז",
+    src: "/images/consulting/litter.jfif",
+  },
+  {
+    title: "יללות",
+    src: "/images/consulting/meowing.jfif",
+  },
+  {
+    title: "מעבר דירה",
+    src: "/images/consulting/moving.jfif",
+  },
+  {
+    title: "הפגת שעמום",
+    src: "/images/consulting/boredom.jfif",
+  },
+  {
+    title: "ייעוץ והכנת הבית לפני אימוץ",
+    src: "/images/consulting/adopting.jfif",
+  },
+  {
+    title: "חיבור בין חתולים",
+    src: "/images/consulting/introducing-cats.jfif",
+  },
+  {
+    title: "חיבור בין חתול וכלב",
+    src: "/images/consulting/introducing-dog.jfif",
+  },
+  {
+    title: "ייעוץ כללי",
+    src: "/images/consulting/general.jfif",
+  },
+]
+---
+
+<Layout title="טיפול וייעוץ התנהגותי לחתולים" footerVariant="light">
+  <div class="bg-primary-bg p-12">
+    <MaxWidth class="flex gap-6 max-w-5xl">
+      <div class="my-2 flex gap-8">
+        <div class="flex-shrink-0 mt-14">
+          <PhotoBorder src="/images/me-and-rocket.jpg" class="h-[233px] w-[300px]" borderSize="sm" />
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold font-varela">קצת עלי</h1>
+          <p class={pCls}>
+            שמי דקל, יועצת להתנהגות חתולים ובוגרת תואר ראשון ושני בחוג למדעי בעלי החיים ווטרינריה של האוניברסיטה העברית.
+          </p>
+
+          <p class={pCls}>
+            בעלי חיים הינם חלק בלתי נפרד מחיי. במהלך שנותיי באקדמיה למדתי רבות אודות הפיזיולוגיה, האנטומיה והאתולוגיה של
+            מגוון בעלי חיים, ובשנים האחרונות הקדשתי חלק לא מבוטל מזמני בלימוד התנהגותם של חתולים, הבנת צרכיהם וחיפוש אחר
+            דרכים לשפר את רווחתם בבית.
+          </p>
+
+          <p class={pCls}>
+            בסיום לימודיי, הוכשרתי כמאבחנת, יועצת ומטפלת התנהגותית לחתולים בשיטה החיובית ("Force free") בהתמחות תחת
+            הנחייתה של אפרת סימון.
+          </p>
+
+          <p class={pCls}>
+            בעבודתי כיועצת התנהגות אני מסייעת לבעלי חתולים להתמודד עם מגוון בעיות, מספקת להם כלים לתקשורת נכונה עם
+            חתולים, מייעצת ומנחה לגידול נכון של חתולי בית תוך דגש על צרכיו הטבעיים של החתול והדרכים למימושם בסביבה
+            הביתית.
+          </p>
+
+          <p class={pCls}>
+            אני מאמינה שעם ליווי מקצועי, סבלנות והרבה אהבה, יכול כל אדם להגיע לחיים שקטים והרמוניים עם חתוליו ולהנות
+            משפע היתרונות של מחייה בסביבת בעלי חיים.
+          </p>
+        </div>
+      </div>
+    </MaxWidth>
+  </div>
+  <div class="bg-bg p-12 pb-0">
+    <MaxWidth class="border-[2px] border-transparent border-b-primary-bg border-dashed pb-12">
+      <h1 class="text-2xl font-bold font-varela">כיצד תוכלו להעזר בי?</h1>
+      <div class="flex gap-16">
+        <div>
+          <p class={pCls}>אני עורכת ביקורי בית, פגישות זום ומלווה בשאלות אונליין לנוחיותכם.</p>
+
+          <p class={pCls}>
+            ניתן לפנות אליי לפתרון מגוון בעיות התנהגותיות שיש לכם עם חתולכם, לייעוץ כללי, הכנת חתולכם לשינויים גדולים
+            צפויים (כמו מעבר דירה, לידה ועוד), לטיפים להכנת הבית לפני אימוץ חתולכם או לכל שאלה אחרת.
+          </p>
+        </div>
+        <div class="flex-shrink-0 mt-4">
+          <PhotoBorder src="/images/me-and-summer.jpg" alt="Sammy" class="w-[220px] h-[220px]" />
+        </div>
+      </div>
+    </MaxWidth>
+  </div>
+</Layout>
