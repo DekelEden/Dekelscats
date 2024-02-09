@@ -1,28 +1,26 @@
---- 
+---
 interface Props {
-	title: string;
+  title: string
 }
 
-const { title } = Astro.props;
-const PREFIX = 'דקל';
-import NavBar from './NavBar.astro';
+const { title } = Astro.props
+const PREFIX = "דקל"
+import NavBar from "./NavBar.astro"
+import Footer from "./Footer.astro"
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <link rel="manifest" href="/manifest.json" />
-		<title>{title ? `${PREFIX} | ` + title : PREFIX}</title>
+    <title>{title ? `${PREFIX} | ` + title : PREFIX}</title>
     <script src="https://kit.fontawesome.com/d380f4a062.js" crossorigin="anonymous"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -40,19 +38,25 @@ import NavBar from './NavBar.astro';
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-58D37SP6JJ"></script>
     <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
+      declare global {
+        interface Window {
+          dataLayer: any[]
+        }
       }
-      gtag('js', new Date())
+      window.dataLayer = window.dataLayer || []
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args)
+      }
+      gtag("js", new Date())
 
-      gtag('config', 'G-58D37SP6JJ')
+      gtag("config", "G-58D37SP6JJ")
     </script>
-	</head>
-	<body>
+  </head>
+  <body>
     <NavBar />
-		<slot />
-	</body>
+    <slot />
+    <Footer />
+  </body>
 </html>
 <style is:global>
   html,

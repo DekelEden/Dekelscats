@@ -1,0 +1,28 @@
+---
+import { cn } from "@/lib/utils"
+type Props = {
+  ["class"]?: string
+  href?: string
+  target?: string
+}
+
+const { href, target, class: className } = Astro.props
+const cls = cn(
+  "bg-primary text-primary-foreground font-varela rounded-2xl",
+  "hover:bg-link-hover",
+  "py-1.5 px-6 text-sm font-bold transition-all",
+  className,
+)
+---
+
+{
+  !href ? (
+    <button class={cls}>
+      <slot />
+    </button>
+  ) : (
+    <a href={href} target={target} class={cls}>
+      <slot />
+    </a>
+  )
+}

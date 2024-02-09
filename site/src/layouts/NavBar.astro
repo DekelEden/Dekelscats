@@ -1,39 +1,40 @@
 ---
-import Link from '../components/Link.astro'
+import { cn } from "@/lib/utils"
+import Link from "../components/Link.astro"
 const items = [
   {
-    title: 'דף הבית',
-    href: '/',
+    title: "דף הבית",
+    href: "/",
   },
   {
-    title: 'אודות',
-    href: '/about',
+    title: "אודות",
+    href: "/about",
   },
   {
-    title: 'טיפול וייעוץ',
-    href: '/consult',
+    title: "טיפול וייעוץ",
+    href: "/consult",
   },
   {
-    title: 'הרצאות',
-    href: '/lectures',
+    title: "הרצאות",
+    href: "/lectures",
   },
   {
-    title: 'צרו קשר',
-    href: '/contact',
+    title: "צרו קשר",
+    href: "/contact",
   },
 ]
 const socialItems = [
   {
     title: '<i class="fab fa-facebook icon"></i>',
-    href: 'https://www.facebook.com/Dekelscats',
+    href: "https://www.facebook.com/Dekelscats",
   },
   {
     title: '<i class="fab fa-instagram icon"></i>',
-    href: 'https://instagram.com/dekelscats',
+    href: "https://instagram.com/dekelscats",
   },
   {
     title: '<i class="far fa-paper-plane icon"></i>',
-    href: 'mailto:dekelscats@gmail.com',
+    href: "mailto:dekelscats@gmail.com",
   },
   // {
   //   title: '<i class="ri-phone-line icon phone"></i>',
@@ -41,40 +42,52 @@ const socialItems = [
   // },
 ]
 ---
+
 <nav class="max-w-6xl mx-auto">
   <ul class="flex justify-space-between items-center background-bg">
     <li class="flex items-center h-full flex-shrink-0">
       <Link class="flex items-center flex-nowrap px-6 py-4" href="/">
-          <img class="w-[60px] h-auto" src="/images/logo.jpg" />
-          <img class="w-[150px] h-auto" src="/images/logo-text.png" />
+        <img class="w-[60px] h-auto" src="/images/logo.jpg" />
+        <img class="w-[150px] h-auto" src="/images/logo-text.png" />
       </Link>
     </li>
-  
-    {items.map(({ title, href }) => (
-       <li>
-         <Link class={`
-            transition-all
-            flex items-center text-center h-full
-            border-b-2 border-transparent
-            font-amatic text-xl px-6 py-4 
-            hover:text-link-hover hover:border-b-link-hover 
-          `}
-           href={href} set:html={title} />
-       </li>
-    ))}
 
-    <li class="flex-1" />
+    {
+      items.map(({ title, href }) => (
+        <li>
+          <Link
+            class={cn(
+              "transition-all",
+              "flex items-center text-center h-full",
+              "border-b-2 border-transparent",
+              "font-amatic text-xl px-6 py-4 ",
+              "hover:text-link-hover hover:border-b-link-hover ",
+              Astro.url.pathname === href && "text-link border-b-primary",
+            )}
+            href={href}
+            set:html={title}
+          />
+        </li>
+      ))
+    }
 
-    {socialItems.map(({ title, href }) => (
-       <li>
-         <Link class={`
+    <li class="flex-1"></li>
+
+    {
+      socialItems.map(({ title, href }) => (
+        <li>
+          <Link
+            class={`
             transition-all
             text-primary
             flex items-center text-center h-full
-            font-amatic text-xl px-6 py-4 
+            font-amatic text-xl px-6 py-4
           `}
-           href={href} set:html={title} />
-       </li>
-    ))}
+            href={href}
+            set:html={title}
+          />
+        </li>
+      ))
+    }
   </ul>
 </nav>
