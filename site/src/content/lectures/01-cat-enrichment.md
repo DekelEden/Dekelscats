@@ -1,13 +1,15 @@
 ---
-slug: cat-enrichment
+key: cat-enrichment
 title: הנמר שבבית - הכל על העשרה סביבתית לחתולים
 purchase_url: https://docs.google.com/forms/d/1ukW6DnjwB5mgFefLUHkouGdJ5K2PrOdX14pLAyhmXCk
 description:
-    subtitle: תמיד רציתם להבין את החתול שלכם טוב יותר?
-    short: סדרת הרצאות המותאמות לכל בעל חתולים אשר מעוניין ללמוד כיצד שינויים קטנים בבית יכולים לשפר באופן ניכר את איכות חייו של החתול (וכך אף למנוע בעיות התנהגותיות פוטנציאליות).
+  subtitle: תמיד רציתם להבין את החתול שלכם טוב יותר?
+  short:
+    סדרת הרצאות המותאמות לכל בעל חתולים אשר מעוניין ללמוד כיצד שינויים קטנים בבית יכולים לשפר באופן
+    ניכר את איכות חייו של החתול (וכך אף למנוע בעיות התנהגותיות פוטנציאליות).
 images:
-    thumbnail: /image/lectures/cat-enrichment.jfif
-    video_preview: /lectures/cat-enrichment-poster.jpg
+  thumbnail: /image/lectures/cat-enrichment.jfif
+  video_preview: /lectures/cat-enrichment-poster.jpg
 videos:
   - title: מבוא
     poster: /lectures/cat-enrichment/01-intro.png
@@ -28,6 +30,7 @@ videos:
   - title: סיכום
     poster: /lectures/cat-enrichment/09-summary.png
 ---
+
 <div>
   <p>
     <b>

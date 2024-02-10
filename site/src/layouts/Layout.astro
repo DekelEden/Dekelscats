@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions"
 import NavBar from "./NavBar.astro"
 import Footer, { type Props as FooterProps } from "./Footer.astro"
 
@@ -14,6 +15,7 @@ const PREFIX = "דקל"
 <!doctype html>
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -58,17 +60,17 @@ const PREFIX = "דקל"
     <NavBar />
     <slot />
     <Footer {...footerProps} />
+    <style is:global>
+      html,
+      body {
+        direction: rtl;
+        font-family: theme("fontFamily.varela");
+        -webkit-font-smoothing: antialiased;
+      }
+
+      p {
+        @apply text-lg my-4 leading-snug font-varela;
+      }
+    </style>
   </body>
 </html>
-<style is:global>
-  html,
-  body {
-    direction: rtl;
-    font-family: theme("fontFamily.varela");
-    -webkit-font-smoothing: antialiased;
-  }
-
-  p {
-    @apply text-lg my-4 leading-snug font-varela;
-  }
-</style>

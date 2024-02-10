@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const lectures = await getCollection("lectures")
   return lectures.map((lecture) => {
     return {
-      params: { slug: lecture.slug },
+      params: { slug: lecture.data.key },
       props: { lecture },
     }
   })
@@ -29,17 +29,64 @@ const { Content } = await lecture.render()
     <Button class="mt-8" size="lg" slot="cta">מילוי פרטים ורכישה</Button>
   </PageHeader>
 
-  <div class="bg-bg-alt p-12 [&_p]:!text-base">
+  <div class="bg-bg-alt px-12 py-8 [&_p]:!text-base">
     <MaxWidth>
-      <div id="lecture-description">
+      <div id="lecture-description" data-lecture={JSON.stringify(lecture.data)}>
         <Content />
       </div>
+      <div id="video-slot"></div>
     </MaxWidth>
   </div>
+
+  <form id="lecture-signin">
+    <button type="submit">OK</button>
+  </form>
 
   <div class="bg-primary-bg p-12 text-center">
     <MaxWidth>
       <Button size="lg">מילוי פרטים ורכישה</Button>
     </MaxWidth>
   </div>
+  <template id="single-video-template">
+    <div>Single</div>
+  </template>
+  <template id="chapters-video-template">
+    <div>Chapters</div>
+  </template>
 </Layout>
+
+<script>
+  import type { LectureSchema } from "@/content/config"
+
+  const form = document.querySelector("#lecture-signin")!
+  const slot = document.querySelector("#video-slot")!
+  const description = document.querySelector("#lecture-description")! as HTMLElement
+  const singleTemplate = document.querySelector("#single-video-template")! as HTMLTemplateElement
+  const chaptersTemplate = document.querySelector("#chapters-video-template")! as HTMLTemplateElement
+  const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
+
+  console.debug("Lecture", lecture)
+
+  document.addEventListener("DOMContentLoaded", () => {
+    form.addEventListener("submit", submit)
+  })
+
+  function submit(e: Event) {
+    console.debug("Submit")
+    e.preventDefault()
+    renderSingleVideo(lecture)
+    return false
+  }
+
+  function renderSingleVideo(data: LectureSchema) {
+    const { videos } = data
+    const videoInfo = videos[0]
+    const container = singleTemplate.content.cloneNode(true)
+
+    // success
+    slot.replaceChildren(container)
+    form.classList.add("hidden")
+    description.classList.add("hidden")
+    slot.classList.remove("hidden")
+  }
+</script>
