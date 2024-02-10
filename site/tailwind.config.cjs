@@ -18,6 +18,7 @@ module.exports = {
           DEFAULT: "#AB3B55",
           bg: "#EBD5D5",
           foreground: colors.white,
+          hover: "#BE4964"
         },
         link: {
           DEFAULT: "",

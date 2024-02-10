@@ -5,7 +5,6 @@ export const LectureSchema = z.object({
   title: z.string(),
   description: z.object({
     short: z.string(),
-    long: z.string().array(),
     subtitle: z.string()
   }),
   images: z.object({

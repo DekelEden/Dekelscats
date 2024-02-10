@@ -1,13 +1,13 @@
 ---
+import Button from "@/components/Button.astro"
 import PageHeader from "@/components/PageHeader.astro"
 import Layout from "@/layouts/Layout.astro"
-import { getCollection, getEntry } from "astro:content"
+import MaxWidth from "@/layouts/MaxWidth.astro"
+import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
   const lectures = await getCollection("lectures")
-  console.log("Lectures:", lectures)
   return lectures.map((lecture) => {
-    console.log("Lecture:", lecture.slug)
     return {
       params: { slug: lecture.slug },
       props: { lecture },
@@ -16,8 +16,30 @@ export async function getStaticPaths() {
 }
 
 const { lecture } = Astro.props
+const { Content } = await lecture.render()
 ---
 
 <Layout title={lecture.data.title}>
-  <PageHeader title={lecture.data.title} paragraphs={[]} image="/images/cats-on-counter.jfif" />
+  <PageHeader
+    title={lecture.data.title}
+    paragraphs={[]}
+    image="/images/cats-on-counter.jfif"
+    imageProps={{ class: "w-[312px]" }}
+  >
+    <Button class="mt-8" size="lg" slot="cta">מילוי פרטים ורכישה</Button>
+  </PageHeader>
+
+  <div class="bg-bg-alt p-12 [&_p]:!text-base">
+    <MaxWidth>
+      <div id="lecture-description">
+        <Content />
+      </div>
+    </MaxWidth>
+  </div>
+
+  <div class="bg-primary-bg p-12 text-center">
+    <MaxWidth>
+      <Button size="lg">מילוי פרטים ורכישה</Button>
+    </MaxWidth>
+  </div>
 </Layout>

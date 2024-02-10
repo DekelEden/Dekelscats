@@ -64,7 +64,11 @@ const PREFIX = "דקל"
   html,
   body {
     direction: rtl;
-    font-family: "Open Sans Hebrew", Sans-serif;
+    font-family: theme("fontFamily.varela");
     -webkit-font-smoothing: antialiased;
+  }
+
+  p {
+    @apply text-lg my-4 leading-snug font-varela;
   }
 </style>

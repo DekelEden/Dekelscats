@@ -53,6 +53,7 @@ const {
       <div class={cn("page-header-content", direction === "col" && "text-center")}>
         <h1 class="text-3xl font-bold font-varela">{title}</h1>
         {paragraphs.map((p) => <p>{p}</p>)}
+        <slot name="cta" />
       </div>
     </div>
   </MaxWidth>
