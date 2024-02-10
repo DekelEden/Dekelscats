@@ -54,7 +54,7 @@ const socialItems = [
 
     {
       items.map(({ title, href }) => (
-        <li>
+        <li class="hidden sm:block">
           <Link
             class={cn(
               "transition-all",
@@ -70,12 +70,13 @@ const socialItems = [
         </li>
       ))
     }
+    {/* TODO mobile menu */}
 
     <li class="flex-1"></li>
 
     {
       socialItems.map(({ title, href }) => (
-        <li>
+        <li class="hidden sm:block">
           <Link
             class={`
             transition-all

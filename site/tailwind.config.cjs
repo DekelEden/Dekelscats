@@ -1,6 +1,6 @@
 // @ts-check
 
-import  colors  from "tailwindcss/colors"
+import colors from "tailwindcss/colors"
 
 const sans = ["Open Sans Hebrew", "sans-serif"]
 /** @type {import('tailwindcss').Config} */

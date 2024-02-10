@@ -14,7 +14,8 @@
     "astro": "^4.3.5",
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

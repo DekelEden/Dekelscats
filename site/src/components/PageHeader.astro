@@ -5,30 +5,52 @@ import type { HTMLAttributes } from "astro/types"
 import { cn } from "@/lib/utils"
 
 type Props = {
+  class?: string
   title: string
   paragraphs: string[]
   width?: "sm" | "md"
   image: string
   imageWithBorder?: boolean
   imageProps?: HTMLAttributes<"img"> | Omit<PhotoBorderProps, "src">
+  direction?: "row" | "col"
 }
 
-const { title, paragraphs, image, imageProps, imageWithBorder = true, width = "md" } = Astro.props
+const {
+  class: className,
+  title,
+  paragraphs,
+  image,
+  imageProps,
+  imageWithBorder = true,
+  width = "md",
+  direction = "col",
+} = Astro.props
 ---
 
-<div class="bg-primary-bg p-8">
-  <MaxWidth class={cn("flex gap-6", width === "sm" && "max-w-3xl", width === "md" && "max-w-5xl")}>
-    <div class="my-2 flex flex-col gap-8 items-center">
-      <div>
+<div class={cn("bg-primary-bg p-8", className)}>
+  <MaxWidth class={cn("flex gap-6 justify-center", width === "sm" && "max-w-3xl", width === "md" && "max-w-5xl")}>
+    <div
+      class={cn(
+        "my-2 flex  gap-8 flex-col",
+        direction === "row" && "sm:flex-row",
+        direction === "col" && "sm:items-center",
+      )}
+    >
+      <div class="flex-shrink-0">
         {
           imageWithBorder ? (
-            <PhotoBorder src={image} borderSize="sm" {...(imageProps as Omit<PhotoBorderProps, "src">)} />
+            <PhotoBorder
+              src={image}
+              borderSize="sm"
+              {...(imageProps as Omit<PhotoBorderProps, "src">)}
+              class={cn("w-[250px]", imageProps?.class)}
+            />
           ) : (
-            <img src={image} {...(imageProps as HTMLAttributes<"img">)} />
+            <img src={image} {...(imageProps as HTMLAttributes<"img">)} class={cn("w-[250px]", imageProps?.class)} />
           )
         }
       </div>
-      <div class="text-center page-header-content">
+      <div class={cn("page-header-content", direction === "col" && "text-center")}>
         <h1 class="text-3xl font-bold font-varela">{title}</h1>
         {paragraphs.map((p) => <p>{p}</p>)}
       </div>

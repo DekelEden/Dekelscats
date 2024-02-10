@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro"
 import PhotoBorder from "../components/PhotoBorder.astro"
 import MaxWidth from "../layouts/MaxWidth.astro"
 import PawList from "@/components/PawList.astro"
+import PageHeader from "@/components/PageHeader.astro"
 const pCls = "text-lg my-4 leading-snug font-varela"
-const liCls = "font-varela ps-6"
 const consultingImages = [
   {
     title: "תוקפנות",
@@ -46,32 +46,24 @@ const consultingImages = [
 ---
 
 <Layout title="טיפול וייעוץ התנהגותי לחתולים">
-  <div class="bg-primary-bg p-12">
-    <MaxWidth class="flex gap-6 max-w-5xl">
-      <div class="flex-shrink-0">
-        <img src="/images/me.jpg" class="rounded-full border border-primary h-[300px] w-[300px]" />
-      </div>
-      <div class="my-2">
-        <h1 class="text-3xl font-bold font-varela">בעיות עם החתול? אני כאן לעזור</h1>
-        <p class={pCls}>
-          בשנים האחרונות, יותר ויותר משפחות פותחות את ליבן ואת ביתן ומאמצות חתולים. לצד העליה בביקוש, עולה גם ההבנה כי
-          לא תמיד פשוט "להבין" מה החתולים שלנו צריכים, ומשפחות רבות מרגישות שקיים קצר תקשורת בינן לבין החתול שלהן, אשר
-          מוביל ללא מעט בעיות התנהגותיות בבית.
-        </p>
-
-        <p class={pCls}>
-          אני מאמינה, שעם הבנה מעמיקה של צרכי החתול, לצד הכוונה מקצועית וטיפול הולם וחיובי, כל בעיית התנהגות ניתנת
-          לפתרון והבעלים יכולים לחזור לחיים שקטים ונעימים לצד החתול שלהם.
-        </p>
-
-        <p class={pCls}>אשמח ללוות אתכם בדרככם ל"לימוד השפה החתולית" וגיבוש מערכת יחסית מוצלחת עם חתולכם.</p>
-      </div>
-    </MaxWidth>
-  </div>
+  <PageHeader
+    width="md"
+    imageWithBorder={false}
+    title="בעיות עם החתול? אני כאן לעזור"
+    image="/images/me.jpg"
+    imageProps={{ class: "rounded-full border-2 border-primary h-[300px] w-[300px]" }}
+    direction="row"
+    class="[&_p]:!text-lg [&_p]:!leading-normal"
+    paragraphs={[
+      'בשנים האחרונות, יותר ויותר משפחות פותחות את ליבן ואת ביתן ומאמצות חתולים. לצד העליה בביקוש, עולה גם ההבנה כי לא תמיד פשוט "להבין" מה החתולים שלנו צריכים, ומשפחות רבות מרגישות שקיים קצר תקשורת בינן לבין החתול שלהן, אשר מוביל ללא מעט בעיות התנהגותיות בבית.',
+      "אני מאמינה, שעם הבנה מעמיקה של צרכי החתול, לצד הכוונה מקצועית וטיפול הולם וחיובי, כל בעיית התנהגות ניתנת לפתרון והבעלים יכולים לחזור לחיים שקטים ונעימים לצד החתול שלהם.",
+      'אשמח ללוות אתכם בדרככם ל"לימוד השפה החתולית" וגיבוש מערכת יחסית מוצלחת עם חתולכם.',
+    ]}
+  />
   <div class="bg-bg-alt p-12">
     <MaxWidth>
       <h1 class="text-2xl font-bold font-varela">הגיע הזמן לנפץ כמה מיתוסים על חתולים:</h1>
-      <div class="flex gap-16">
+      <div class="flex flex-col sm:flex-row gap-16">
         <PawList>
           <li>
             <b>בניגוד לכלבים, חתולים הם לא חיה חברתית - </b>

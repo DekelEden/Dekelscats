@@ -16,13 +16,13 @@ const { title, variant = "primary" } = Astro.props
     <h2 class="text-3xl font-bold font-varela">{title ?? "צרו קשר"}</h2>
 
     <div class="flex flex-col gap-4 items-center justify-center">
-      <div class="flex items-center gap-4 font-varela">
+      <div class="flex flex-col sm:flex-row items-center gap-4 font-varela">
         <b>דקל עדן-צאליק</b>
-        <span class="inline-flex gap-2 items-center">
+        <span class="text-[15px] inline-flex gap-2 items-center">
           <i class="text-primary fas fa-phone-square-alt"></i>
           {PHONE}
         </span>
-        <span>|</span>
+        <span class="hidden sm:inline-block">|</span>
         <a class="inline-flex gap-2 items-center" href={`mailto:${EMAIL}`}>
           <i class="text-primary fas fa-envelope-square"></i>
           {EMAIL}
