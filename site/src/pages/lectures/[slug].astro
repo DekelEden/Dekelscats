@@ -32,9 +32,9 @@ console.debug("Lecture", lecture)
     <Button class="mt-8" size="lg" slot="cta">מילוי פרטים ורכישה</Button>
   </PageHeader>
 
-  <div class="bg-bg-alt px-12 py-8 [&_p]:!text-base">
+  <div class="bg-bg-altpy-8 [&_p]:!text-base">
     <MaxWidth>
-      <div id="lecture-description" data-lecture={JSON.stringify(lecture.data)}>
+      <div id="lecture-description" class="p-12" data-lecture={JSON.stringify(lecture.data)}>
         <Content />
         {
           (lecture.data.toc?.length ?? 0) > 0 && (
@@ -43,7 +43,7 @@ console.debug("Lecture", lecture)
               <PawList>
                 {lecture.data.toc!.map((item) => (
                   <li>
-                    <b clas="font-bold text-underline">{item.title}</b> - {item.description}
+                    <b class="font-bold text-underline">{item.title}</b> - {item.description}
                   </li>
                 ))}
               </PawList>
@@ -51,7 +51,7 @@ console.debug("Lecture", lecture)
           )
         }
       </div>
-      <div id="video-slot" class="max-w-3xl"></div>
+      <div id="video-slot" class="py-12"></div>
     </MaxWidth>
   </div>
 
@@ -72,9 +72,20 @@ console.debug("Lecture", lecture)
     </div>
   </template>
   <template id="chapters-video-template">
-    <ul id="chapters-container"></ul>
-    <div id="video-container">
-      <video id="video" class="video-js vjs-big-play-centered"></video>
+    <div class="flex gap-4">
+      <ul
+        id="chapters-container"
+        class="w-56 border-t border-t-neutral-300"
+        data-li-class={`
+          transition-all font-amatic border text-foreground border-transparent border-b-neutral-300
+          text-[28px] hover:border-b-primary hover:text-primary
+        `}
+        data-li-active-class="text-primary border-b-primary border-b-2 font-bold"
+      >
+      </ul>
+      <div id="video-container" class="flex-1">
+        <video id="video" class="video-js vjs-big-play-centered"></video>
+      </div>
     </div>
   </template>
 </Layout>
@@ -82,7 +93,9 @@ console.debug("Lecture", lecture)
 <script>
   import type { LectureSchema } from "@/content/config"
   import { API_BASE } from "@/lib/consts"
+  import { cn } from "@/lib/utils"
   import videojs from "video.js"
+  import type Player from "video.js/dist/types/player"
   import "video.js/dist/video-js.css"
   import type { ZodError } from "zod"
 
@@ -131,58 +144,59 @@ console.debug("Lecture", lecture)
     const template = singleTemplate.content.cloneNode(true) as HTMLElement
     const video = template.querySelector("#video") as HTMLVideoElement
     inject(template)
-    videojs(video, {
+    const player = videojs(video, {
       controls: true,
       responsive: true,
       fluid: true,
-      poster: videoInfo.poster,
-      sources: [
-        {
-          src: url,
-          type: "video/mp4",
-        },
-      ],
     })
+    setVideo(player, url, videoInfo.poster)
   }
 
   function renderChaptersVideo(urls: string[]) {
     const template = chaptersTemplate.content.cloneNode(true) as HTMLElement
     const container = template.querySelector("#chapters-container") as HTMLUListElement
     const video = template.querySelector("#video") as HTMLVideoElement
+    video.addEventListener("contextmenu", (e) => e.preventDefault())
     inject(template)
     urls.forEach((url, i) => {
       const videoInfo = lecture.videos[i]
       const li = document.createElement("li")
-      const a = document.createElement("a")
-      a.href = "#"
-      a.textContent = videoInfo.title
-      a.addEventListener("click", (e) => {
-        e.preventDefault()
-        const isPlaying = !video.paused
+      setChapterLiState(container, li, i === 0)
+      const button = document.createElement("button")
+      button.textContent = videoInfo.title
+      button.setAttribute("class", "block py-1.5 px-4")
+      button.addEventListener("click", () => {
+        const activeLi = container.querySelector(`[data-selected]`) as HTMLLIElement
+        setChapterLiState(container, activeLi, false)
+        setChapterLiState(container, li, true)
         const player = videojs.getPlayer(video)
-        player.src({ type: "video/mp4", src: url })
-        player.poster(videoInfo.poster)
-        player.load()
-        if (isPlaying) {
-          player.play()
-        }
+        setVideo(player, url, videoInfo.poster)
       })
-      li.appendChild(a)
+      li.appendChild(button)
       container.appendChild(li)
     })
     const videoInfo = lecture.videos[0]
-    videojs(video, {
+    const player = videojs(video, {
       controls: true,
       responsive: true,
       fluid: true,
-      poster: videoInfo.poster,
-      sources: [
-        {
-          src: urls[0],
-          type: "video/mp4",
-        },
-      ],
     })
+    setVideo(player, urls[0], videoInfo.poster)
+  }
+
+  function setChapterLiState(container: HTMLElement, li: HTMLElement, state: boolean) {
+    li.setAttribute("class", cn(container.dataset.liClass!, state && container.dataset.liActiveClass!))
+    if (state) {
+      li.setAttribute("data-selected", "")
+    } else {
+      li.removeAttribute("data-selected")
+    }
+  }
+
+  function setVideo(player: Player, url: string, poster: string) {
+    player.src({ type: "video/mp4", src: url })
+    player.poster(poster)
+    player.load()
   }
 
   function inject(container: Node) {
