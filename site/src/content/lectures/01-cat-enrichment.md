@@ -7,28 +7,26 @@ description:
   short:
     סדרת הרצאות המותאמות לכל בעל חתולים אשר מעוניין ללמוד כיצד שינויים קטנים בבית יכולים לשפר באופן
     ניכר את איכות חייו של החתול (וכך אף למנוע בעיות התנהגותיות פוטנציאליות).
-images:
-  thumbnail: /image/lectures/cat-enrichment.jfif
-  video_preview: /lectures/cat-enrichment-poster.jpg
+thumbnail: /images/lectures/cat-enrichment/poster.jpg
 videos:
   - title: מבוא
-    poster: /lectures/cat-enrichment/01-intro.png
+    poster: /images/lectures/cat-enrichment/01-intro.png
   - title: גובה ומסתור
-    poster: /lectures/cat-enrichment/02-height-and-hiding.png
+    poster: /images/lectures/cat-enrichment/02-height-and-hiding.png
   - title: מים ומזון
-    poster: /lectures/cat-enrichment/03-food-and-drink.png
+    poster: /images/lectures/cat-enrichment/03-food-and-drink.png
   - title: ארגזי החול
-    poster: /lectures/cat-enrichment/04-litterboxes.png
+    poster: /images/lectures/cat-enrichment/04-litterboxes.png
   - title: השחזת ציפורניים
-    poster: /lectures/cat-enrichment/05-scratching.png
+    poster: /images/lectures/cat-enrichment/05-scratching.png
   - title: משחק ותעסוקה
-    poster: /lectures/cat-enrichment/06-play-time.png
+    poster: /images/lectures/cat-enrichment/06-play-time.png
   - title: בטיחות בבית
-    poster: /lectures/cat-enrichment/07-home-safety.png
+    poster: /images/lectures/cat-enrichment/07-home-safety.png
   - title: ריבוי בעלי חיים בבית
-    poster: /lectures/cat-enrichment/08-multiple-pets.png
+    poster: /images/lectures/cat-enrichment/08-multiple-pets.png
   - title: סיכום
-    poster: /lectures/cat-enrichment/09-summary.png
+    poster: /images/lectures/cat-enrichment/09-summary.png
 ---
 
 <div>

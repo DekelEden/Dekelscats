@@ -1,6 +1,8 @@
 ---
 import Button from "@/components/Button.astro"
+import Input from "@/components/Input.astro"
 import PageHeader from "@/components/PageHeader.astro"
+import PawList from "@/components/PawList.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
 import { getCollection } from "astro:content"
@@ -17,13 +19,14 @@ export async function getStaticPaths() {
 
 const { lecture } = Astro.props
 const { Content } = await lecture.render()
+console.debug("Lecture", lecture)
 ---
 
 <Layout title={lecture.data.title}>
   <PageHeader
     title={lecture.data.title}
     paragraphs={[]}
-    image="/images/cats-on-counter.jfif"
+    image={lecture.data.thumbnail}
     imageProps={{ class: "w-[312px]" }}
   >
     <Button class="mt-8" size="lg" slot="cta">מילוי פרטים ורכישה</Button>
@@ -33,12 +36,28 @@ const { Content } = await lecture.render()
     <MaxWidth>
       <div id="lecture-description" data-lecture={JSON.stringify(lecture.data)}>
         <Content />
+        {
+          (lecture.data.toc?.length ?? 0) > 0 && (
+            <div class="mt-4">
+              <h3 class="font-bold">{lecture.data.toc_title ?? "מה בתוכנית?"}</h3>
+              <PawList>
+                {lecture.data.toc!.map((item) => (
+                  <li>
+                    <b clas="font-bold text-underline">{item.title}</b> - {item.description}
+                  </li>
+                ))}
+              </PawList>
+            </div>
+          )
+        }
       </div>
-      <div id="video-slot"></div>
+      <div id="video-slot" class="max-w-3xl"></div>
     </MaxWidth>
   </div>
 
   <form id="lecture-signin">
+    <Input type="text" name="username" autocomplete="username" placeholder="שם משתמש" />
+    <Input type="password" name="password" autocomplete="current-password" placeholder="סיסמה" />
     <button type="submit">OK</button>
   </form>
 
@@ -48,21 +67,30 @@ const { Content } = await lecture.render()
     </MaxWidth>
   </div>
   <template id="single-video-template">
-    <div>Single</div>
+    <div id="video-container">
+      <video id="video" class="video-js vjs-big-play-centered"></video>
+    </div>
   </template>
   <template id="chapters-video-template">
-    <div>Chapters</div>
+    <ul id="chapters-container"></ul>
+    <div id="video-container">
+      <video id="video" class="video-js vjs-big-play-centered"></video>
+    </div>
   </template>
 </Layout>
 
 <script>
   import type { LectureSchema } from "@/content/config"
+  import { API_BASE } from "@/lib/consts"
+  import videojs from "video.js"
+  import "video.js/dist/video-js.css"
+  import type { ZodError } from "zod"
 
-  const form = document.querySelector("#lecture-signin")!
+  const form = document.querySelector("#lecture-signin") as HTMLFormElement
   const slot = document.querySelector("#video-slot")!
-  const description = document.querySelector("#lecture-description")! as HTMLElement
-  const singleTemplate = document.querySelector("#single-video-template")! as HTMLTemplateElement
-  const chaptersTemplate = document.querySelector("#chapters-video-template")! as HTMLTemplateElement
+  const description = document.querySelector("#lecture-description") as HTMLElement
+  const singleTemplate = document.querySelector("#single-video-template") as HTMLTemplateElement
+  const chaptersTemplate = document.querySelector("#chapters-video-template") as HTMLTemplateElement
   const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
 
   console.debug("Lecture", lecture)
@@ -71,19 +99,93 @@ const { Content } = await lecture.render()
     form.addEventListener("submit", submit)
   })
 
-  function submit(e: Event) {
+  async function submit(e: Event) {
     console.debug("Submit")
     e.preventDefault()
-    renderSingleVideo(lecture)
+    const inputs = form.elements
+    const username = (inputs.namedItem("username") as HTMLInputElement).value
+    const password = (inputs.namedItem("password") as HTMLInputElement).value
+
+    const response = await fetch(
+      `${API_BASE}/get_video_urls?${new URLSearchParams({
+        username,
+        key: password,
+        video_key: lecture.key,
+      }).toString()}${import.meta.env.DEV ? "&refresh=1" : ""}`,
+    )
+    const json = await response.json()
+    if (json.error) {
+      throw new Error((json.error as ZodError["issues"]).map((issue) => issue.message).join(", ") || "שגיאה לא ידועה")
+    }
+    // success
+    if (json.urls.length > 1) {
+      renderChaptersVideo(json.urls)
+    } else {
+      renderSingleVideo(json.urls[0])
+    }
     return false
   }
 
-  function renderSingleVideo(data: LectureSchema) {
-    const { videos } = data
-    const videoInfo = videos[0]
-    const container = singleTemplate.content.cloneNode(true)
+  function renderSingleVideo(url: string) {
+    const videoInfo = lecture.videos[0]
+    const template = singleTemplate.content.cloneNode(true) as HTMLElement
+    const video = template.querySelector("#video") as HTMLVideoElement
+    inject(template)
+    videojs(video, {
+      controls: true,
+      responsive: true,
+      fluid: true,
+      poster: videoInfo.poster,
+      sources: [
+        {
+          src: url,
+          type: "video/mp4",
+        },
+      ],
+    })
+  }
 
-    // success
+  function renderChaptersVideo(urls: string[]) {
+    const template = chaptersTemplate.content.cloneNode(true) as HTMLElement
+    const container = template.querySelector("#chapters-container") as HTMLUListElement
+    const video = template.querySelector("#video") as HTMLVideoElement
+    inject(template)
+    urls.forEach((url, i) => {
+      const videoInfo = lecture.videos[i]
+      const li = document.createElement("li")
+      const a = document.createElement("a")
+      a.href = "#"
+      a.textContent = videoInfo.title
+      a.addEventListener("click", (e) => {
+        e.preventDefault()
+        const isPlaying = !video.paused
+        const player = videojs.getPlayer(video)
+        player.src({ type: "video/mp4", src: url })
+        player.poster(videoInfo.poster)
+        player.load()
+        if (isPlaying) {
+          player.play()
+        }
+      })
+      li.appendChild(a)
+      container.appendChild(li)
+    })
+    const videoInfo = lecture.videos[0]
+    videojs(video, {
+      controls: true,
+      responsive: true,
+      fluid: true,
+      poster: videoInfo.poster,
+      sources: [
+        {
+          src: urls[0],
+          type: "video/mp4",
+        },
+      ],
+    })
+  }
+
+  function inject(container: Node) {
     slot.replaceChildren(container)
     form.classList.add("hidden")
     description.classList.add("hidden")

@@ -9,10 +9,7 @@ export const LectureSchema = z.object({
     short: z.string(),
     subtitle: z.string(),
   }),
-  images: z.object({
-    video_preview: z.string(), // TODO remove?
-    thumbnail: z.string(),
-  }),
+  thumbnail: z.string(),
   purchase_url: z.string(),
   toc_title: z.string().optional(),
   videos: z.array(
