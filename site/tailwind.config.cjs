@@ -17,8 +17,9 @@ module.exports = {
         primary: {
           DEFAULT: "#AB3B55",
           bg: "#EBD5D5",
+          light: "#BC8A96",
           foreground: colors.white,
-          hover: "#BE4964"
+          hover: "#BE4964",
         },
         link: {
           DEFAULT: "",

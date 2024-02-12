@@ -6,4 +6,15 @@ type Props = HTMLAttributes<"input">
 const { class: className, ...rest } = Astro.props
 ---
 
-<input class={cn("", className)} {...rest} />
+<input
+  class={cn(
+    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "transition-colors",
+    "py-1.5 px-2 rounded-md",
+    "border border-neutral-300",
+    "hover:border-primary-light",
+    "focus-visible:border-primary-hover focus-visible:outline-none",
+    className,
+  )}
+  {...rest}
+/>

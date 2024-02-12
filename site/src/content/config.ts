@@ -7,7 +7,7 @@ export const LectureSchema = z.object({
   title: z.string(),
   description: z.object({
     short: z.string(),
-    subtitle: z.string(),
+    subtitle: z.string().optional(),
   }),
   thumbnail: z.string(),
   purchase_url: z.string(),

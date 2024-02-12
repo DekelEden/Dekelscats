@@ -7,6 +7,6 @@ type Props = HTMLAttributes<"a">
 const { class: className, ...rest } = Astro.props
 ---
 
-<a class={cn(className)} {...rest}>
+<a class={cn("hover:text-primary hover:underline transition-colors", className)} {...rest}>
   <slot />
 </a>
