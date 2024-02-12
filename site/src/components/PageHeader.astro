@@ -42,6 +42,7 @@ const {
             <PhotoBorder
               src={image}
               borderSize="sm"
+              transition:name="hero"
               {...(imageProps as Omit<PhotoBorderProps, "src">)}
               class={cn("w-[250px]", imageProps?.class)}
             />

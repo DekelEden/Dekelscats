@@ -78,12 +78,14 @@ const socialItems = [
       socialItems.map(({ title, href }) => (
         <li class="hidden sm:block">
           <Link
-            class={`
-            transition-all
-            text-primary
-            flex items-center text-center h-full
-            font-amatic text-xl px-6 py-4
-          `}
+            class={cn(
+              "transition-all",
+              "text-primary",
+              "hover:text-primary-hover",
+              "flex items-center text-center h-full",
+              "font-amatic text-xl px-6 py-4",
+            )}
+            underline="never"
             aria-label={title}
             href={href}
             set:html={title}

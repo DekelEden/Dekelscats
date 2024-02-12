@@ -1,0 +1,43 @@
+---
+import Button from "@/components/Button.astro"
+import Input from "@/components/Input.astro"
+import PhotoBorder from "@/components/PhotoBorder.astro"
+import Layout from "@/layouts/Layout.astro"
+import MaxWidth from "@/layouts/MaxWidth.astro"
+---
+
+<Layout title="צרו קשר" footerProps={{ variant: "minimal" }}>
+  <div class="bg-primary-bg p-8">
+    <MaxWidth class="max-w-96">
+      <PhotoBorder src="/images/contact.jfif" class="w-[310px] mx-auto" borderSize="sm" />
+
+      <h1 class="font-bold text-xl text-center my-4">אנא השאירו פרטים ליצירת קשר:</h1>
+
+      <form class="flex flex-col gap-8">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-user"></i>
+          <Input name="fullName" class="w-full" placeholder="שם מלא" autocomplete="name" />
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-envelope"></i>
+          <Input name="email" class="w-full" type="email" placeholder="דואר אלקטרוני" autocomplete="email" />
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-phone-alt"></i>
+          <Input name="phone" class="w-full text-right" type="tel" placeholder="טלפון" autocomplete="tel" />
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-comments"></i>
+          כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
+        </div>
+        <div class="flex items-center gap-2">
+          <label>
+            <input type="radio" name="howToContact" value="phoneCall" />
+            שיחת טלפון
+          </label>
+        </div>
+        <Button type="submit">Submit</Button>
+      </form>
+    </MaxWidth>
+  </div>
+</Layout>

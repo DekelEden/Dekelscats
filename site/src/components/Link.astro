@@ -2,11 +2,21 @@
 import { cn } from "@/lib/utils"
 import type { HTMLAttributes } from "astro/types"
 
-type Props = HTMLAttributes<"a">
+type Props = HTMLAttributes<"a"> & {
+  underline?: "always" | "hover" | "never"
+}
 
-const { class: className, ...rest } = Astro.props
+const { class: className, underline = "hover", ...rest } = Astro.props
 ---
 
-<a class={cn("hover:text-primary hover:underline transition-colors", className)} {...rest}>
+<a
+  class={cn(
+    "hover:text-primary transition-colors",
+    underline === "always" && "underline",
+    underline === "hover" && "hover:underline",
+    className,
+  )}
+  {...rest}
+>
   <slot />
 </a>

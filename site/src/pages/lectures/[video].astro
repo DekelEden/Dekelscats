@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const lectures = await getCollection("lectures")
   return lectures.map((lecture) => {
     return {
-      params: { slug: lecture.data.key },
+      params: { video: lecture.data.key },
       props: { lecture },
     }
   })
@@ -20,7 +20,6 @@ export async function getStaticPaths() {
 
 const { lecture } = Astro.props
 const { Content } = await lecture.render()
-console.debug("Lecture", lecture)
 ---
 
 <Layout title={lecture.data.title}>
@@ -109,32 +108,59 @@ console.debug("Lecture", lecture)
   import "video.js/dist/video-js.css"
   import type { ZodError } from "zod"
 
-  const form = document.querySelector("#lecture-signin") as HTMLFormElement
-  const slot = document.querySelector("#video-slot")!
-  const description = document.querySelector("#lecture-description") as HTMLElement
-  const button = form.querySelector("button[type=submit]") as HTMLButtonElement
-  const singleTemplate = document.querySelector("#single-video-template") as HTMLTemplateElement
-  const chaptersTemplate = document.querySelector("#chapters-video-template") as HTMLTemplateElement
-  const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
-  const fieldset = document.querySelector("#form-fieldset") as HTMLFieldSetElement
-  const inputs = form.elements
-  const username = inputs.namedItem("username") as HTMLInputElement
-  const password = inputs.namedItem("password") as HTMLInputElement
-  const error = document.querySelector("#error") as HTMLElement
-  const signinArea = document.querySelector("#signin-area") as HTMLElement
-  const ctaButton = document.querySelector("#cta-button") as HTMLButtonElement
+  let _init = false
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", init)
+  document.addEventListener("astro:page-load", init)
+
+  function getElements() {
+    const form = document.querySelector("#lecture-signin") as HTMLFormElement
+    const slot = document.querySelector("#video-slot") as HTMLElement
+    const description = document.querySelector("#lecture-description") as HTMLElement
+    const button = form.querySelector("button[type=submit]") as HTMLButtonElement
+    const singleTemplate = document.querySelector("#single-video-template") as HTMLTemplateElement
+    const chaptersTemplate = document.querySelector("#chapters-video-template") as HTMLTemplateElement
+    const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
+    const fieldset = document.querySelector("#form-fieldset") as HTMLFieldSetElement
+    const inputs = form.elements
+    const username = inputs.namedItem("username") as HTMLInputElement
+    const password = inputs.namedItem("password") as HTMLInputElement
+    const error = document.querySelector("#error") as HTMLElement
+    const signinArea = document.querySelector("#signin-area") as HTMLElement
+    const ctaButton = document.querySelector("#cta-button") as HTMLButtonElement
+    return {
+      form,
+      username,
+      password,
+      button,
+      fieldset,
+      error,
+      lecture,
+      singleTemplate,
+      chaptersTemplate,
+      slot,
+      signinArea,
+      description,
+      ctaButton,
+    }
+  }
+
+  function init() {
+    if (_init) return
+    _init = true
+    const { form, username, password } = getElements()
     form.addEventListener("submit", submit)
     username.addEventListener("input", calcButtonState)
     password.addEventListener("input", calcButtonState)
-  })
+  }
 
   function calcButtonState() {
+    const { username, password, button } = getElements()
     button.disabled = !username.value || !password.value
   }
 
   async function submit(e: Event) {
+    const { username, password, button, fieldset, error, lecture } = getElements()
     const buttonTxt = button.innerHTML
     try {
       e.preventDefault()
@@ -151,7 +177,9 @@ console.debug("Lecture", lecture)
       )
       const json = await response.json()
       if (json.error) {
-        throw new Error((json.error as ZodError["issues"]).map((issue) => issue.message).join(", ") || "שגיאה לא ידועה")
+        throw new Error(
+          (json.error as ZodError["issues"])?.map((issue) => issue.message).join(", ") || "שגיאה לא ידועה",
+        )
       }
       // success
       if (json.urls.length > 1) {
@@ -168,6 +196,7 @@ console.debug("Lecture", lecture)
   }
 
   function renderSingleVideo(url: string) {
+    const { lecture, singleTemplate } = getElements()
     const videoInfo = lecture.videos[0]
     const template = singleTemplate.content.cloneNode(true) as HTMLElement
     const video = template.querySelector("#video") as HTMLVideoElement
@@ -181,6 +210,7 @@ console.debug("Lecture", lecture)
   }
 
   function renderChaptersVideo(urls: string[]) {
+    const { lecture, chaptersTemplate } = getElements()
     const template = chaptersTemplate.content.cloneNode(true) as HTMLElement
     const container = template.querySelector("#chapters-container") as HTMLUListElement
     const video = template.querySelector("#video") as HTMLVideoElement
@@ -224,6 +254,7 @@ console.debug("Lecture", lecture)
   }
 
   function inject(container: Node) {
+    const { slot, signinArea, description, ctaButton } = getElements()
     slot.replaceChildren(container)
     signinArea.classList.add("hidden")
     description.classList.add("hidden")

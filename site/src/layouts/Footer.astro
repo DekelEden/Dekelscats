@@ -4,16 +4,17 @@ import { PHONE, EMAIL } from "@/lib/consts"
 import { cn } from "@/lib/utils"
 
 export type Props = {
-  variant?: "light" | "primary"
+  color?: "light" | "primary"
+  variant?: "minimal" | "default"
   title?: string
 }
 
-const { title, variant = "primary" } = Astro.props
+const { title, color = "primary", variant = "default" } = Astro.props
 ---
 
-<footer class={cn("footer-img", variant === "primary" && "bg-primary-bg")}>
+<footer class={cn("footer-img", color === "primary" && "bg-primary-bg")}>
   <div class="flex flex-col items-center gap-8 py-12">
-    <h2 class="text-3xl font-bold font-varela">{title ?? "צרו קשר"}</h2>
+    {variant !== "minimal" && <h2 class="text-3xl font-bold font-varela">{title ?? "צרו קשר"}</h2>}
 
     <div class="flex flex-col gap-4 items-center justify-center">
       <div class="flex flex-col sm:flex-row items-center gap-4 font-varela">
@@ -28,9 +29,15 @@ const { title, variant = "primary" } = Astro.props
           {EMAIL}
         </a>
       </div>
-      <div class="flex items-center justify-center">
-        <Button class="font-bold" size="sm" rounded="pill" href="/contact">טופס יצירת קשר</Button>
-      </div>
+      {
+        variant !== "minimal" && (
+          <div class="flex items-center justify-center">
+            <Button class="font-bold" size="sm" rounded="pill" href="/contact">
+              טופס יצירת קשר
+            </Button>
+          </div>
+        )
+      }
     </div>
   </div>
 

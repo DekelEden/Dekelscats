@@ -11,7 +11,7 @@ description:
 thumbnail: /images/lectures/cat-language/poster.jfif
 videos:
   - title: ""
-    poster: /lectures/cat-language/cat-language.jpg
+    poster: /images/lectures/cat-language/cat-language.jpg
 toc_title: מה בתוכנית?
 toc:
   - title: חישה בחתולים
