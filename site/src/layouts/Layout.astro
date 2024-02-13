@@ -1,5 +1,5 @@
 ---
-// import { ViewTransitions } from "astro:transitions"
+import { ViewTransitions } from "astro:transitions"
 import NavBar from "./NavBar.astro"
 import Footer, { type Props as FooterProps } from "./Footer.astro"
 
@@ -15,6 +15,7 @@ const PREFIX = "דקל"
 <!doctype html>
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,7 +23,21 @@ const PREFIX = "דקל"
     <meta name="generator" content={Astro.generator} />
     <link rel="manifest" href="/manifest.json" />
     <title>{title ? `${PREFIX} | ` + title : PREFIX}</title>
-    <script src="https://kit.fontawesome.com/d380f4a062.js" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", initFontAwesome)
+      document.addEventListener("astro:after-swap", initFontAwesome)
+
+      function initFontAwesome() {
+        const fa = document.getElementById("fontawesome")
+        if (!fa) {
+          const script = document.createElement("script")
+          script.id = "fontawesome"
+          script.src = "https://kit.fontawesome.com/d380f4a062.js"
+          script.crossOrigin = "anonymous"
+          document.head.appendChild(script)
+        }
+      }
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,14 +55,9 @@ const PREFIX = "דקל"
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-58D37SP6JJ"></script>
-    <script>
-      declare global {
-        interface Window {
-          dataLayer: any[]
-        }
-      }
+    <script is:inline>
       window.dataLayer = window.dataLayer || []
-      function gtag(...args: any[]) {
+      function gtag(...args) {
         window.dataLayer.push(args)
       }
       gtag("js", new Date())

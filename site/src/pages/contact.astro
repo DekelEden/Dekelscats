@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components"
 import Button from "@/components/Button.astro"
 import Input from "@/components/Input.astro"
 import PhotoBorder from "@/components/PhotoBorder.astro"
@@ -15,19 +16,19 @@ import MaxWidth from "@/layouts/MaxWidth.astro"
 
       <form class="flex flex-col gap-8">
         <div class="flex items-center gap-2">
-          <i class="fas fa-user"></i>
+          <Icon name="fa6-solid:user" />
           <Input name="fullName" class="w-full" placeholder="שם מלא" autocomplete="name" />
         </div>
         <div class="flex items-center gap-2">
-          <i class="fas fa-envelope"></i>
+          <Icon name="fa6-solid:envelope" />
           <Input name="email" class="w-full" type="email" placeholder="דואר אלקטרוני" autocomplete="email" />
         </div>
         <div class="flex items-center gap-2">
-          <i class="fas fa-phone-alt"></i>
+          <Icon name="fa6-solid:phone" />
           <Input name="phone" class="w-full text-right" type="tel" placeholder="טלפון" autocomplete="tel" />
         </div>
         <div class="flex items-center gap-2">
-          <i class="fas fa-comments"></i>
+          <Icon name="fa6-solid:comments" />
           כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
         </div>
         <div class="flex items-center gap-2">
@@ -41,3 +42,7 @@ import MaxWidth from "@/layouts/MaxWidth.astro"
     </MaxWidth>
   </div>
 </Layout>
+
+<script>
+  console.log("Contact page")
+</script>
