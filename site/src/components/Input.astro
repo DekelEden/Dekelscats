@@ -2,19 +2,24 @@
 import { cn } from "@/lib/utils"
 import type { HTMLAttributes } from "astro/types"
 
-type Props = HTMLAttributes<"input">
+type Props = Omit<HTMLAttributes<"input">, "type"> & { type?: HTMLInputTypeAttribute | "textarea" }
+import type { HTMLInputTypeAttribute } from "react"
 const { class: className, ...rest } = Astro.props
+const cls = cn(
+  "disabled:opacity-50 disabled:cursor-not-allowed",
+  "transition-colors",
+  "py-1.5 px-2 rounded-md",
+  "border border-neutral-300",
+  "hover:border-primary-light",
+  "focus-visible:border-primary-hover focus-visible:outline-none",
+  className,
+)
 ---
 
-<input
-  class={cn(
-    "disabled:opacity-50 disabled:cursor-not-allowed",
-    "transition-colors",
-    "py-1.5 px-2 rounded-md",
-    "border border-neutral-300",
-    "hover:border-primary-light",
-    "focus-visible:border-primary-hover focus-visible:outline-none",
-    className,
-  )}
-  {...rest}
-/>
+{
+  rest.type === "textarea" ? (
+    <textarea class={cls} {...(rest as HTMLAttributes<"textarea">)} />
+  ) : (
+    <input class={cls} {...(rest as HTMLAttributes<"input">)} />
+  )
+}

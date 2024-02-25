@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components"
 import Button from "@/components/Button.astro"
 import { PHONE, EMAIL } from "@/lib/consts"
 import { cn } from "@/lib/utils"
+import Link from "@/components/Link.astro"
 
 export type Props = {
   color?: "light" | "primary"
@@ -21,14 +22,14 @@ const { title, color = "primary", variant = "default" } = Astro.props
       <div class="flex flex-col sm:flex-row items-center gap-4 font-varela">
         <b>דקל עדן-צאליק</b>
         <span class="text-[15px] inline-flex gap-2 items-center">
-          <Icon name="fa6-solid:square-phone" class="text-primary" />
+          <Icon name="fa6-solid:phone" class="text-primary" />
           {PHONE}
         </span>
         <span class="hidden sm:inline-block">|</span>
-        <a class="inline-flex gap-2 items-center" href={`mailto:${EMAIL}`}>
-          <Icon name="fa6-solid:square-envelope" class="text-primary" />
+        <Link class="inline-flex gap-2 items-center" href={`mailto:${EMAIL}`}>
+          <Icon name="fa6-solid:envelope" class="text-primary" />
           {EMAIL}
-        </a>
+        </Link>
       </div>
       {
         variant !== "minimal" && (

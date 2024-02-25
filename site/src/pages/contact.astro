@@ -5,44 +5,272 @@ import Input from "@/components/Input.astro"
 import PhotoBorder from "@/components/PhotoBorder.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
+const labelCls =
+  "cursor-pointer transition-all p-2 bg-bg rounded-xl inline-flex justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
 ---
 
 <Layout title="צרו קשר" footerProps={{ variant: "minimal" }}>
   <div class="bg-primary-bg p-8">
-    <MaxWidth class="max-w-96">
+    <MaxWidth class="max-w-md">
       <PhotoBorder src="/images/contact.jfif" class="w-[310px] mx-auto" borderSize="sm" />
 
       <h1 class="font-bold text-xl text-center my-4">אנא השאירו פרטים ליצירת קשר:</h1>
 
-      <form class="flex flex-col gap-8">
-        <div class="flex items-center gap-2">
-          <Icon name="fa6-solid:user" />
-          <Input name="fullName" class="w-full" placeholder="שם מלא" autocomplete="name" />
-        </div>
-        <div class="flex items-center gap-2">
-          <Icon name="fa6-solid:envelope" />
-          <Input name="email" class="w-full" type="email" placeholder="דואר אלקטרוני" autocomplete="email" />
-        </div>
-        <div class="flex items-center gap-2">
-          <Icon name="fa6-solid:phone" />
-          <Input name="phone" class="w-full text-right" type="tel" placeholder="טלפון" autocomplete="tel" />
-        </div>
-        <div class="flex items-center gap-2">
-          <Icon name="fa6-solid:comments" />
-          כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
-        </div>
-        <div class="flex items-center gap-2">
+      <form>
+        <fieldset class="flex flex-col gap-8">
           <label>
-            <input type="radio" name="howToContact" value="phoneCall" />
-            שיחת טלפון
+            <div class="flex items-center gap-2">
+              <Icon name="fa6-solid:user" />
+              <Input
+                name="name"
+                required
+                minlength="2"
+                class="w-full"
+                placeholder="שם מלא"
+                autocomplete="name"
+                data-error
+                data-error-required="שם חובה"
+              />
+            </div>
+            <div class="error ms-5 text-red-500"></div>
           </label>
-        </div>
-        <Button type="submit">Submit</Button>
+          <label>
+            <div class="flex items-center gap-2">
+              <Icon name="fa6-solid:envelope" />
+              <Input
+                name="email"
+                required
+                class="w-full"
+                type="email"
+                placeholder="דואר אלקטרוני"
+                autocomplete="email"
+                data-error
+                data-error-required="אימייל חובה"
+              />
+            </div>
+            <div class="error ms-5 text-red-500"></div>
+          </label>
+          <label>
+            <div class="flex items-center gap-2">
+              <Icon name="fa6-solid:phone" />
+              <Input
+                name="phone"
+                type="tel"
+                required
+                minlength="9"
+                class="w-full text-right"
+                type="tel"
+                placeholder="טלפון"
+                autocomplete="tel"
+                data-error
+                data-error-required="שדה חובה"
+              />
+            </div>
+            <div class="error ms-5 text-red-500"></div>
+          </label>
+          <div class="flex items-center gap-2">
+            <Icon name="fa6-solid:comments" />
+            כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
+          </div>
+          <div class="flex items-center justify-around gap-2">
+            <label class={labelCls}>
+              <input type="radio" name="method" required value="phone" />
+              <Icon name="fa6-solid:phone" />
+              טלפון
+            </label>
+            <label class={labelCls}>
+              <input type="radio" name="method" value="whatsapp" />
+              <Icon name="fa6-brands:whatsapp" class="text-xl" />
+              WhatsApp
+            </label>
+            <label class={labelCls}>
+              <input type="radio" name="method" value="email" />
+              <Icon name="fa6-solid:envelope" />
+              אימייל
+            </label>
+            <div class="error ms-5 text-red-500"></div>
+          </div>
+          <label>
+            <div class="flex items-center gap-2">
+              <Icon name="fa6-solid:circle-info" class="flex-shrink-0 text-lg" />
+              <span class="whitespace-nowrap">סיבת הפנייה:</span>
+              <select
+                name="reason"
+                required
+                class="h-10 transition-all w-full cursor-pointer py-1 px-2 rounded-md border border-transparent hover:border-primary-light"
+              >
+                <option value="">בחרו</option>
+                <option value="agression">חתול תוקפן</option>
+                <option value="litterbox">צרכים מחוץ לארגז</option>
+                <option value="loudcat">יללנות יתר</option>
+                <option value="connectcats">חיבור בין חתולים</option>
+                <option value="connectcatdog">חיבור בין חתול וכלב</option>
+                <option value="adoption">ייעוץ לפני אימוץ</option>
+                <option value="other">ייעוץ כללי/שאלה כללית/אחר</option>
+              </select>
+            </div>
+            <div class="error ms-5 text-red-500"></div>
+          </label>
+          <label class="flex flex-col items-stretch gap-2">
+            <span class="flex gap-2 items-center">
+              <Icon name="fa6-solid:circle-info" class="text-lg" />
+              תיאור הפנייה:
+            </span>
+            <Input
+              type="textarea"
+              required
+              name="description"
+              class="min-h-20"
+              placeholder="תיאור כללי של עד 500 תווים"
+              data-error
+              data-error-required="תיאור חובה"
+              data-error-max="התיאור חייב להיות עד 500 תווים"
+            />
+            <div class="error ms-5 text-red-500"></div>
+          </label>
+          <div class="form-error text-red-500 text-center"></div>
+          <Button type="submit" disabled>שליחה</Button>
+        </fieldset>
       </form>
+      <div id="form-done" class="hidden">
+        <p>תודה רבה, נחזור אליכם בהקדם</p>
+      </div>
     </MaxWidth>
   </div>
-</Layout>
 
-<script>
-  console.log("Contact page")
-</script>
+  <script>
+    import { API_BASE } from "@/lib/consts"
+
+    console.log("Contact page")
+    function init() {
+      const { form, radios, reason, errorInputs } = getElements()
+
+      radios.forEach((radio) => {
+        radio.addEventListener("click", (e) => {
+          radios.forEach((r) => r.closest("label")!.removeAttribute("data-selected"))
+          const self = e.target as HTMLElement
+          self.closest("label")!.setAttribute("data-selected", "selected")
+          validateForm()
+        })
+      })
+      errorInputs?.forEach((e) => {
+        const input = e as HTMLInputElement
+        const error = input.closest("label")!.querySelector(".error") as HTMLDivElement
+        input.addEventListener("input", () => {
+          console.log("Validating", input.name, input.validity)
+          if (input.validity.valid) {
+            error.innerHTML = ""
+          } else {
+            if (input.validity.valueMissing) {
+              error.innerHTML = input.dataset.errorRequired ?? "שדה חובה"
+            } else if (input.validity.tooLong) {
+              error.innerHTML = input.dataset.errorMax ?? `חייב להכיל עד ${input.maxLength} תווים`
+            } else if (input.validity.tooShort) {
+              error.innerHTML = input.dataset.errorMin ?? `חייב להכיל לפחות ${input.minLength} תווים`
+            } else if (input.validity.typeMismatch) {
+              if (input.type === "email") {
+                error.innerHTML = "כתובת אימייל לא תקינה"
+              } else {
+                error.innerHTML = "שדה לא תקין"
+              }
+            }
+          }
+          validateForm()
+        })
+      })
+
+      reason.addEventListener("change", validateForm)
+
+      form?.addEventListener("submit", submit)
+    }
+
+    function validateForm() {
+      const { button, method, reason, errorInputs } = getElements()
+      const allValid =
+        [...errorInputs].every((e) => (e as HTMLInputElement).validity.valid) &&
+        method.value?.length &&
+        reason.value?.length
+      console.log("All valid", allValid, { method: method.value, reason: reason.value })
+      button.disabled = !allValid
+    }
+    function getElements() {
+      const form = document.querySelector("form") as HTMLFormElement
+      const fieldset = form.querySelector("fieldset") as HTMLFieldSetElement
+      const error = form.querySelector(".form-error") as HTMLDivElement
+      const inputs = form.elements
+      const name = inputs.namedItem("name") as HTMLInputElement
+      const email = inputs.namedItem("email") as HTMLInputElement
+      const phone = inputs.namedItem("phone") as HTMLInputElement
+      const method = inputs.namedItem("method") as HTMLInputElement
+      const reason = inputs.namedItem("reason") as HTMLSelectElement
+      const description = inputs.namedItem("description") as HTMLTextAreaElement
+      const button = form.querySelector("button") as HTMLButtonElement
+      const radios = form.querySelectorAll("input[type=radio]") as NodeListOf<HTMLInputElement>
+      const errorInputs = form?.querySelectorAll("[data-error]")
+      const done = document.getElementById("form-done") as HTMLDivElement
+
+      return {
+        form,
+        error,
+        fieldset,
+        name,
+        email,
+        phone,
+        method,
+        reason,
+        description,
+        button,
+        radios,
+        errorInputs,
+        done,
+      }
+    }
+
+    async function submit(e: Event) {
+      const { form, name, error, fieldset, email, phone, method, reason, button, description, done } = getElements()
+
+      const buttonTxt = button.innerHTML
+      try {
+        e.preventDefault()
+        fieldset.disabled = true
+        error.innerHTML = ""
+        button.innerHTML = "שולח..."
+
+        const response = await fetch(`${API_BASE}/contact`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            // sender details
+            name: name.value,
+            email: email.value,
+            // form fields
+            // name
+            שם: name.value,
+            // email
+            אימייל: email.value,
+            // phone
+            טלפון: phone.value,
+            // contact method
+            "דרך יצירת קשר": method.value,
+            // reason
+            "סיבת הפנייה": reason.value,
+            // description
+            "תיאור הפנייה": description.value,
+          }),
+        })
+        if (!response.ok) throw new Error("שגיאה בשליחה")
+        form.reset()
+        form.innerHTML = done.innerHTML
+      } catch (err) {
+        fieldset.disabled = false
+        error.innerHTML = (err as Error).message
+        button.innerHTML = buttonTxt
+        console.error(err)
+      }
+      return false
+    }
+
+    document.addEventListener("DOMContentLoaded", init)
+    document.addEventListener("astro:after-swap", init)
+  </script>
+</Layout>
