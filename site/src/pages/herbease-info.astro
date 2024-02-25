@@ -2,6 +2,8 @@
 import PageHeader from "@/components/PageHeader.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
+import { Icon } from "astro-icon/components"
+import Link from "@/components/Link.astro"
 ---
 
 <Layout title="מידע חיוני והוראות לשימוש בסדרת המרגיעונים הטבעיים לבעלי חיים">
@@ -52,7 +54,7 @@ import MaxWidth from "@/layouts/MaxWidth.astro"
               <b>יש להמנע משימוש באותו היום ולהציע שנית למחרת.</b>
               ניתן לחזור על כך ולהציע שימוש בבקבוק במשך מספר ימים.
             </li>
-            <li>ניתן להציע את התכשיר גם כאשר הוא מדולל בתוך קערת מים בהתאם להוראות השימוש.</li>
+            <li>ניתן להציע את התכשיר גם כאשר הוא מדולל בתוך קערת מים נוספת בהתאם להוראות השימוש.</li>
             <li>במידה ובעל החיים מסרב להשתמש בתכשיר לאחר כל הנסיונות הנ"ל, יש להמנע מהשימוש בתכשיר.</li>
           </ul>
         </blockquote>
@@ -97,6 +99,33 @@ import MaxWidth from "@/layouts/MaxWidth.astro"
             מרופד ועוד (המקום המועדף על בעל החיים לשינה).
           </li>
         </ul>
+      </div>
+    </div>
+    <div>בכל שאלה נוספת לגבי השימוש, ניתן לפנות ישירות לייצרניות התכשיר בכתובות המייל הבאות:</div>
+    <div class="flex gap-2 justify-around">
+      <div class="flex flex-col gap-1 items-center justif-center">
+        <div><img class="h-[200px]" src="/images/raz-logo.png" alt="רז פלוקסמן" /></div>
+        <span class="font-bold">רז פלוקסמן - רפואה סינית לבע"ח </span>
+        <div class="flex gap-1 items-center">
+          <Icon name="fa6-solid:envelope" />
+          <Link class="ltr" href="mailto:petcareraz@gmail.com">petcareraz@gmail.com</Link>
+        </div>
+        <div class="flex gap-1 items-center">
+          <Icon name="fa6-brands:instagram" />
+          <Link class="ltr" href="https://www.instagram.com/Pet.Care.Raz">Pet.Care.Raz</Link>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1 items-center justif-center">
+        <div><img class="h-[200px]" src="/images/logo.jpg" alt="דקל עדן-צאליק" /></div>
+        <span class="font-bold">דקל עדן-צאליק - טיפול וייעוץ התנהגותי לחתולים</span>
+        <div class="flex gap-1 items-center">
+          <Icon name="fa6-solid:envelope" />
+          <Link class="ltr" href="mailto:contact@dekelscats.com">contact@dekelscats.com</Link>
+        </div>
+        <div class="flex gap-1 items-center">
+          <Icon name="fa6-brands:instagram" />
+          <Link class="ltr" href="https://www.instagram.com/Dekelscats">Dekelscats</Link>
+        </div>
       </div>
     </div>
     <div>
