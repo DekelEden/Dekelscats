@@ -1,6 +1,7 @@
 ---
 import { cn } from "@/lib/utils"
 import Link from "../components/Link.astro"
+import { Icon } from "astro-icon/components"
 const items = [
   {
     title: "דף הבית",
@@ -44,7 +45,7 @@ const socialItems = [
 ---
 
 <nav class="max-w-6xl mx-auto">
-  <ul class="flex justify-space-between items-center background-bg">
+  <ul class="flex justify-space-between items-center bg-bg relative">
     <li class="flex items-center h-full flex-shrink-0">
       <Link class="flex items-center flex-nowrap px-6 py-4" href="/" aria-label="דף הבית">
         <img class="w-[60px] h-auto" src="/images/logo.jpg" alt="דקל עדן-צאליק" />
@@ -74,6 +75,53 @@ const socialItems = [
 
     <li class="flex-1"></li>
 
+    <li class="block sm:hidden px-2">
+      <button class="mobile-menu-button flex items-center justify-center h-12 w-12">
+        <Icon name="fa6-solid:bars" />
+      </button>
+    </li>
+
+    <li class="mobile-menu hidden sm:hidden absolute top-full left-0 right-0">
+      <ul class="bg-bg p-10 pt-4">
+        {
+          items.map(({ title, href }) => (
+            <li class="block">
+              <Link
+                class={cn(
+                  "transition-all",
+                  "flex items-center justify-center text-center",
+                  "border-b-2 border-transparent",
+                  "font-amatic text-2xl font-bold px-6 py-4 ",
+                  "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
+                  Astro.url.pathname === href && "text-link border-b-primary",
+                )}
+                href={href}
+                set:html={title}
+              />
+            </li>
+          ))
+        }
+        {
+          socialItems.map(({ title, href }) => (
+            <li>
+              <Link
+                class={cn(
+                  "transition-all",
+                  "text-primary",
+                  "hover:text-primary-hover",
+                  "flex items-center justify-center text-center h-full",
+                  "font-amatic text-xl px-6 py-4",
+                )}
+                underline="never"
+                aria-label={title}
+                href={href}
+                set:html={title}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </li>
     {
       socialItems.map(({ title, href }) => (
         <li class="hidden sm:block">
@@ -95,3 +143,21 @@ const socialItems = [
     }
   </ul>
 </nav>
+
+<script>
+  function initMobileMenu() {
+    const menu = document.querySelector(".mobile-menu")!
+    const button = document.querySelector(".mobile-menu-button")!
+    button.addEventListener("click", () => {
+      menu.classList.toggle("hidden")
+    })
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
+        menu.classList.add("hidden")
+      }
+    })
+  }
+
+  document.addEventListener("DOMContentLoaded", initMobileMenu)
+  document.addEventListener("astro:after-swap", initMobileMenu)
+</script>

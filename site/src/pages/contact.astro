@@ -6,7 +6,7 @@ import PhotoBorder from "@/components/PhotoBorder.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
 const labelCls =
-  "cursor-pointer transition-all p-2 bg-bg rounded-xl inline-flex justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
+  "cursor-pointer transition-all p-2 bg-bg rounded-xl inline-flex justify-start sm:justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
 ---
 
 <Layout title="צרו קשר" footerProps={{ variant: "minimal" }}>
@@ -17,7 +17,7 @@ const labelCls =
       <h1 class="font-bold text-xl text-center my-4">אנא השאירו פרטים ליצירת קשר:</h1>
 
       <form>
-        <fieldset class="flex flex-col gap-8">
+        <fieldset class="flex flex-col gap-8 w-full">
           <label>
             <div class="flex items-center gap-2">
               <Icon name="fa6-solid:user" />
@@ -72,7 +72,7 @@ const labelCls =
             <Icon name="fa6-solid:comments" />
             כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
           </div>
-          <div class="flex items-center justify-around gap-2">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-around gap-2">
             <label class={labelCls}>
               <input type="radio" name="method" required value="phone" />
               <Icon name="fa6-solid:phone" />
