@@ -18,6 +18,10 @@ const items = [
   {
     title: "הרצאות",
     href: "/lectures",
+    isActive: (pathname: string) => {
+      console.log("pathname", pathname, pathname.startsWith("/lectures"))
+      return pathname.startsWith("/lectures")
+    },
   },
   {
     title: "צרו קשר",
@@ -26,15 +30,18 @@ const items = [
 ]
 const socialItems = [
   {
-    title: '<i class="fab fa-facebook icon"></i>',
+    icon: '<i class="fab fa-facebook icon"></i>',
+    title: "פייסבוק",
     href: "https://www.facebook.com/Dekelscats",
   },
   {
-    title: '<i class="fab fa-instagram icon"></i>',
+    icon: '<i class="fab fa-instagram icon"></i>',
+    title: "אינסטגרם",
     href: "https://instagram.com/dekelscats",
   },
   {
-    title: '<i class="far fa-paper-plane icon"></i>',
+    icon: '<i class="far fa-paper-plane icon"></i>',
+    title: "אימייל",
     href: "mailto:dekelscats@gmail.com",
   },
   // {
@@ -54,7 +61,7 @@ const socialItems = [
     </li>
 
     {
-      items.map(({ title, href }) => (
+      items.map(({ title, href, isActive }) => (
         <li class="hidden sm:block">
           <Link
             class={cn(
@@ -63,7 +70,7 @@ const socialItems = [
               "border-b-2 border-transparent",
               "font-amatic text-xl px-6 py-4 ",
               "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
-              Astro.url.pathname === href && "text-link border-b-primary",
+              Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) && "text-link border-b-primary",
             )}
             href={href}
             set:html={title}
@@ -81,10 +88,12 @@ const socialItems = [
       </button>
     </li>
 
-    <li class="mobile-menu hidden sm:hidden absolute top-full left-0 right-0">
+    <li
+      class="mobile-menu transition-all duration-500 absolute top-full left-0 right-0 opacity-0 max-h-0 overflow-y-hidden"
+    >
       <ul class="bg-bg p-10 pt-4">
         {
-          items.map(({ title, href }) => (
+          items.map(({ title, href, isActive }) => (
             <li class="block">
               <Link
                 class={cn(
@@ -93,7 +102,8 @@ const socialItems = [
                   "border-b-2 border-transparent",
                   "font-amatic text-2xl font-bold px-6 py-4 ",
                   "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
-                  Astro.url.pathname === href && "text-link border-b-primary",
+                  Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) &&
+                    "text-link border-b-primary",
                 )}
                 href={href}
                 set:html={title}
@@ -101,21 +111,22 @@ const socialItems = [
             </li>
           ))
         }
+        <li class="h-8 flex flex-col items-stretch justify-center"><hr /></li>
         {
-          socialItems.map(({ title, href }) => (
+          socialItems.map(({ title, icon, href }) => (
             <li>
               <Link
                 class={cn(
                   "transition-all",
                   "text-primary",
                   "hover:text-primary-hover",
-                  "flex items-center justify-center text-center h-full",
+                  "flex items-center justify-center text-center h-full gap-2",
                   "font-amatic text-xl px-6 py-4",
                 )}
                 underline="never"
                 aria-label={title}
                 href={href}
-                set:html={title}
+                set:html={icon + " " + title}
               />
             </li>
           ))
@@ -123,7 +134,7 @@ const socialItems = [
       </ul>
     </li>
     {
-      socialItems.map(({ title, href }) => (
+      socialItems.map(({ title, icon, href }) => (
         <li class="hidden sm:block">
           <Link
             class={cn(
@@ -136,7 +147,7 @@ const socialItems = [
             underline="never"
             aria-label={title}
             href={href}
-            set:html={title}
+            set:html={icon}
           />
         </li>
       ))
@@ -145,11 +156,22 @@ const socialItems = [
 </nav>
 
 <script>
+  import { cn } from "@/lib/utils"
+
   function initMobileMenu() {
-    const menu = document.querySelector(".mobile-menu")!
+    const menu = document.querySelector(".mobile-menu") as HTMLElement
     const button = document.querySelector(".mobile-menu-button")!
     button.addEventListener("click", () => {
-      menu.classList.toggle("hidden")
+      menu.dataset.open = !menu.dataset.open ? "true" : ""
+      menu.setAttribute(
+        "class",
+        cn(
+          menu.getAttribute("class"),
+          menu.dataset.open
+            ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
+            : "max-h-0 opacity-0 overflow-y-hidden",
+        ),
+      )
     })
     document.addEventListener("click", (e) => {
       if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {

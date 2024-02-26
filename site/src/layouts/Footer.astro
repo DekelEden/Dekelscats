@@ -16,7 +16,11 @@ const { title, color = "primary", variant = "default" } = Astro.props
 
 <footer class={cn("footer-img", color === "primary" && "bg-primary-bg")}>
   <div class="flex flex-col items-center gap-8 py-12">
-    {variant !== "minimal" && <h2 class="text-3xl font-bold font-varela">{title ?? "צרו קשר"}</h2>}
+    {
+      variant !== "minimal" && (
+        <h2 class="text-3xl font-bold font-varela text-center px-10 sm:px-0">{title ?? "צרו קשר"}</h2>
+      )
+    }
 
     <div class="flex flex-col gap-4 items-center justify-center">
       <div class="flex flex-col sm:flex-row items-center gap-4 font-varela">

@@ -6,7 +6,7 @@ type Props = {
 const { class: className } = Astro.props
 ---
 
-<ul class={cn("paw-list", "flex flex-col gap-6 my-6 ps-11", className)}>
+<ul class={cn("paw-list", "flex flex-col gap-6 my-6 ps-2 sm:ps-11", className)}>
   <slot />
 </ul>
 <style>

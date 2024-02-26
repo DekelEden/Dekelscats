@@ -81,10 +81,10 @@ const { Content } = await lecture.render()
     </div>
   </template>
   <template id="chapters-video-template">
-    <div class="flex gap-4">
+    <div class="flex gap-4 flex-col-reverse sm:flex-row">
       <ul
         id="chapters-container"
-        class="w-56 border-t border-t-neutral-300"
+        class="w-full sm:w-56 border-t border-t-neutral-300"
         data-li-class={`
           transition-all font-amatic border text-foreground border-transparent border-b-neutral-300
           text-[28px] hover:border-b-primary hover:text-primary
@@ -187,6 +187,7 @@ const { Content } = await lecture.render()
       } else {
         renderSingleVideo(json.urls[0])
       }
+      // scroll to video
     } catch (err) {
       fieldset.disabled = false
       error.innerHTML = (err as Error).message
@@ -251,6 +252,8 @@ const { Content } = await lecture.render()
     player.src({ type: "video/mp4", src: url })
     player.poster(poster)
     player.load()
+    const video = document.querySelector("#video-container") as HTMLVideoElement
+    window.scrollTo({ top: video.offsetTop - 100, behavior: "smooth" })
   }
 
   function inject(container: Node) {

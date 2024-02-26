@@ -6,7 +6,7 @@ import PhotoBorder from "@/components/PhotoBorder.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
 const labelCls =
-  "cursor-pointer transition-all p-2 bg-bg rounded-xl inline-flex justify-start sm:justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
+  "cursor-pointer transition-all flex-1 p-2 bg-bg rounded-xl inline-flex justify-start sm:justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
 ---
 
 <Layout title="צרו קשר" footerProps={{ variant: "minimal" }}>
@@ -68,27 +68,29 @@ const labelCls =
             </div>
             <div class="error ms-5 text-red-500"></div>
           </label>
-          <div class="flex items-center gap-2">
-            <Icon name="fa6-solid:comments" />
-            כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
-          </div>
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-around gap-2">
-            <label class={labelCls}>
-              <input type="radio" name="method" required value="phone" />
-              <Icon name="fa6-solid:phone" />
-              טלפון
-            </label>
-            <label class={labelCls}>
-              <input type="radio" name="method" value="whatsapp" />
-              <Icon name="fa6-brands:whatsapp" class="text-xl" />
-              WhatsApp
-            </label>
-            <label class={labelCls}>
-              <input type="radio" name="method" value="email" />
-              <Icon name="fa6-solid:envelope" />
-              אימייל
-            </label>
-            <div class="error ms-5 text-red-500"></div>
+          <div class="flex flex-col gap-4 items-stretch justify-stretch">
+            <div class="flex items-center gap-2">
+              <Icon name="fa6-solid:comments" />
+              כיצד תרצו שאצור איתכם קשר לתיאום מפגש?
+            </div>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-around gap-2">
+              <label class={labelCls}>
+                <input type="radio" name="method" required value="phone" />
+                <Icon name="fa6-solid:phone" />
+                טלפון
+              </label>
+              <label class={labelCls}>
+                <input type="radio" name="method" value="whatsapp" />
+                <Icon name="fa6-brands:whatsapp" class="text-xl" />
+                WhatsApp
+              </label>
+              <label class={labelCls}>
+                <input type="radio" name="method" value="email" />
+                <Icon name="fa6-solid:envelope" />
+                אימייל
+              </label>
+              <div class="error ms-5 text-red-500"></div>
+            </div>
           </div>
           <label>
             <div class="flex items-center gap-2">
@@ -120,7 +122,7 @@ const labelCls =
               type="textarea"
               required
               name="description"
-              class="min-h-20"
+              class="min-h-40"
               placeholder="תיאור כללי של עד 500 תווים"
               data-error
               data-error-required="תיאור חובה"
