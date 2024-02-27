@@ -68,7 +68,7 @@ const socialItems = [
               "transition-all",
               "flex items-center text-center h-full",
               "border-b-2 border-transparent",
-              "font-amatic text-xl px-6 py-4 ",
+              "font-amatic text-xl px-6 py-4 font-bold",
               "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
               Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) && "text-link border-b-primary",
             )}
@@ -100,7 +100,7 @@ const socialItems = [
                   "transition-all",
                   "flex items-center justify-center text-center",
                   "border-b-2 border-transparent",
-                  "font-amatic text-2xl font-bold px-6 py-4 ",
+                  "font-amatic text-2xl px-6 py-4 font-bold",
                   "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
                   Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) &&
                     "text-link border-b-primary",
