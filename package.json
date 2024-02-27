@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@types/video.js": "^7.3.56",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0"
   }
