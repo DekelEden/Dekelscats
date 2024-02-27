@@ -31,9 +31,14 @@ const { Content } = await lecture.render()
   >
     <div slot="cta">
       {lecture.data.description.subtitle && <h2 class="text-xl font-bold mt-4">{lecture.data.description.subtitle}</h2>}
-      <Button id="cta-button" class={cn(lecture.data.description.subtitle ? "mt-4" : "mt-8")} size="lg"
-        >מילוי פרטים ורכישה</Button
+      <Button
+        id="cta-button"
+        class={cn(lecture.data.description.subtitle ? "mt-4" : "mt-8")}
+        size="lg"
+        href={lecture.data.purchase_url}
       >
+        מילוי פרטים ורכישה
+      </Button>
     </div>
   </PageHeader>
 
@@ -62,7 +67,12 @@ const { Content } = await lecture.render()
 
   <div id="signin-area" class="bg-primary-bg p-12 text-center">
     <MaxWidth>
-      <Button size="lg">מילוי פרטים ורכישה</Button>
+      <Button
+        size="lg"
+        href={lecture.data.purchase_url}
+      >
+        מילוי פרטים ורכישה
+      </Button>
       <div class="font-bold text-center mt-16 mb-8">כבר רכשתם? הכניסו פרטים לצפייה</div>
       <form id="lecture-signin" class="max-w-80 mx-auto">
         <fieldset id="form-fieldset" class="flex flex-col gap-4">
