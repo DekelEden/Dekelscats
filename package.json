@@ -8,8 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "predeploy": "pnpm build",
-    "deploy": "gh-pages -d dist"
+    "gh": "pnpm build && gh-pages -d dist"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",

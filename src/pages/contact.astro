@@ -143,7 +143,6 @@ const labelCls =
   <script>
     import { API_BASE } from "@/lib/consts"
 
-    console.log("Contact page")
     function init() {
       const { form, radios, reason, errorInputs } = getElements()
 
@@ -159,7 +158,6 @@ const labelCls =
         const input = e as HTMLInputElement
         const error = input.closest("label")!.querySelector(".error") as HTMLDivElement
         input.addEventListener("input", () => {
-          console.log("Validating", input.name, input.validity)
           if (input.validity.valid) {
             error.innerHTML = ""
           } else {
@@ -192,7 +190,6 @@ const labelCls =
         [...errorInputs].every((e) => (e as HTMLInputElement).validity.valid) &&
         method.value?.length &&
         reason.value?.length
-      console.log("All valid", allValid, { method: method.value, reason: reason.value })
       button.disabled = !allValid
     }
     function getElements() {
