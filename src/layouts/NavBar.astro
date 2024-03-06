@@ -8,6 +8,10 @@ const items = [
     href: "/",
   },
   {
+    title: "חנות",
+    href: "https://store.dekelscats.com",
+  },
+  {
     title: "אודות",
     href: "/about",
   },
@@ -46,35 +50,44 @@ const socialItems = [
   //   href: 'tel:0503059422',
   // },
 ]
+const removeSlashes = (str: string) => str.replace(/^\/+|\/+$/g, "")
+const defaultIsActive = (pathname: string) => removeSlashes(pathname) === removeSlashes(Astro.url.pathname)
 ---
 
-<nav class="max-w-6xl mx-auto">
-  <ul class="flex justify-space-between items-center bg-bg relative h-[100px]">
+<nav class="w-full max-w-screen sm:max-w-6xl mx-auto">
+  <ul class="flex justify-space-between items-center bg-bg relative h-[100px] w-full">
     <li class="flex items-center h-full flex-shrink-0">
-      <Link class="flex items-center flex-nowrap px-6" href="/" aria-label="דף הבית">
+      <Link class="flex items-center flex-nowrap px-4" href="/" aria-label="דף הבית">
         <img class="h-[77px] w-auto" src="/images/logo/logo-wide-normal.svg" alt="דקל עדן-צאליק" />
       </Link>
     </li>
 
     {
-      items.map(({ title, href, isActive }) => (
-        <li class="hidden sm:block">
-          <Link
-            class={cn(
-              "transition-all",
-              "flex items-center text-center h-full",
-              "border-b-2 border-transparent",
-              "font-amatic text-xl px-6 py-4 font-bold",
-              "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
-              Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) && "text-link border-b-primary",
-            )}
-            href={href}
-            set:html={title}
-          />
-        </li>
-      ))
+      items.map(({ title, href, isActive }) => {
+        // console.log({
+        //   isActive: defaultIsActive(href) || isActive?.(removeSlashes(Astro.url.pathname)),
+        //   href,
+        //   pathname: Astro.url.pathname,
+        // })
+        return (
+          <li class="hidden sm:block">
+            <Link
+              class={cn(
+                "transition-all",
+                "flex items-center text-center h-full",
+                "border-b-2 border-transparent",
+                "font-amatic text-xl px-4 py-4 font-bold",
+                "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
+                Boolean(defaultIsActive(href) || isActive?.(removeSlashes(Astro.url.pathname))) &&
+                  "text-link border-b-primary",
+              )}
+              href={href}
+              set:html={title}
+            />
+          </li>
+        )
+      })
     }
-    {/* TODO mobile menu */}
 
     <li class="flex-1"></li>
 
@@ -85,9 +98,9 @@ const socialItems = [
     </li>
 
     <li
-      class="mobile-menu transition-all duration-500 absolute top-full left-0 right-0 opacity-0 max-h-0 overflow-y-hidden"
+      class="mobile-menu transition-all duration-500 absolute top-full left-0 right-0 opacity-0 max-h-0 overflow-y-hidden h-[calc(100vh-100px)] bg-bg"
     >
-      <ul class="bg-bg p-10 pt-4">
+      <ul class="p-10 pt-4">
         {
           items.map(({ title, href, isActive }) => (
             <li class="block">

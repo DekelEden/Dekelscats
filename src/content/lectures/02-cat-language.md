@@ -1,7 +1,7 @@
 ---
 key: cat-language
 title: לומדים חתולית
-purchase_url: https://docs.google.com/forms/d/1ukW6DnjwB5mgFefLUHkouGdJ5K2PrOdX14pLAyhmXCk
+purchase_url: https://store.dekelscats.com/product-page/%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%94-%D7%9C%D7%95%D7%9E%D7%93%D7%99%D7%9D-%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%AA
 description:
   short: <p>תמיד רציתם להבין את החתול שלכם טוב יותר?</p>
 
