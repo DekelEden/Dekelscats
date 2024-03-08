@@ -41,25 +41,79 @@ import Link from "@/components/Link.astro"
       </ul>
     </div>
 
-    <div class="h-20 w-30 flex items-center justify-center bg-primary-bg/30">*סרטונים*</div>
+    <div>
+      <blockquote class="max-w-full w-[600px] mx-auto my-2 bg-primary-bg/80 p-3 rounded-md">
+        <h3>מבחן רגישויות</h3>
+        <ul>
+          <li>לפני השימוש הראשון בתכשיר, יש לפתוח את פיית הבקבוקון ולהציע לבעל החיים להריח ממרחק.</li>
+          <li>
+            במידה ובעל החיים מראה סימנים של רתיעה או נסיון להתרחק מאיזור הבקבוק –
+            <b>יש להמנע משימוש באותו היום ולהציע שנית למחרת.</b>
+            ניתן לחזור על כך ולהציע שימוש בבקבוק במשך מספר ימים.
+          </li>
+          <li>ניתן להציע את התכשיר גם כאשר הוא מדולל בתוך קערת מים נוספת בהתאם להוראות השימוש.</li>
+          <li>במידה ובעל החיים מסרב להשתמש בתכשיר לאחר כל הנסיונות הנ"ל, יש להמנע מהשימוש בתכשיר.</li>
+        </ul>
+      </blockquote>
+    </div>
+  </MaxWidth>
 
-    <div class="flex flex-row-reverse gap-16">
-      <div>
-        <blockquote class="w-96 -ms-3 my-2 bg-primary-bg/80 p-3 rounded-md float-end">
-          <h3>מבחן רגישויות</h3>
-          <ul>
-            <li>לפני השימוש הראשון בתכשיר, יש לפתוח את פיית הבקבוקון ולהציע לבעל החיים להריח ממרחק.</li>
-            <li>
-              במידה ובעל החיים מראה סימנים של רתיעה או נסיון להתרחק מאיזור הבקבוק –
-              <b>יש להמנע משימוש באותו היום ולהציע שנית למחרת.</b>
-              ניתן לחזור על כך ולהציע שימוש בבקבוק במשך מספר ימים.
-            </li>
-            <li>ניתן להציע את התכשיר גם כאשר הוא מדולל בתוך קערת מים נוספת בהתאם להוראות השימוש.</li>
-            <li>במידה ובעל החיים מסרב להשתמש בתכשיר לאחר כל הנסיונות הנ"ל, יש להמנע מהשימוש בתכשיר.</li>
-          </ul>
-        </blockquote>
+  <MaxWidth class="prose flex flex-wrap max-w-full p-12 items-center justify-center bg-primary-bg/30 gap-4">
+    <div class="flex flex-col items-start justify-stretch gap-4">
+      <h3>מבחן הרגישויות בכלבים:</h3>
+      <div class="">
+        <iframe
+          width="315"
+          height="560"
+          src="https://www.youtube.com/embed/-8vfCZ-9Re0?si=C05sjZbAv41RqdOw"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
       </div>
+    </div>
+    <div class="self-stretch hidden sm:block">
+      <div class="bg-black/20 w-px h-full"></div>
+    </div>
+    <div class="flex flex-col items-start justify-center gap-4">
+      <h3>מבחן הרגישויות בחתולים:</h3>
+      <div class="flex items-center justify-start bg-primary-bg/30 gap-4 flex-wrap">
+        <div class="relative">
+          <div
+            class="absolute -top-3 -right-3 h-10 w-10 flex justify-center items-center bg-white rounded-full text-xl font-bold border-2"
+          >
+            1
+          </div>
+          <iframe
+            width="315"
+            height="560"
+            src="https://www.youtube.com/embed/sP7-cWUezYs?si=_i7P4mlSDQmvfei6"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <div class="relative">
+          <div
+            class="absolute -top-3 -right-3 h-10 w-10 flex justify-center items-center bg-white rounded-full text-xl font-bold border-2"
+          >
+            2
+          </div>
+          <iframe
+            width="315"
+            height="560"
+            src="https://www.youtube.com/embed/rPMp8PCgsYk?si=ED8EzuJFgxjshtcb"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </MaxWidth>
 
+  <MaxWidth class="p-12 prose flex flex-col gap-10">
+    <div class="flex flex-row-reverse gap-16">
       <div>
         <h3>הוראות השימוש:</h3>
         <ul>
@@ -102,8 +156,8 @@ import Link from "@/components/Link.astro"
       </div>
     </div>
     <div>בכל שאלה נוספת לגבי השימוש, ניתן לפנות ישירות לייצרניות התכשיר בכתובות המייל הבאות:</div>
-    <div class="flex gap-2 justify-around">
-      <div class="flex flex-col gap-1 items-center justif-center">
+    <div class="flex gap-4 sm:gap-2 justify-around flex-wrap">
+      <div class="flex flex-col gap-1 items-center justify-center">
         <div><img class="h-[200px]" src="/images/raz-logo.png" alt="רז פלוקסמן" /></div>
         <span class="font-bold">רז פלוקסמן - רפואה סינית לבע"ח </span>
         <div class="flex gap-1 items-center">
@@ -137,12 +191,12 @@ import Link from "@/components/Link.astro"
           הרעלה
         </li>
         <li>יש לאחסן בקירור בטמפרטורה של עד 4°C. אין להקפיא</li>
-        <li>יש לאחסן את התכשיר באריזה המקורית על מנת לשמור על סטריליות התכשיר.</li>
+        <li>יש לאחסן את התכשיר באריזה המקורית על מנת לשמור על סטריליות התכשיר</li>
         <li>
           יש להשתמש בתכשיר עד 6 חודשים מיום פתיחת הבקבוקון. עם פתיחת הבקבוקון, מומלץ לכתוב על גבי התווית את תאריך הפתיחה
           על מנת להמנע משימוש לאחר תאריך התפוגה
         </li>
-        <li>התכשיר מסופק בתוך בקבוקון בגדלים: 15/40/60 ml. ייתכן ולא כל גודלי האריזות משווקים</li>
+        <li>התכשיר מסופק בתוך בקבוקון בגדלים: 15 ו-20 מ"ל. ייתכן ולא כל גודלי האריזות משווקים</li>
         <li>
           הפורמולה המסופקת בבקבוקון הינה נוזל בצבע שקוף-צהבהב בהיר ללא משקעים או עכירות. במידה ונצפים שינויים משמעותיים
           בצבע התכשיר או מופיעים משקעים, יש להמנע משימוש בתכשיר
