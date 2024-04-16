@@ -15,11 +15,12 @@ module.exports = {
           alt: "#F2F2F2",
         },
         primary: {
-          DEFAULT: "#AB3B55",
+          DEFAULT: "#B66666",
+          // DEFAULT: "#AB3B55",
           bg: "#EBD5D5",
           light: "#BC8A96",
           foreground: colors.white,
-          hover: "#BE4964",
+          hover: "#c87a7a",
         },
         link: {
           DEFAULT: "",
