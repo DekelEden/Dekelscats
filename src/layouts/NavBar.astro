@@ -136,26 +136,19 @@ const defaultIsActive = (pathname: string) => removeSlashes(pathname) === remove
   <script>
     import { cn } from "@/lib/utils"
 
-    document.addEventListener("DOMContentLoaded", initMobileMenu)
-    document.addEventListener("astro:after-swap", initMobileMenu)
-    let menuOpen = false
+    document.addEventListener("astro:page-load", initMobileMenu)
 
-    function initMobileMenu() {
-      const menu = document.querySelector(".mobile-menu") as HTMLElement
-      const button = document.querySelector(".mobile-menu-button")!
+    function initMobileMenu(e: Event) {
+      const document = e.target as Document
+      const { button } = getElements(document)
       button.addEventListener("click", menuClick)
-      document.addEventListener("click", (e) => {
-        if (!menuOpen) return
-        if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
-          menuClick()
-        }
-      })
+      document.removeEventListener("click", documentClick)
+      document.addEventListener("click", documentClick)
     }
 
     function menuClick() {
-      const menu = document.querySelector(".mobile-menu") as HTMLElement
+      const { menu } = getElements(document)
       menu.dataset.open = !menu.dataset.open ? "true" : ""
-      menuOpen = !menuOpen
       menu.setAttribute(
         "class",
         cn(
@@ -165,6 +158,22 @@ const defaultIsActive = (pathname: string) => removeSlashes(pathname) === remove
             : "max-h-0 opacity-0 overflow-y-hidden",
         ),
       )
+    }
+
+    function documentClick(e: Event) {
+      const { menu, button } = getElements()
+      const menuOpen = menu.dataset.open === "true"
+      if (!menuOpen) return
+      if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
+        menuClick()
+      }
+    }
+
+    function getElements(document: Document = window.document) {
+      return {
+        menu: document.querySelector(".mobile-menu") as HTMLElement,
+        button: document.querySelector(".mobile-menu-button") as HTMLElement,
+      }
     }
   </script>
 </nav>

@@ -25,8 +25,7 @@ const PREFIX = "דקל"
     <link rel="manifest" href="/manifest.json" />
     <title>{title ? `${PREFIX} | ` + title : PREFIX}</title>
     <script>
-      document.addEventListener("DOMContentLoaded", initFontAwesome)
-      document.addEventListener("astro:after-swap", initFontAwesome)
+      document.addEventListener("astro:page-load", initFontAwesome)
 
       function initFontAwesome() {
         const fa = document.getElementById("fontawesome")

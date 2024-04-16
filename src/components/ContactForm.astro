@@ -134,8 +134,7 @@ const { density = "normal" } = Astro.props
 <script>
   import { API_BASE } from "@/lib/consts"
 
-  document.addEventListener("DOMContentLoaded", init)
-  document.addEventListener("astro:after-swap", init)
+  document.addEventListener("astro:page-load", init)
 
   function init() {
     const { form, radios, reason, errorInputs } = getElements()
