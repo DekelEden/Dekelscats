@@ -75,6 +75,14 @@ const defaultIsActive = (pathname: string) => removeSlashes(pathname) === remove
       class="mobile-menu transition-all duration-500 absolute top-full left-0 right-0 opacity-0 max-h-0 overflow-y-hidden h-[calc(100vh-100px)] bg-bg"
     >
       <ul class="p-10 pt-4">
+        <li class="block text-center">
+          <Button href={whatsappUrl} class="mx-auto">
+            <div class="flex flex-col">
+              <span class="text-lg">לייעוץ וקביעת פגישה</span>
+              <span class="text-2xl">{PHONE}</span>
+            </div>
+          </Button>
+        </li>
         {
           items.map(({ title, href, isActive }) => (
             <li class="block">
