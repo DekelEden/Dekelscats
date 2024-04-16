@@ -136,29 +136,35 @@ const defaultIsActive = (pathname: string) => removeSlashes(pathname) === remove
   <script>
     import { cn } from "@/lib/utils"
 
+    document.addEventListener("DOMContentLoaded", initMobileMenu)
+    document.addEventListener("astro:after-swap", initMobileMenu)
+    let menuOpen = false
+
     function initMobileMenu() {
       const menu = document.querySelector(".mobile-menu") as HTMLElement
       const button = document.querySelector(".mobile-menu-button")!
-      button.addEventListener("click", () => {
-        menu.dataset.open = !menu.dataset.open ? "true" : ""
-        menu.setAttribute(
-          "class",
-          cn(
-            menu.getAttribute("class"),
-            menu.dataset.open
-              ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
-              : "max-h-0 opacity-0 overflow-y-hidden",
-          ),
-        )
-      })
+      button.addEventListener("click", menuClick)
       document.addEventListener("click", (e) => {
+        if (!menuOpen) return
         if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
-          menu.classList.add("hidden")
+          menuClick()
         }
       })
     }
 
-    document.addEventListener("DOMContentLoaded", initMobileMenu)
-    document.addEventListener("astro:after-swap", initMobileMenu)
+    function menuClick() {
+      const menu = document.querySelector(".mobile-menu") as HTMLElement
+      menu.dataset.open = !menu.dataset.open ? "true" : ""
+      menuOpen = !menuOpen
+      menu.setAttribute(
+        "class",
+        cn(
+          menu.getAttribute("class"),
+          menu.dataset.open
+            ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
+            : "max-h-0 opacity-0 overflow-y-hidden",
+        ),
+      )
+    }
   </script>
 </nav>
