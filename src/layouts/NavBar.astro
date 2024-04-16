@@ -1,0 +1,170 @@
+---
+import { cn } from "@/lib/utils"
+import Link from "../components/Link.astro"
+import Button from "../components/Button.astro"
+import { Icon } from "astro-icon/components"
+const items = [
+  {
+    title: "דף הבית",
+    href: "/",
+  },
+  {
+    title: "חנות",
+    href: "https://store.dekelscats.com",
+  },
+  {
+    title: "אודות",
+    href: "/about",
+  },
+  {
+    title: "טיפול וייעוץ",
+    href: "/consult",
+  },
+  {
+    title: "הרצאות",
+    href: "/lectures",
+    isActive: (pathname: string) => pathname.startsWith("/lectures"),
+  },
+  {
+    title: "צרו קשר",
+    href: "/contact",
+  },
+]
+import { PHONE, socialItems, whatsappUrl } from "@/lib/consts"
+const removeSlashes = (str: string) => str.replace(/^\/+|\/+$/g, "")
+const defaultIsActive = (pathname: string) => removeSlashes(pathname) === removeSlashes(Astro.url.pathname)
+---
+
+<nav class="w-full max-w-screen sm:max-w-6xl mx-auto">
+  <ul class="flex justify-space-between items-center bg-bg relative h-[100px] w-full">
+    <li class="flex items-center h-full flex-shrink-0">
+      <Link class="flex items-center flex-nowrap px-4" href="/" aria-label="דף הבית">
+        <img class="h-[77px] w-auto" src="/images/logo/logo-wide-normal.svg" alt="דקל עדן-צאליק" />
+      </Link>
+    </li>
+
+    {
+      items.map(({ title, href, isActive }) => (
+        <li class="hidden sm:block">
+          <Link
+            class={cn(
+              "transition-all",
+              "flex items-center text-center h-full",
+              "border-b-2 border-transparent",
+              "font-amatic text-xl px-4 py-4 font-bold",
+              "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
+              Boolean(defaultIsActive(href) || isActive?.(removeSlashes(Astro.url.pathname))) &&
+                "text-link border-b-primary",
+            )}
+            href={href}
+            set:html={title}
+          />
+        </li>
+      ))
+    }
+
+    <li class="flex-1"></li>
+
+    <li class="block sm:hidden px-2">
+      <button class="mobile-menu-button flex items-center justify-center h-12 w-12">
+        <Icon name="fa6-solid:bars" />
+      </button>
+    </li>
+
+    <li
+      class="mobile-menu transition-all duration-500 absolute top-full left-0 right-0 opacity-0 max-h-0 overflow-y-hidden h-[calc(100vh-100px)] bg-bg"
+    >
+      <ul class="p-10 pt-4">
+        <li class="block text-center">
+          <Button href={whatsappUrl} class="mx-auto">
+            <div class="flex flex-col">
+              <span class="text-lg">לייעוץ וקביעת פגישה</span>
+              <span class="text-2xl">{PHONE}</span>
+            </div>
+          </Button>
+        </li>
+        {
+          items.map(({ title, href, isActive }) => (
+            <li class="block">
+              <Link
+                class={cn(
+                  "transition-all",
+                  "flex items-center justify-center text-center",
+                  "border-b-2 border-transparent",
+                  "font-amatic text-2xl px-6 py-4 font-bold",
+                  "hover:text-link-hover hover:border-b-link-hover hover:no-underline",
+                  Boolean(Astro.url.pathname === href || isActive?.(Astro.url.pathname)) &&
+                    "text-link border-b-primary",
+                )}
+                href={href}
+                set:html={title}
+              />
+            </li>
+          ))
+        }
+        <li class="h-8 flex flex-col items-stretch justify-center"><hr /></li>
+        {
+          socialItems.map(({ title, icon, href }) => (
+            <li>
+              <Link
+                class={cn(
+                  "transition-all",
+                  "text-primary",
+                  "hover:text-primary-hover",
+                  "flex items-center justify-center text-center h-full gap-2",
+                  "font-amatic text-xl px-6 py-4",
+                )}
+                underline="never"
+                aria-label={title}
+                href={href}
+                set:html={icon + " " + title}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+
+    <Button href={whatsappUrl} class="hidden sm:block">
+      <div class="flex flex-col">
+        <span class="text-lg">לייעוץ וקביעת פגישה</span>
+        <span class="text-2xl">{PHONE}</span>
+      </div>
+    </Button>
+  </ul>
+
+  <script>
+    import { cn } from "@/lib/utils"
+
+    document.addEventListener("DOMContentLoaded", initMobileMenu)
+    document.addEventListener("astro:after-swap", initMobileMenu)
+    let menuOpen = false
+
+    function initMobileMenu() {
+      const menu = document.querySelector(".mobile-menu") as HTMLElement
+      const button = document.querySelector(".mobile-menu-button")!
+      button.addEventListener("click", menuClick)
+      document.addEventListener("click", (e) => {
+        if (!menuOpen) return
+        if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
+          menuClick()
+        }
+      })
+    }
+
+    function menuClick() {
+      const menu = document.querySelector(".mobile-menu") as HTMLElement
+      menu.dataset.open = !menu.dataset.open ? "true" : ""
+      menuOpen = !menuOpen
+      menu.setAttribute(
+        "class",
+        cn(
+          menu.getAttribute("class"),
+          menu.dataset.open
+            ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
+            : "max-h-0 opacity-0 overflow-y-hidden",
+        ),
+      )
+    }
+  </script>
+</nav>

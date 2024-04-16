@@ -1,0 +1,277 @@
+---
+import Button from "@/components/Button.astro"
+import Input from "@/components/Input.astro"
+import PageHeader from "@/components/PageHeader.astro"
+import PawList from "@/components/PawList.astro"
+import Layout from "@/layouts/Layout.astro"
+import MaxWidth from "@/layouts/MaxWidth.astro"
+import { cn } from "@/lib/utils"
+import { getCollection } from "astro:content"
+
+export async function getStaticPaths() {
+  const lectures = await getCollection("lectures")
+  return lectures.map((lecture) => {
+    return {
+      params: { video: lecture.data.key },
+      props: { lecture },
+    }
+  })
+}
+
+const { lecture } = Astro.props
+const { Content } = await lecture.render()
+---
+
+<Layout title={lecture.data.title}>
+  <PageHeader
+    title={lecture.data.title}
+    paragraphs={[]}
+    image={lecture.data.thumbnail}
+    imageProps={{ class: "w-[312px]" }}
+  >
+    <div slot="cta">
+      {lecture.data.description.subtitle && <h2 class="text-xl font-bold mt-4">{lecture.data.description.subtitle}</h2>}
+      <Button
+        id="cta-button"
+        class={cn(lecture.data.description.subtitle ? "mt-4" : "mt-8")}
+        size="lg"
+        href={lecture.data.purchase_url}
+      >
+        מילוי פרטים ורכישה
+      </Button>
+    </div>
+  </PageHeader>
+
+  <div class="bg-bg-altpy-8 [&_p]:!text-base">
+    <MaxWidth>
+      <div id="lecture-description" class="p-12" data-lecture={JSON.stringify(lecture.data)}>
+        <Content />
+        {
+          (lecture.data.toc?.length ?? 0) > 0 && (
+            <div class="mt-4">
+              <h3 class="font-bold">{lecture.data.toc_title ?? "מה בתוכנית?"}</h3>
+              <PawList>
+                {lecture.data.toc!.map((item) => (
+                  <li>
+                    <b class="font-bold underline">{item.title}</b> - {item.description}
+                  </li>
+                ))}
+              </PawList>
+            </div>
+          )
+        }
+      </div>
+      <div id="video-slot" class="hidden py-12"></div>
+    </MaxWidth>
+  </div>
+
+  <div id="signin-area" class="bg-primary-bg p-12 text-center">
+    <MaxWidth>
+      <Button
+        size="lg"
+        href={lecture.data.purchase_url}
+      >
+        מילוי פרטים ורכישה
+      </Button>
+      <div class="font-bold text-center mt-16 mb-8">כבר רכשתם? הכניסו פרטים לצפייה</div>
+      <form id="lecture-signin" class="max-w-80 mx-auto">
+        <fieldset id="form-fieldset" class="flex flex-col gap-4">
+          <Input type="text" name="username" autocomplete="username" placeholder="שם משתמש" />
+          <Input type="password" name="password" autocomplete="current-password" placeholder="סיסמה" />
+          <Button type="submit" disabled>צפייה בהרצאה</Button>
+          <div id="error" class="text-red-500"></div>
+        </fieldset>
+      </form>
+    </MaxWidth>
+  </div>
+
+  <template id="single-video-template">
+    <div id="video-container">
+      <video id="video" class="video-js vjs-big-play-centered"></video>
+    </div>
+  </template>
+  <template id="chapters-video-template">
+    <div class="flex gap-4 flex-col-reverse sm:flex-row">
+      <ul
+        id="chapters-container"
+        class="w-full sm:w-56 border-t border-t-neutral-300"
+        data-li-class={`
+          transition-all font-amatic border text-foreground border-transparent border-b-neutral-300
+          text-[28px] hover:border-b-primary hover:text-primary
+        `}
+        data-li-active-class="text-primary border-b-primary border-b-2 font-bold"
+      >
+      </ul>
+      <div id="video-container" class="flex-1">
+        <video id="video" class="video-js vjs-big-play-centered"></video>
+      </div>
+    </div>
+  </template>
+</Layout>
+
+<script>
+  import type { LectureSchema } from "@/content/config"
+  import { API_BASE } from "@/lib/consts"
+  import { cn } from "@/lib/utils"
+  import videojs from "video.js"
+  import type Player from "video.js/dist/types/player"
+  import "video.js/dist/video-js.css"
+  import type { ZodError } from "zod"
+
+  let _init = false
+
+  document.addEventListener("DOMContentLoaded", init)
+  document.addEventListener("astro:page-load", init)
+
+  function getElements() {
+    const form = document.querySelector("#lecture-signin") as HTMLFormElement
+    const slot = document.querySelector("#video-slot") as HTMLElement
+    const description = document.querySelector("#lecture-description") as HTMLElement
+    const button = form.querySelector("button[type=submit]") as HTMLButtonElement
+    const singleTemplate = document.querySelector("#single-video-template") as HTMLTemplateElement
+    const chaptersTemplate = document.querySelector("#chapters-video-template") as HTMLTemplateElement
+    const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
+    const fieldset = document.querySelector("#form-fieldset") as HTMLFieldSetElement
+    const inputs = form.elements
+    const username = inputs.namedItem("username") as HTMLInputElement
+    const password = inputs.namedItem("password") as HTMLInputElement
+    const error = document.querySelector("#error") as HTMLElement
+    const signinArea = document.querySelector("#signin-area") as HTMLElement
+    const ctaButton = document.querySelector("#cta-button") as HTMLButtonElement
+    return {
+      form,
+      username,
+      password,
+      button,
+      fieldset,
+      error,
+      lecture,
+      singleTemplate,
+      chaptersTemplate,
+      slot,
+      signinArea,
+      description,
+      ctaButton,
+    }
+  }
+
+  function init() {
+    if (_init) return
+    _init = true
+    const { form, username, password } = getElements()
+    form.addEventListener("submit", submit)
+    username.addEventListener("input", calcButtonState)
+    password.addEventListener("input", calcButtonState)
+  }
+
+  function calcButtonState() {
+    const { username, password, button } = getElements()
+    button.disabled = !username.value || !password.value
+  }
+
+  async function submit(e: Event) {
+    const { username, password, button, fieldset, error, lecture } = getElements()
+    const buttonTxt = button.innerHTML
+    try {
+      e.preventDefault()
+      fieldset.disabled = true
+      error.innerHTML = ""
+      button.innerHTML = "מתחבר..."
+
+      const response = await fetch(
+        `${API_BASE}/get_video_urls?${new URLSearchParams({
+          username: username.value,
+          key: password.value,
+          video_key: lecture.key,
+        }).toString()}${import.meta.env.DEV ? "&refresh=1" : ""}`,
+      )
+      const json = await response.json()
+      if (json.error) {
+        throw new Error(
+          (json.error as ZodError["issues"])?.map((issue) => issue.message).join(", ") || "שגיאה לא ידועה",
+        )
+      }
+      // success
+      if (json.urls.length > 1) {
+        renderChaptersVideo(json.urls)
+      } else {
+        renderSingleVideo(json.urls[0])
+      }
+      // scroll to video
+    } catch (err) {
+      fieldset.disabled = false
+      error.innerHTML = (err as Error).message
+      button.innerHTML = buttonTxt
+    }
+    return false
+  }
+
+  function renderSingleVideo(url: string) {
+    const { lecture, singleTemplate } = getElements()
+    const videoInfo = lecture.videos[0]
+    const template = singleTemplate.content.cloneNode(true) as HTMLElement
+    const video = template.querySelector("#video") as HTMLVideoElement
+    inject(template)
+    const player = videojs(video, {
+      controls: true,
+      responsive: true,
+      fluid: true,
+    })
+    setVideo(player, url, videoInfo.poster)
+  }
+
+  function renderChaptersVideo(urls: string[]) {
+    const { lecture, chaptersTemplate } = getElements()
+    const template = chaptersTemplate.content.cloneNode(true) as HTMLElement
+    const container = template.querySelector("#chapters-container") as HTMLUListElement
+    const video = template.querySelector("#video") as HTMLVideoElement
+    video.addEventListener("contextmenu", (e) => e.preventDefault())
+    inject(template)
+    urls.forEach((url, i) => {
+      const videoInfo = lecture.videos[i]
+      const li = document.createElement("li")
+      setChapterLiState(container, li, i === 0)
+      const button = document.createElement("button")
+      button.textContent = videoInfo.title
+      button.setAttribute("class", "w-full text-start py-1.5 px-4")
+      button.addEventListener("click", () => {
+        const activeLi = container.querySelector(`[data-selected=true]`) as HTMLLIElement
+        setChapterLiState(container, activeLi, false)
+        setChapterLiState(container, li, true)
+        const player = videojs.getPlayer(video)
+        setVideo(player, url, videoInfo.poster)
+      })
+      li.appendChild(button)
+      container.appendChild(li)
+    })
+    const videoInfo = lecture.videos[0]
+    const player = videojs(video, {
+      controls: true,
+      responsive: true,
+      fluid: true,
+    })
+    setVideo(player, urls[0], videoInfo.poster)
+  }
+
+  function setChapterLiState(container: HTMLElement, li: HTMLElement, state: boolean) {
+    li.setAttribute("class", cn(container.dataset.liClass!, state && container.dataset.liActiveClass!))
+    li.setAttribute("data-selected", state ? "true" : "false")
+  }
+
+  function setVideo(player: Player, url: string, poster: string) {
+    player.src({ type: "video/mp4", src: url })
+    player.poster(poster)
+    player.load()
+    const video = document.querySelector("#video-container") as HTMLVideoElement
+    window.scrollTo({ top: video.offsetTop - 100, behavior: "smooth" })
+  }
+
+  function inject(container: Node) {
+    const { slot, signinArea, description, ctaButton } = getElements()
+    slot.replaceChildren(container)
+    signinArea.classList.add("hidden")
+    description.classList.add("hidden")
+    slot.classList.remove("hidden")
+    ctaButton.classList.add("hidden")
+  }
+</script>

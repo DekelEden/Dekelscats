@@ -1,0 +1,77 @@
+---
+import MaxWidth from "@/layouts/MaxWidth.astro"
+import PhotoBorder, { type Props as PhotoBorderProps } from "./PhotoBorder.astro"
+import type { HTMLAttributes } from "astro/types"
+import { cn, type ClassMap } from "@/lib/utils"
+
+type Props = {
+  class?: string
+  title: string
+  paragraphs: string[]
+  width?: "sm" | "md"
+  image?: string
+  imageWithBorder?: boolean
+  imageProps?: HTMLAttributes<"img"> | Omit<PhotoBorderProps, "src">
+  direction?: "row" | "col"
+  classes?: ClassMap<"container">
+}
+
+const {
+  class: className,
+  title,
+  paragraphs,
+  image,
+  imageProps,
+  imageWithBorder = true,
+  width = "md",
+  direction = "col",
+  classes,
+} = Astro.props
+---
+
+<div class={cn("bg-primary-bg p-8", className)}>
+  <MaxWidth class={cn("flex gap-6 justify-center", width === "sm" && "max-w-3xl", width === "md" && "max-w-5xl")}>
+    <div
+      class={cn(
+        "my-2 flex gap-8 flex-col justify-center items-center",
+        direction === "row" && "sm:flex-row",
+        direction === "col" && "sm:items-center",
+        classes?.container,
+      )}
+    >
+      {
+        image && (
+          <div class="flex-shrink-0">
+            {imageWithBorder ? (
+              <PhotoBorder
+                src={image}
+                borderSize="sm"
+                transition:name="hero"
+                {...(imageProps as Omit<PhotoBorderProps, "src">)}
+                class={cn("w-[250px] mx-auto", imageProps?.class)}
+              />
+            ) : (
+              <img src={image} {...(imageProps as HTMLAttributes<"img">)} class={cn("w-[250px]", imageProps?.class)} />
+            )}
+          </div>
+        )
+      }
+      <div class={cn("page-header-content", "flex-1", direction === "col" && "text-center")}>
+        <slot name="pretitle" />
+        <h1 class="text-3xl font-bold font-varela">{title}</h1>
+        <slot name="subtitle" />
+        {paragraphs.map((p) => <p>{p}</p>)}
+        <slot name="cta" />
+      </div>
+      <slot name="aside" />
+    </div>
+  </MaxWidth>
+</div>
+<style>
+  .page-header-content :global(p) {
+    font-size: theme("fontSize.base");
+    margin: theme("margin.4") 0;
+    line-spacing: theme("lineHeight.snug");
+    font-family: theme("fontFamily.varela");
+  }
+</style>

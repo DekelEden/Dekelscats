@@ -1,0 +1,137 @@
+---
+import { ViewTransitions } from "astro:transitions"
+import NavBar from "./NavBar.astro"
+import Footer, { type Props as FooterProps } from "./Footer.astro"
+
+interface Props {
+  title: string
+  description: string
+  footerProps?: FooterProps
+}
+
+const { title, footerProps, description } = Astro.props
+const PREFIX = "דקל"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <ViewTransitions />
+    <meta charset="UTF-8" />
+    {description && <meta name="description" content={description} />}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="manifest" href="/manifest.json" />
+    <title>{title ? `${PREFIX} | ` + title : PREFIX}</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", initFontAwesome)
+      document.addEventListener("astro:after-swap", initFontAwesome)
+
+      function initFontAwesome() {
+        const fa = document.getElementById("fontawesome")
+        if (!fa) {
+          const script = document.createElement("script")
+          script.id = "fontawesome"
+          script.src = "https://kit.fontawesome.com/d380f4a062.js"
+          script.crossOrigin = "anonymous"
+          document.head.appendChild(script)
+        }
+      }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58D37SP6JJ"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || []
+      function gtag(...args) {
+        window.dataLayer.push(args)
+      }
+      gtag("js", new Date())
+
+      gtag("config", "G-58D37SP6JJ")
+    </script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen">
+      <NavBar />
+      <div class="flex-1">
+        <slot />
+      </div>
+      <Footer {...footerProps} />
+    </div>
+    <style is:global>
+      html,
+      body {
+        direction: rtl;
+        font-family: theme("fontFamily.varela");
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .ltr {
+        direction: ltr;
+      }
+
+      p,
+      .prose p {
+        font-size: theme("fontSize.lg");
+        margin-top: theme("margin.4");
+        margin-bottom: theme("margin.4");
+        line-height: theme("lineHeight.snug");
+        font-family: theme("fontFamily.varela");
+      }
+
+      .prose ul {
+        @apply list-disc list-outside pt-0 ps-8;
+      }
+
+      .prose li {
+        @apply my-2;
+      }
+
+      .prose h1 {
+        @apply text-4xl font-amatic font-bold;
+      }
+      .prose h2 {
+        @apply text-3xl font-amatic font-bold;
+      }
+      .prose h3 {
+        @apply text-2xl font-varela font-bold;
+      }
+      .prose h4 {
+        @apply text-xl font-varela font-bold;
+      }
+      .prose h5 {
+        @apply text-lg font-varela font-bold;
+      }
+      .prose h6 {
+        @apply text-base font-varela font-bold;
+      }
+      .prose b,
+      .prose strong {
+        @apply font-bold;
+      }
+      .prose i,
+      .prose em {
+        @apply italic;
+      }
+      .prose u {
+        @apply underline;
+      }
+    </style>
+  </body>
+</html>

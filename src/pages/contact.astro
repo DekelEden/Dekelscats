@@ -1,0 +1,21 @@
+---
+import ContactForm from "@/components/ContactForm.astro"
+import PhotoBorder from "@/components/PhotoBorder.astro"
+import Layout from "@/layouts/Layout.astro"
+import MaxWidth from "@/layouts/MaxWidth.astro"
+---
+
+<Layout title="צרו קשר" footerProps={{ variant: "minimal" }} description="אנא השאירו פרטים ליצירת קשר">
+  <div class="bg-primary-bg p-8">
+    <MaxWidth class="max-w-md">
+      <PhotoBorder src="/images/contact.jfif" class="w-[310px] mx-auto" borderSize="sm" />
+
+      <h1 class="font-bold text-xl text-center my-4">אנא השאירו פרטים ליצירת קשר:</h1>
+
+      <ContactForm />
+      <div id="form-done" class="hidden">
+        <p>תודה רבה, נחזור אליכם בהקדם</p>
+      </div>
+    </MaxWidth>
+  </div>
+</Layout>
