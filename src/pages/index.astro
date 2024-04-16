@@ -4,6 +4,9 @@ import PhotoBorder from "../components/PhotoBorder.astro"
 import MaxWidth from "../layouts/MaxWidth.astro"
 import PawList from "@/components/PawList.astro"
 import PageHeader from "@/components/PageHeader.astro"
+import ContactForm from "@/components/ContactForm.astro"
+import { cn } from "@/lib/utils"
+import Button from "@/components/Button.astro"
 const consultingImages = [
   {
     title: "תוקפנות",
@@ -52,8 +55,7 @@ const consultingImages = [
     width="md"
     imageWithBorder={false}
     title="בעיות עם החתול? אני כאן לעזור"
-    image="/images/me.jpg"
-    imageProps={{ class: "rounded-full border-2 border-primary h-[300px] w-[300px]", alt: "דקל וסאמר" }}
+    imageProps={{}}
     direction="row"
     class="[&_p]:!text-lg [&_p]:!leading-normal"
     paragraphs={[
@@ -61,8 +63,39 @@ const consultingImages = [
       "אני מאמינה, שעם הבנה מעמיקה של צרכי החתול, לצד הכוונה מקצועית וטיפול הולם וחיובי, כל בעיית התנהגות ניתנת לפתרון והבעלים יכולים לחזור לחיים שקטים ונעימים לצד החתול שלהם.",
       'אשמח ללוות אתכם בדרככם ל"לימוד השפה החתולית" וגיבוש מערכת יחסית מוצלחת עם חתולכם.',
     ]}
-  />
+    classes={{ container: "flex-col-reverse sm:flex-row" }}
+  >
+    <img
+      slot="pretitle"
+      src="/images/me.jpg"
+      alt="דקל וסאמר"
+      class={cn("rounded-full border-2 border-primary h-[200px] w-[200px] mb-4 mx-auto")}
+    />
+    <div slot="aside" class="flex-1">
+      <div class="sm:hidden">
+        <Button size="lg" href="/contact">ליצירת קשר לחצו כאן</Button>
+      </div>
+      <div class="hidden sm:block bg-white/40 p-6 -my-6 rounded-lg">
+        <h2 class="font-bold text-xl text-center my-4">אנא השאירו פרטים ליצירת קשר</h2>
+        <ContactForm density="compact" />
+      </div>
+    </div>
+  </PageHeader>
   <div class="bg-bg-alt p-12">
+    <h1 class="text-3xl font-bold text-center font-varela">במה אוכל לעזור?</h1>
+
+    <MaxWidth class="flex flex-wrap justify-center items-center gap-10 mt-10">
+      {
+        consultingImages.map(({ title, src }) => (
+          <div class="flex flex-col gap-2">
+            <PhotoBorder class="w-[300px] h-[200px]" src={src} alt={title} borderSize="sm" />
+            <h3 class="text-2xl font-varela text-center font-bold">{title}</h3>
+          </div>
+        ))
+      }
+    </MaxWidth>
+  </div>
+  <div class="bg-primary-bg p-12">
     <MaxWidth>
       <h1 class="text-2xl font-bold font-varela">הגיע הזמן לנפץ כמה מיתוסים על חתולים:</h1>
       <div class="flex flex-col sm:flex-row gap-16">
@@ -95,20 +128,6 @@ const consultingImages = [
           <PhotoBorder src="/images/sammy.jfif" alt="Sammy" class="flex-basis-[320px] h-[420px]" alt="סאמר" />
         </div>
       </div>
-    </MaxWidth>
-  </div>
-  <div class="bg-primary-bg p-12">
-    <h1 class="text-3xl font-bold text-center font-varela">במה אוכל לעזור?</h1>
-
-    <MaxWidth class="flex flex-wrap justify-center items-center gap-10 mt-10">
-      {
-        consultingImages.map(({ title, src }) => (
-          <div class="flex flex-col gap-2">
-            <PhotoBorder class="w-[300px] h-[200px]" src={src} alt={title} borderSize="sm" />
-            <h3 class="text-2xl font-varela text-center font-bold">{title}</h3>
-          </div>
-        ))
-      }
     </MaxWidth>
   </div>
 </Layout>
