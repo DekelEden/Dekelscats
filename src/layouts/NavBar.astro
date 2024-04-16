@@ -1,6 +1,7 @@
 ---
 import { cn } from "@/lib/utils"
 import Link from "../components/Link.astro"
+import Button from "../components/Button.astro"
 import { Icon } from "astro-icon/components"
 const items = [
   {
@@ -29,27 +30,7 @@ const items = [
     href: "/contact",
   },
 ]
-const socialItems = [
-  {
-    icon: '<i class="fab fa-facebook icon"></i>',
-    title: "פייסבוק",
-    href: "https://www.facebook.com/Dekelscats",
-  },
-  {
-    icon: '<i class="fab fa-instagram icon"></i>',
-    title: "אינסטגרם",
-    href: "https://instagram.com/dekelscats",
-  },
-  {
-    icon: '<i class="far fa-paper-plane icon"></i>',
-    title: "אימייל",
-    href: "mailto:dekelscats@gmail.com",
-  },
-  // {
-  //   title: '<i class="ri-phone-line icon phone"></i>',
-  //   href: 'tel:0503059422',
-  // },
-]
+import { PHONE, socialItems, whatsappUrl } from "@/lib/consts"
 const removeSlashes = (str: string) => str.replace(/^\/+|\/+$/g, "")
 const defaultIsActive = (pathname: string) => removeSlashes(pathname) === removeSlashes(Astro.url.pathname)
 ---
@@ -135,53 +116,41 @@ const defaultIsActive = (pathname: string) => removeSlashes(pathname) === remove
         }
       </ul>
     </li>
-    {
-      socialItems.map(({ title, icon, href }) => (
-        <li class="hidden sm:block">
-          <Link
-            class={cn(
-              "transition-all",
-              "text-primary",
-              "hover:text-primary-hover",
-              "flex items-center text-center h-full",
-              "font-amatic text-xl px-6 py-4",
-            )}
-            underline="never"
-            aria-label={title}
-            href={href}
-            set:html={icon}
-          />
-        </li>
-      ))
-    }
+
+    <Button href={whatsappUrl} class="hidden sm:block">
+      <div class="flex flex-col">
+        <span class="text-lg">לייעוץ וקביעת פגישה</span>
+        <span class="text-2xl">{PHONE}</span>
+      </div>
+    </Button>
   </ul>
+
+  <script>
+    import { cn } from "@/lib/utils"
+
+    function initMobileMenu() {
+      const menu = document.querySelector(".mobile-menu") as HTMLElement
+      const button = document.querySelector(".mobile-menu-button")!
+      button.addEventListener("click", () => {
+        menu.dataset.open = !menu.dataset.open ? "true" : ""
+        menu.setAttribute(
+          "class",
+          cn(
+            menu.getAttribute("class"),
+            menu.dataset.open
+              ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
+              : "max-h-0 opacity-0 overflow-y-hidden",
+          ),
+        )
+      })
+      document.addEventListener("click", (e) => {
+        if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
+          menu.classList.add("hidden")
+        }
+      })
+    }
+
+    document.addEventListener("DOMContentLoaded", initMobileMenu)
+    document.addEventListener("astro:after-swap", initMobileMenu)
+  </script>
 </nav>
-
-<script>
-  import { cn } from "@/lib/utils"
-
-  function initMobileMenu() {
-    const menu = document.querySelector(".mobile-menu") as HTMLElement
-    const button = document.querySelector(".mobile-menu-button")!
-    button.addEventListener("click", () => {
-      menu.dataset.open = !menu.dataset.open ? "true" : ""
-      menu.setAttribute(
-        "class",
-        cn(
-          menu.getAttribute("class"),
-          menu.dataset.open
-            ? "max-h-[calc(100vh-100px)] opacity-100 overflow-y-auto"
-            : "max-h-0 opacity-0 overflow-y-hidden",
-        ),
-      )
-    })
-    document.addEventListener("click", (e) => {
-      if (!menu.contains(e.target as HTMLElement) && !button.contains(e.target as HTMLElement)) {
-        menu.classList.add("hidden")
-      }
-    })
-  }
-
-  document.addEventListener("DOMContentLoaded", initMobileMenu)
-  document.addEventListener("astro:after-swap", initMobileMenu)
-</script>

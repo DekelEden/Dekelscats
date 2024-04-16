@@ -72,17 +72,17 @@ const { density = "normal" } = Astro.props
       </div>
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-around gap-2">
         <label class={labelCls}>
-          <input type="radio" name="method" required value="phone" />
+          <input class="invisible size-px -mr-2" type="radio" name="method" required value="phone" />
           <Icon name="fa6-solid:phone" />
           טלפון
         </label>
         <label class={labelCls}>
-          <input type="radio" name="method" value="whatsapp" />
+          <input class="invisible size-px -mr-2" type="radio" name="method" value="whatsapp" />
           <Icon name="fa6-brands:whatsapp" class="text-xl" />
           WhatsApp
         </label>
         <label class={labelCls}>
-          <input type="radio" name="method" value="email" />
+          <input class="invisible size-px -mr-2" type="radio" name="method" value="email" />
           <Icon name="fa6-solid:envelope" />
           אימייל
         </label>
