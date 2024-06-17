@@ -5,7 +5,7 @@ import PageHeader from "@/components/PageHeader.astro"
 import PawList from "@/components/PawList.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
-import { cn } from "@/lib/utils"
+import { cn, stripHtml } from "@/lib/utils"
 import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ const { lecture } = Astro.props
 const { Content } = await lecture.render()
 ---
 
-<Layout title={lecture.data.title}>
+<Layout title={lecture.data.title} description={stripHtml(lecture.body)}>
   <PageHeader
     title={lecture.data.title}
     paragraphs={[]}
@@ -156,7 +156,6 @@ const { Content } = await lecture.render()
 
   function calcButtonState() {
     const { username, password, button } = getElements()
-    console.debug("Calculating button state", username.value, password.value)
     button.disabled = !username.value || !password.value
   }
 

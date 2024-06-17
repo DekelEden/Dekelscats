@@ -4,7 +4,9 @@ import Button from "@/components/Button.astro"
 import Input from "@/components/Input.astro"
 import { cn } from "@/lib/utils"
 const labelCls =
-  "cursor-pointer transition-all flex-1 p-2 bg-bg rounded-xl inline-flex justify-start sm:justify-center items-center gap-2 border border-transparent hover:border-primary-light data-[selected='selected']:border-primary"
+  "cursor-pointer transition-all flex-1 p-2 bg-bg rounded-xl inline-flex justify-start " +
+  "sm:justify-center items-center gap-2 border border-transparent hover:border-primary-light " +
+  "data-[selected='selected']:border-primary"
 
 type Props = {
   density?: "compact" | "normal"
@@ -131,6 +133,9 @@ const { density = "normal" } = Astro.props
     <Button type="submit" disabled>שליחה</Button>
   </fieldset>
 </form>
+<div id="form-done" class="hidden">
+  <p>תודה רבה, נחזור אליכם בהקדם</p>
+</div>
 <script>
   import { API_BASE } from "@/lib/consts"
 
