@@ -1,0 +1,68 @@
+---
+key: friendly-cats
+title: חיבור בין חתולים
+# TODO update
+purchase_url: https://store.dekelscats.com/product-page/%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%94-%D7%9C%D7%95%D7%9E%D7%93%D7%99%D7%9D-%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%AA
+description:
+  short:
+    <p> מדריך מפורט (סדרת הרצאות) הנועד לסייע לבעלי חתולים <b>בפתרון בעיות ביחסים</b> בין חתולים או
+    <b>בחיבור ראשוני נכון</b> בין חתולים. המתכון המנצח להפגשה מחודשת בין החתולים בצורה נעימה,
+    הדרגתית וחיובית ליצירת הרמוניה בבית. </p>
+thumbnail: /images/lectures/friendly-cats/cover.jpg
+videos:
+  - title: מבוא
+    poster: /images/lectures/friendly-cats/01-intro.png
+  - title: מידע חשוב על התהליך
+    poster: /images/lectures/friendly-cats/02-important-info.png
+  - title: השלב הראשון בהליך
+    poster: /images/lectures/friendly-cats/03-first-step.png
+  - title: שלב ראשון - תרגולים מעשיים
+    poster: /images/lectures/friendly-cats/04-first-step-addendum.png
+  - title: השלב השני בהליך
+    poster: /images/lectures/friendly-cats/05-second-step.png
+  - title: השלב השלישי בהליך
+    poster: /images/lectures/friendly-cats/06-third-step.png
+  - title: השלב הרביעי בהליך
+    poster: /images/lectures/friendly-cats/07-fourth-step.png
+  - title: השלב החמישי בהליך
+    poster: /images/lectures/friendly-cats/08-fifth-step.png
+  - title: השלב השישי בהליך
+    poster: /images/lectures/friendly-cats/09-sixth-step.png
+  - title: השלב השביעי (והאחרון) בהליך
+    poster: /images/lectures/friendly-cats/10-seventh-step.png
+---
+
+<h3 class="underline font-bold">מה בתוכנית?</h3>
+<p>
+  אחת הבעיות הנפוצות ביותר מאלו אשר מגיעות אליי לטיפול היא בעיות ביחסים בין חתולים החיים באותו הבית.
+  חתולים הם בעל חיים רגיש במיוחד, ולעיתים בהעדר הבנה מעמיקה של בעל החיים – בעלי חתולים מאוד מתקשים
+  לדעת כיצד לחבר, באיזה קצב נכון לחבר ומה החתולים שלנו זקוקים על מנת להצליח לחלוק את הסביבה הביתית
+  בשלום ובתחושת נוחות.
+</p>
+<h3 class="underline font-bold">למי מתאימה ההרצאה?</h3>
+
+<p>
+  <ul class="paw-list">
+    <li>אם אימצתם חתול חדש והייתם רוצים לדעת כיצד להפגיש אותו עם שאר חתולי הבית בצורה בטוחה אשר
+      תאפשר בניית יחסים נכונים וטובים בינהם</li>
+    <li>אם שניים או יותר מחתולי הבית שלכם לא מסתדרים, מאיימים או אפילו תוקפים זה את זה </li>
+    <li>אם אחד מחתולי הבית חווה סטרס מהותי שמקורו בנוכחות חתול אחר בבית</li>
+    <li>
+      יחכו לכם גם לא מעט רעיונות למקרה שהחתולים שלכם דווקא חיים ביחד בשלום יחסי, אבל הייתם רוצים
+      להצליח לחזק את היחסים קצת יותר 😊
+    </li>
+  </ul>
+</p>
+
+<p>
+  חיברות או חיבור מחדש בין חתולים בשיטה החיובית מבוססים על פרוטוקולים קיימים לטיפול הכרוכים בחשיפות
+  איטיות והדרגתיות בין בעלי החיים באוירה נעימה וחיובית.<br />
+לצד תיאור הפרוטוקלים הקיימים, ילמדו גם כלים אילופיים אשר ישרתו אתכם בתהליך ויוכלו לשמש אתכם למעשה
+  לאורך כל חיי החתולים.
+</p>
+
+<p>
+  כל מטרתי בהרצאה זו היא להנגיש עבורכם את הידע על הליכי חיבור בצורה המפורטת ביותר, אשר מספקת מענה
+  לכל השאלות והבעיות המהותיות אשר <u>עשרות לקוחות עבר שלי</u> נתקלו בהן ונענו במהלך דרכנו המשותפת
+  לחיים שלווים והרמוניים בין בעלי החיים שלהם בבית.
+</p>
