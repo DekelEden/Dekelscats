@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-astro"],
   "semi": false,
   "trailingComma": "all",
   "printWidth": 120,
@@ -9,6 +10,12 @@
       "options": {
         "printWidth": 100,
         "proseWrap": "always"
+      }
+    },
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
       }
     }
   ]
