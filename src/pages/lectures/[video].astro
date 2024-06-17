@@ -67,12 +67,7 @@ const { Content } = await lecture.render()
 
   <div id="signin-area" class="bg-primary-bg p-12 text-center">
     <MaxWidth>
-      <Button
-        size="lg"
-        href={lecture.data.purchase_url}
-      >
-        מילוי פרטים ורכישה
-      </Button>
+      <Button size="lg" href={lecture.data.purchase_url}> מילוי פרטים ורכישה </Button>
       <div class="font-bold text-center mt-16 mb-8">כבר רכשתם? הכניסו פרטים לצפייה</div>
       <form id="lecture-signin" class="max-w-80 mx-auto">
         <fieldset id="form-fieldset" class="flex flex-col gap-4">
@@ -118,9 +113,6 @@ const { Content } = await lecture.render()
   import "video.js/dist/video-js.css"
   import type { ZodError } from "zod"
 
-  let _init = false
-
-  document.addEventListener("DOMContentLoaded", init)
   document.addEventListener("astro:page-load", init)
 
   function getElements() {
@@ -156,8 +148,6 @@ const { Content } = await lecture.render()
   }
 
   function init() {
-    if (_init) return
-    _init = true
     const { form, username, password } = getElements()
     form.addEventListener("submit", submit)
     username.addEventListener("input", calcButtonState)
@@ -166,6 +156,7 @@ const { Content } = await lecture.render()
 
   function calcButtonState() {
     const { username, password, button } = getElements()
+    console.debug("Calculating button state", username.value, password.value)
     button.disabled = !username.value || !password.value
   }
 
