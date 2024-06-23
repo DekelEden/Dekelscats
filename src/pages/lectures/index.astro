@@ -18,7 +18,7 @@ const lectures = await getCollection("lectures")
       const isEven = i % 2 === 0
       const url = `/lectures/${lecture.key}`
       return (
-        <div class={cn("py-4 px-8 ", !isEven && "bg-primary-bg")}>
+        <div class={cn("py-6 px-8 ", !isEven && "bg-primary-bg")}>
           <div class="flex gap-10 flex-col sm:flex-row max-w-6xl mx-auto">
             <a class="flex-shrink-0" href={url}>
               <PhotoBorder src={lecture.thumbnail} class="w-[310px] min-h-[175px]" borderSize="sm" />

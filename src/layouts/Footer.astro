@@ -25,12 +25,12 @@ const { title, color = "primary", variant = "default" } = Astro.props
     <div class="flex flex-col gap-4 items-center justify-center">
       <div class="flex flex-col sm:flex-row items-center gap-4 font-varela">
         <b>דקל עדן-צאליק</b>
-        <a href={whatsappUrl} class="text-[15px] inline-flex gap-2 items-center">
+        <Link href={whatsappUrl} class="text-[15px] inline-flex gap-2 items-center" underline="hover">
           <Icon name="fa6-brands:whatsapp" class="text-primary" />
           {PHONE}
-        </a>
+        </Link>
         <span class="hidden sm:inline-block">|</span>
-        <Link class="inline-flex gap-2 items-center" href={`mailto:${EMAIL}`}>
+        <Link href={`mailto:${EMAIL}`} class="inline-flex gap-2 items-center" underline="hover">
           <Icon name="fa6-solid:envelope" class="text-primary" />
           {EMAIL}
         </Link>
