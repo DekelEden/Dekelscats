@@ -240,21 +240,25 @@ const { density = "normal" } = Astro.props
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           // sender details
-          name: name.value,
-          email: email.value,
+          sender: {
+            name: name.value,
+            email: email.value,
+          },
           // form fields
-          // name
-          שם: name.value,
-          // email
-          אימייל: email.value,
-          // phone
-          טלפון: phone.value,
-          // contact method
-          "דרך יצירת קשר": method.value,
-          // reason
-          "סיבת הפנייה": reason.value,
-          // description
-          "תיאור הפנייה": description.value,
+          details: [
+            // name
+            ["שם", name.value],
+            // email
+            ["אימייל", email.value],
+            // phone
+            ["טלפון", phone.value],
+            // contact method
+            ["דרך יצירת קשר", method.value],
+            // reason
+            ["סיבת הפנייה", reason.value],
+            // description
+            ["תיאור הפנייה", description.value],
+          ],
         }),
       })
       if (!response.ok) throw new Error("שגיאה בשליחה")
