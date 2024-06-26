@@ -5,6 +5,7 @@ import { defineCollection } from "astro:content"
 export const LectureSchema = z.object({
   key: z.string(),
   title: z.string(),
+  draft: z.boolean().optional(),
   description: z.object({
     short: z.string(),
     subtitle: z.string().optional(),

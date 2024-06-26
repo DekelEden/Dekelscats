@@ -11,3 +11,7 @@ export function cn(...values: ClassNameValue[]): string {
 export function stripHtml(content: string): string {
   return content.replace(/<[^>]*>?/gm, "")
 }
+
+export function notDraftFilter(item: { draft?: boolean }): boolean {
+  return !item.draft
+}

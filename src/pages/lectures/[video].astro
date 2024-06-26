@@ -5,17 +5,19 @@ import PageHeader from "@/components/PageHeader.astro"
 import PawList from "@/components/PawList.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
-import { cn, stripHtml } from "@/lib/utils"
+import { cn, notDraftFilter, stripHtml } from "@/lib/utils"
 import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
   const lectures = await getCollection("lectures")
-  return lectures.map((lecture) => {
-    return {
-      params: { video: lecture.data.key },
-      props: { lecture },
-    }
-  })
+  return lectures
+    .filter((lecture) => notDraftFilter(lecture.data))
+    .map((lecture) => {
+      return {
+        params: { video: lecture.data.key },
+        props: { lecture },
+      }
+    })
 }
 
 const { lecture } = Astro.props
@@ -37,7 +39,7 @@ const { Content } = await lecture.render()
         size="lg"
         href={lecture.data.purchase_url}
       >
-        מילוי פרטים ורכישה
+        פרטים נוספים ורכישה
       </Button>
     </div>
   </PageHeader>
@@ -67,7 +69,7 @@ const { Content } = await lecture.render()
 
   <div id="signin-area" class="bg-primary-bg p-12 text-center">
     <MaxWidth>
-      <Button size="lg" href={lecture.data.purchase_url}> מילוי פרטים ורכישה </Button>
+      <Button size="lg" href={lecture.data.purchase_url}>פרטים נוספים ורכישה</Button>
       <div class="font-bold text-center mt-16 mb-8">כבר רכשתם? הכניסו פרטים לצפייה</div>
       <form id="lecture-signin" class="max-w-80 mx-auto">
         <fieldset id="form-fieldset" class="flex flex-col gap-4">

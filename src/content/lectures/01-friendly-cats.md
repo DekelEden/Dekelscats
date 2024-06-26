@@ -1,8 +1,7 @@
 ---
 key: friendly-cats
 title: חיבור בין חתולים
-# TODO update
-purchase_url: https://store.dekelscats.com/product-page/%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%94-%D7%9C%D7%95%D7%9E%D7%93%D7%99%D7%9D-%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%AA
+purchase_url: https://store.dekelscats.com/product-page/%D7%97%D7%99%D7%91%D7%95%D7%A8-%D7%91%D7%99%D7%9F-%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%9D-%D7%94%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%9E%D7%9C%D7%90
 description:
   short:
     <p> מדריך מפורט (סדרת הרצאות) הנועד לסייע לבעלי חתולים <b>בפתרון בעיות ביחסים</b> בין חתולים או
@@ -82,7 +81,7 @@ videos:
 <ul class="list list-disc list-inside ms-6">
     <li><b>20% הנחה</b> על רכישת כל אחת מהרצאות הבסיס שלי: "לומדים חתולית" / "הנמר שבבית"</li>
     <li><b>10% הנחה</b> על כל המוצרים הקיימים באתר תחת "צעצועים ואביזרים"</li>
-    <li><b>10% הנחה</b> על כל המוצרים מסדרת המרגיעונים הטבעיים "הרביז" (כולל המרגיעון הייעודי לחיבור בין חתולים – HerbEase Friends!)</li>
+    <li><b>10% הנחה</b> על כל המוצרים מסדרת המרגיעונים הטבעיים "הרביז" (כולל המרגיעון הייעודי לחיבור בין חתולים – <i>HerbEase Friends</i>!)</li>
 </ul>
 </p>
 

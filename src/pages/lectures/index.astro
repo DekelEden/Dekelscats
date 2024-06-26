@@ -1,12 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-import { cn } from "@/lib/utils"
+import { cn, notDraftFilter } from "@/lib/utils"
 import PhotoBorder from "@/components/PhotoBorder.astro"
 import { getCollection } from "astro:content"
 import Button from "@/components/Button.astro"
 import Link from "@/components/Link.astro"
 
-const lectures = await getCollection("lectures")
+const lectures = (await getCollection("lectures")).filter((l) => notDraftFilter(l.data))
 ---
 
 <Layout title="הרצאות" description="הרצאות">
