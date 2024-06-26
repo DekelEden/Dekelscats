@@ -12,6 +12,6 @@ export function stripHtml(content: string): string {
   return content.replace(/<[^>]*>?/gm, "")
 }
 
-export function notDraftFilter(item: { draft?: boolean }): boolean {
-  return !item.draft
+export function notDraftFilter({ data: { draft } }: { data: { draft?: boolean } }): boolean {
+  return !draft
 }

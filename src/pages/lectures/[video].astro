@@ -10,14 +10,12 @@ import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
   const lectures = await getCollection("lectures")
-  return lectures
-    .filter((lecture) => notDraftFilter(lecture.data))
-    .map((lecture) => {
-      return {
-        params: { video: lecture.data.key },
-        props: { lecture },
-      }
-    })
+  return lectures.filter(notDraftFilter).map((lecture) => {
+    return {
+      params: { video: lecture.data.key },
+      props: { lecture },
+    }
+  })
 }
 
 const { lecture } = Astro.props

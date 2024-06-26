@@ -6,7 +6,7 @@ import { getCollection } from "astro:content"
 import Button from "@/components/Button.astro"
 import Link from "@/components/Link.astro"
 
-const lectures = (await getCollection("lectures")).filter((l) => notDraftFilter(l.data))
+const lectures = (await getCollection("lectures")).filter(notDraftFilter)
 ---
 
 <Layout title="הרצאות" description="הרצאות">
