@@ -1,10 +1,12 @@
 ---
 import Button from "@/components/Button.astro"
 import Input from "@/components/Input.astro"
+import Link from "@/components/Link.astro"
 import PageHeader from "@/components/PageHeader.astro"
 import PawList from "@/components/PawList.astro"
 import Layout from "@/layouts/Layout.astro"
 import MaxWidth from "@/layouts/MaxWidth.astro"
+import { Icon } from "astro-icon/components"
 import { cn, notDraftFilter, stripHtml } from "@/lib/utils"
 import { getCollection } from "astro:content"
 
@@ -80,6 +82,20 @@ const { Content } = await lecture.render()
     </MaxWidth>
   </div>
 
+  <template id="lecture-summary-download">
+    <div class="p-2 mb-4">
+      <Link
+        id="lecture-summary-download"
+        class="inline-flex gap-2 text-primary items-center text-lg"
+        download
+        target="_blank"
+      >
+        <Icon name="fa6-solid:file-pdf" class="inline-block" />
+        <span class="content">להורדת קובץ סיכום המדריך</span>
+      </Link>
+    </div>
+  </template>
+
   <template id="single-video-template">
     <div id="video-container">
       <video id="video" class="video-js vjs-big-play-centered"></video>
@@ -122,6 +138,7 @@ const { Content } = await lecture.render()
     const button = form.querySelector("button[type=submit]") as HTMLButtonElement
     const singleTemplate = document.querySelector("#single-video-template") as HTMLTemplateElement
     const chaptersTemplate = document.querySelector("#chapters-video-template") as HTMLTemplateElement
+    const downloadTemplate = document.querySelector("#lecture-summary-download") as HTMLTemplateElement
     const lecture = JSON.parse(description.dataset.lecture!) as LectureSchema
     const fieldset = document.querySelector("#form-fieldset") as HTMLFieldSetElement
     const inputs = form.elements
@@ -140,6 +157,7 @@ const { Content } = await lecture.render()
       lecture,
       singleTemplate,
       chaptersTemplate,
+      downloadTemplate,
       slot,
       signinArea,
       description,
@@ -186,6 +204,9 @@ const { Content } = await lecture.render()
         renderChaptersVideo(json.urls)
       } else {
         renderSingleVideo(json.urls[0])
+      }
+      if (json.download_url) {
+        setDownloadUrl(json.download_url, json.download_filename, json.download_text)
       }
       // scroll to video
     } catch (err) {
@@ -254,6 +275,19 @@ const { Content } = await lecture.render()
     player.load()
     const video = document.querySelector("#video-container") as HTMLVideoElement
     window.scrollTo({ top: video.offsetTop - 100, behavior: "smooth" })
+  }
+
+  function setDownloadUrl(url: string, filename: string, text: string | undefined) {
+    const { slot, downloadTemplate } = getElements()
+    const template = downloadTemplate.content.cloneNode(true) as HTMLAnchorElement
+    const a = template.querySelector("a") as HTMLAnchorElement
+    a.setAttribute("href", url)
+    a.setAttribute("download", filename)
+
+    if (text) {
+      a.textContent = text
+    }
+    slot.prepend(template)
   }
 
   function inject(container: Node) {
