@@ -44,7 +44,7 @@ const {
           <div class="flex-shrink-0">
             {imageWithBorder ? (
               <PhotoBorder
-                src={image}
+                src={image!}
                 borderSize="sm"
                 transition:name="hero"
                 {...(imageProps as Omit<PhotoBorderProps, "src">)}

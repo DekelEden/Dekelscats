@@ -265,7 +265,7 @@ const { Content } = await lecture.render()
   }
 
   function setChapterLiState(container: HTMLElement, li: HTMLElement, state: boolean) {
-    li.setAttribute("class", cn(container.dataset.liClass!, state && container.dataset.liActiveClass!))
+    li.setAttribute("class", cn(container.dataset.liClass, state && container.dataset.liActiveClass))
     li.setAttribute("data-selected", state ? "true" : "false")
   }
 
