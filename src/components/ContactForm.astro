@@ -13,6 +13,7 @@ type Props = {
 }
 
 const { density = "normal" } = Astro.props
+const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ""
 ---
 
 <form>
@@ -129,7 +130,8 @@ const { density = "normal" } = Astro.props
       />
       <div class="error ms-5 text-red-500"></div>
     </label>
-    <div class="form-error text-red-500 text-center"></div>
+    <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-size="flexible"></div>
+    <div class="form-error text-red-500 text-center hidden"></div>
     <Button type="submit" disabled>שליחה</Button>
   </fieldset>
 </form>
@@ -206,6 +208,7 @@ const { density = "normal" } = Astro.props
     const button = form.querySelector("button") as HTMLButtonElement
     const radios = form.querySelectorAll("input[type=radio]") as NodeListOf<HTMLInputElement>
     const errorInputs = form?.querySelectorAll("[data-error]")
+    const turnstileResponse = inputs.namedItem("cf-turnstile-response") as HTMLInputElement
     const done = document.getElementById("form-done") as HTMLDivElement
 
     return {
@@ -221,18 +224,21 @@ const { density = "normal" } = Astro.props
       button,
       radios,
       errorInputs,
+      turnstileResponse,
       done,
     }
   }
 
   async function submit(e: Event) {
-    const { form, name, error, fieldset, email, phone, method, reason, button, description, done } = getElements()
+    const { form, name, error, fieldset, email, phone, method, reason, button, description, done, turnstileResponse } =
+      getElements()
 
     const buttonTxt = button.innerHTML
     try {
       e.preventDefault()
       fieldset.disabled = true
       error.innerHTML = ""
+      error.classList.add("hidden")
       button.innerHTML = "שולח..."
 
       const response = await fetch(`${API_BASE}/contact`, {
@@ -259,6 +265,7 @@ const { density = "normal" } = Astro.props
             // description
             ["תיאור הפנייה", description.value],
           ],
+          captchaToken: turnstileResponse.value,
         }),
       })
       if (!response.ok) throw new Error("שגיאה בשליחה")
@@ -267,6 +274,7 @@ const { density = "normal" } = Astro.props
     } catch (err) {
       fieldset.disabled = false
       error.innerHTML = (err as Error).message
+      error.classList.remove("hidden")
       button.innerHTML = buttonTxt
       console.error(err)
     }

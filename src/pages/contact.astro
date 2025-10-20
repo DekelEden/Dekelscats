@@ -6,6 +6,7 @@ import MaxWidth from "@/layouts/MaxWidth.astro"
 ---
 
 <Layout title="צרו קשר" footerProps={{ variant: "minimal" }} description="אנא השאירו פרטים ליצירת קשר">
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <div class="bg-primary-bg p-8">
     <MaxWidth class="max-w-md">
       <PhotoBorder src="/images/contact.jfif" class="w-[310px] mx-auto" borderSize="sm" />
