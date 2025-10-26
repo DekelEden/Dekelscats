@@ -17,6 +17,7 @@ const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ""
 ---
 
 <form>
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <fieldset class={cn("flex flex-col  w-full", density === "normal" ? "gap-8" : "gap-4")}>
     <label>
       <div class="flex items-center gap-2">
